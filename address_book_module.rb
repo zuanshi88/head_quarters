@@ -4,14 +4,23 @@ module Address_book_module
 # can I access the ENTRIES and convert them to HASHes and put them back?
 
 # takes a file, returns an array of objects
-      def open_directory(file, type)
+
+def marshal_directory(file)
+  accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
+end
+
+def marshal_save(file,obj_array)
+  File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
+end
+
+      def open_directory(file)
         new_open_directory = []
         directory = File.open(file, "r")
         directory.each_line do |entry|
         new_open_directory << eval(entry)
         end
           directory.close
-          obj_array(new_open_directory, type)
+          obj_array(new_open_directory, Entry)
       end
 
       def obj_array(database, type)
@@ -41,7 +50,7 @@ module Address_book_module
 
       def prepare_argument_hashes(objs)
         save_array = []
-        objs.each{|obj| save_array << obj.entry_info}
+        objs.each{|obj| save_array << Marshal.dump(obj)}
         save_array
       end
 
