@@ -13,23 +13,23 @@ def marshal_save(file,obj_array)
   File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
 end
 
-      def open_directory(file)
-        new_open_directory = []
-        directory = File.open(file, "r")
-        directory.each_line do |entry|
-        new_open_directory << eval(entry)
-        end
-          directory.close
-          obj_array(new_open_directory, Entry)
-      end
+      # def open_directory(file)
+      #   new_open_directory = []
+      #   directory = File.open(file, "r")
+      #   directory.each_line do |entry|
+      #   new_open_directory << eval(entry)
+      #   end
+      #     directory.close
+      #     obj_array(new_open_directory, Entry)
+      # end
 
-      def obj_array(database, type)
-          obj_array = []
-          database.each do |entry|
-          obj_array << type.new(entry)
-        end
-        obj_array
-      end
+      # def obj_array(database, type)
+      #     obj_array = []
+      #     database.each do |entry|
+      #     obj_array << type.new(entry)
+      #   end
+      #   obj_array
+      # end
 
   def open_touch_points(obj)
         obj_array = []
@@ -54,12 +54,12 @@ end
         save_array
       end
 
-      def hard_save_directory(database, file)
-        hash_array = prepare_argument_hashes(database)
-        write_file = File.open(file, "w")
-        write_file.puts hash_array
-        write_file.close
-      end
+      # def hard_save_directory(database, file)
+      #   hash_array = prepare_argument_hashes(database)
+      #   write_file = File.open(file, "w")
+      #   write_file.puts hash_array
+      #   write_file.close
+      # end
 
       def simplify(database)
         database.map { |obj| obj.name.downcase.scan(/[\w]/).uniq}

@@ -22,7 +22,7 @@ require_relative 'Entry_Class.rb'
 require_relative 'Touch_Point_Class.rb'
 include Address_book_module
 
-ENTRIES = "backup_entries.txt"
+ENTRIES = "backup_entries_4.txt"
 TOUCH_POINTS = "touch_points.txt"
 
 
@@ -31,9 +31,10 @@ class Session
   attr_reader :database
 
   def initialize
-    @database = open_directory(ENTRIES, Entry)
+    @database = marshal_directory(ENTRIES)
     main_menu
   end
+
 
   def main_menu
     puts "  ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
@@ -49,7 +50,7 @@ class Session
         case action
         when 1
           save_entry(add_entry, database)
-          hard_save_directory(database, ENTRIES)
+          marshal_save(database, ENTRIES)
         when 3
           touch_points_menu(TOUCH_POINTS)
         when 6
