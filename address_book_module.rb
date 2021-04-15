@@ -85,12 +85,14 @@ end
       end
 
 
-      def capture_hash_and_index(hash, index, matches, fudge_width)
+      def capture_hash_and_index(hash, index,fudge_width)
+            matches = []
             match = hash.values.join("")
             matches << [index, hash, fudge_width]
+            matches
       end
 
-      def calculate_fudge(search_hash, hash_name_array, matches, search)
+      def calculate_fudge(search_hash, hash_name_array, search)
         hash_name_array.each_with_index do |hash, index|
         fudge_width = search_hash.merge(hash).length - search.length
         fudge_width <= 0 ? capture_hash_and_index(hash, index, matches, fudge_width) : next
@@ -98,22 +100,15 @@ end
       end
 
       def best_match(matches, search_hash, database)
-        puts " This is the result!!"
-        puts "++++++++++"
-        puts search_hash
-        puts "++++++++++"
         final_match = matches.select{ |match| match[1].first == search_hash.first}.pop
-        puts matches
-        database[final_match[0]]
-        # best_match = database[best_array_index]
-        # best_match
+        final_match
       end
 
 
-      def hash_name_compare(search, database, matches)
+      def hash_name_compare(search, database)
         hash_name_array = obj_to_fullname_hash(database)
         search_hash = name_hasher(search.downcase.split(""))
-        calculate_fudge(search_hash, hash_name_array, matches, search)
+        matches = calculate_fudge(search_hash, hash_name_array, search)
         final_match = best_match(matches, search_hash, database)
         final_match
       end

@@ -146,8 +146,7 @@ class Session
         # that should look way better. I will be able to compare the before and after
         # and talk about what I leaarned.
         search = gets.chomp
-        matches = []
-        target = hash_name_compare(search, database, matches)
+        target = hash_name_compare(search, database)
         display_contact(target)
         entry_menu(target)
     end
