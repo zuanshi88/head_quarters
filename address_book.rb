@@ -15,6 +15,9 @@
 # => touch point object
 # => display object
 
+#04/17/2021
+# => have added Marshalling and index
+
 
 require 'json'
 require_relative 'address_book_module.rb'
@@ -23,7 +26,6 @@ require_relative 'Touch_Point_Class.rb'
 include Address_book_module
 
 ENTRIES = "backup_entries_4.txt"
-TOUCH_POINTS = "touch_points.txt"
 
 
 class Session
@@ -31,33 +33,32 @@ class Session
   attr_reader :database
 
   def initialize
-    @database = marshal_directory(ENTRIES)
+    @database = Directory.new(ENTRIES)
     main_menu
   end
 
 
   def main_menu
-    puts "  ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
-    puts "   ===  ==== ==== ===== === ==== ADDRESS BOOK 3 == = == == === =========== ====="
-    puts "  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "                add (1) |  touch_points (3) | contacts (6) | open (7)"
-    puts "  = == ========= =========== == == ==== ============= ===== === = ===="
-    puts "  ======== =============== ======== = = ====== ===== == ======== ========== =="
-    puts "   === ===== == = = = ===== === ===== === == == = == ===== == === === === =="
+    puts "                                                                 ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
+    puts "                                                                  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== ====="
+    puts "                                                                  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
+    puts "                                                                             add (1) |  touch_points (3) | contacts (6) | open (7)"
+    puts "                                                                   = == ========= =========== == == ==== ============= ===== === = ===="
+    puts "                                                                   ======== =============== ======== = = ====== ===== == ======== ========== =="
+    puts "                                                                 === ===== == = = = ===== === ===== === == == = == ===== == === === === =="
 
         action = gets.to_i
 
         case action
         when 1
-          save_entry(add_entry, database)
-          marshal_save(database, ENTRIES)
+          marshal_save(save_entry(add_entry, database.accounts), ENTRIES)
         when 3
-          touch_points_menu(TOUCH_POINTS)
+          touch_points_menu
         when 6
-          directory(database)
+          directory(database.accounts)
           main_menu
         when 7
-          open_contact(database)
+          open_contact
         end
       end
 
@@ -141,14 +142,14 @@ class Session
 #12/15/2020: how to delete a hash in an array of hashes?
 
 
-      def open_contact(database)
+      def open_contact
         #NEED to rewrite hasher suite with the object oriented comparisons.
         # that should look way better. I will be able to compare the before and after
         # and talk about what I leaarned.
-        search = gets.chomp
-        target = hash_name_compare(search, database)
-        display_contact(target)
-        entry_menu(target)
+        target = gets.chomp
+        result = @database.search(target)
+        display_contact(result)
+        entry_menu(result)
     end
 
       def entry_menu(entry)
@@ -225,38 +226,45 @@ class Session
           main_menu
       end
       #have I moved away from the dup design?
-        hard_save_directory(database, ENTRIES)
+        database.accounts.delete(entry)
+        updated_database = database.accounts.push(entry)
+        marshal_save(updated_database, ENTRIES)
         puts "#{entry.name}: updated"
         edit(entry)
 
        end
 
-  def touch_points_menu(collection)
+  def touch_points_menu
     puts "   ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
     puts "  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "                ten more (1) |  all (3) | a-z (5) | z-a (6) | open (7)"
+    puts "                main menu (1) |  all (3) | a-z (5) | z-a (6) | open (7)"
     puts "  = == ========= =========== == == ==== ============= ===== === = ===="
     puts "  ======== =============== ======== = = ====== ===== == ======== ========== =="
 
-
-    touch_points = open_directory(collection, Touch_Point)
 
     selection = gets.chomp
 
     case selection
     when 1
-      ten_touch_points
+      main_menu
     when 3
-      all_touch_points(touch_points)
+      all_touch_points
     when 5
       display_a_to_z
     when 6
       display_z_to_a
     end
 
-    def all_touch_points(touch_points)
-      puts touch_points
-      touch_points.each {|tp| puts "#{tp.create_date} #{tp.name} : #{tp.activity}"}
+    def all_touch_points
+        # directory = @database.accounts
+        #
+        # puts directory[0].touch_points
+        # directory.each do |account|
+        #   puts accou
+        #   end
+
+        puts "This is not working why?"
+        touch_points_menu
     end
 
 end

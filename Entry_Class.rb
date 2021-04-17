@@ -19,19 +19,16 @@ class Entry
     @zipcode = @address["zipcode"]
     @email = hash["email"]
     @touch_points = hash["touch_points"]
-    @entry_info = {"first name" => @first_name, "last name" => @last_name, "address" => @address, "phone number" => @phone_number, "email" => @email, "name" => @name}
   end
 
     def first_name=(first_name)
       @first_name = first_name
-      @entry_info["first name"] = first_name
-      @name = "#{first_name} @last_name"
+      @name = "#{@first_name} #{@last_name}"
     end
 
     def last_name=(last_name)
       @last_name = last_name
-      @entry_info["last name"] = last_name
-      @name = "@first_name #{last_name}"
+      @name = "#{@first_name} #{@last_name}"
     end
 
     def touch_points=(reset)

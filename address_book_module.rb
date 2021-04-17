@@ -5,14 +5,56 @@ module Address_book_module
 
 # takes a file, returns an array of objects
 
-def marshal_directory(file)
-  accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
+
+class Directory
+
+  attr_reader :accounts, :accounts_index
+
+  def initialize(file)
+    @accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
+    @accounts_index = WordIndex.new(@accounts).index
+  end
+
+  def search(target)
+
+    @accounts_index[target][0]
+  #   if @accounts_index[target].length > 1
+  #     puts @accounts_index[target]
+  #   else
+  #     display(@account_index[target])
+  #   end
+  end
+
+class WordIndex
+  def initialize(accounts)
+    @accounts = accounts
+    puts "here is the future buddy!"
+    # @index = index
+  end
+
+      def index
+        information = ["name", "last_name", "first_name"]
+        index_hash = {}
+          @accounts.cycle(1) do |obj|
+          index_hash[obj.name] = [] if index_hash[obj.name].nil?
+          index_hash[obj.name].push(obj)
+          index_hash[obj.last_name] = [] if index_hash[obj.last_name].nil?
+          index_hash[obj.last_name].push(obj)
+          index_hash[obj.first_name] = [] if index_hash[obj.first_name].nil?
+          index_hash[obj.first_name].push(obj)
+          index_hash[obj.city] = [] if index_hash[obj.city].nil?
+          index_hash[obj.city].push(obj)
+          index_hash[obj.state] = [] if index_hash[obj.state].nil?
+          index_hash[obj.state].push(obj)
+        end
+        index_hash
+      end
+  end
 end
 
-def marshal_save(file,obj_array)
+def marshal_save(obj_array, file)
   File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
 end
-
       # def open_directory(file)
       #   new_open_directory = []
       #   directory = File.open(file, "r")
@@ -32,20 +74,14 @@ end
       # end
 
   def open_touch_points(obj)
-        obj_array = []
-        obj.touch_points.each do |tps|
-          tps.each do |tp|
-          obj_array << Touch_Point.new(eval(tp))
-        end
-      end
-        obj_array
-      end
+      obj.touch_points
+  end
 
 
-      def save_entry(entry, database)
-        new_entry = Entry.new(entry)
-        database = database << new_entry
-        puts "#{new_entry.name} has been added."
+      def save_entry(entry_info, database)
+        new_entry = Entry.new(entry_info)
+        updated_database = database.push(new_entry)
+        updated_database
       end
 
       def prepare_argument_hashes(objs)
@@ -144,6 +180,4 @@ end
         end
         exist
       end
-
-
   end
