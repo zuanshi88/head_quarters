@@ -45,7 +45,7 @@ class Session
     puts "                                                                 ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
     puts "                                                                  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== ====="
     puts "                                                                  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "                                                                             add (1) |  touch points (3) | contacts (6) | open (7)"
+    puts "                                                                     add (1) |  touch points (3) | contacts (6) | open (7) | exit (*)"
     puts "                                                                   = == ========= =========== == == ==== ============= ===== === = ===="
     puts "                                                                   ======== =============== ======== = = ====== ===== == ======== ========== =="
     puts "                                                                 === ===== == = = = ===== === ===== === == == = == ===== == === === === =="
@@ -62,6 +62,9 @@ class Session
           main_menu
         when 7
           open_contact
+          main_menu
+        else
+          exit
         end
       end
 
@@ -138,7 +141,8 @@ class Session
           puts ""
         else
           tp_obj_array = obj.touch_points
-          tp_obj_array.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+          sorted_tp_obj_array = tp_obj_array.sort_by{|tp| tp.date_obj }.reverse
+          sorted_tp_obj_array.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
         end
           2.times{puts""}
         end
@@ -147,23 +151,26 @@ class Session
 #12/15/2020: how to delete a hash in an array of hashes?
 
     def display_points
-      @touch_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+      all_points = @touch_points.sort_by{|tp| tp.date_obj}.reverse
+      all_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
 
-      def open_contact
-        #NEED to rewrite hasher suite with the object oriented comparisons.
-        # that should look way better. I will be able to compare the before and after
-        # and talk about what I leaarned.
+    def open_contact
         target = gets.chomp
-        result = @database.search(target)
+      begin
+        result = @database.search(target.downcase)
         display_contact(result)
+      rescue
+        p "#{target} not found. Try again."
+        open_contact
+      end
         entry_menu(result)
     end
 
       def entry_menu(entry)
 
         puts "      = = = == === = = = == = == =  === = === === ===== =="
-        puts "          edit (1) | all (5) | add (9) | main menu (*) "
+        puts "          edit (1) | all (5) | add (9) | main menu (0) | exit (*)"
         puts "       === == ==  = = =  = = = ==== === = = = = = = = = = == "
 
         selection = gets.to_i
@@ -176,15 +183,17 @@ class Session
          entry.touch_points.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
         when 9
           add_touch_point(entry)
-        else
+        when 0
           main_menu
+        else
+          exit
        end
       end
 
       def edit(entry)
         puts "    == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
         puts "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
-        puts "    name (1) | address (2) | phone (3) | email (4) | touch points (6) | entry menu (9) | main menu (*) "
+        puts "    name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (9) | main menu (*) "
         puts " == = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
         puts "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
 
@@ -236,6 +245,14 @@ class Session
           delete_tp = gets.to_i
           tp_hash.delete(delete_tp)
           entry.touch_points.delete_at(delete_tp)
+        when 7
+          puts "Are you sure?"
+          response = gets.chomp
+          index = @database.accounts.index(entry)
+
+          response.downcase.include?("y") ? @database.accounts.delete_at(index) : entry_menu(entry)
+          marshal_save(@database.accounts, ENTRIES)
+          main_menu
         when 9
           entry_menu(entry)
         else

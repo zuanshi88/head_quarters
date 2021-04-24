@@ -17,36 +17,53 @@ class Directory
   end
 
   def search(target)
+    begin
+      result =  @accounts_index[target]
+      if result.nil?
+        puts "#{result} didn't return a match. Try again"
+      else
+        account_hash = {}
+        result.each_with_index{|acc, index| account_hash[index] = acc}
+        if account_hash.length == 1
+          return account_hash[0]
+        else
+          account_hash.each_key{|key| puts "#{key}: #{account_hash[key].name}"}
+          selection = gets.chomp
+          return account_hash[selection.to_i]
+        end
+      end
+    rescue
+      puts "account not found"
+      exit
+    end
 
-    @accounts_index[target][0]
-  #   if @accounts_index[target].length > 1
-  #     puts @accounts_index[target]
-  #   else
-  #     display(@account_index[target])
-  #   end
+
+    def delete_account(entry)
+      @accounts.delete(entry)
+    end
+
+
   end
 
 class WordIndex
   def initialize(accounts)
     @accounts = accounts
-    puts "here is the future buddy!"
-    # @index = index
   end
 
       def index
         information = ["name", "last_name", "first_name"]
         index_hash = {}
           @accounts.cycle(1) do |obj|
-          index_hash[obj.name] = [] if index_hash[obj.name].nil?
-          index_hash[obj.name].push(obj)
-          index_hash[obj.last_name] = [] if index_hash[obj.last_name].nil?
-          index_hash[obj.last_name].push(obj)
-          index_hash[obj.first_name] = [] if index_hash[obj.first_name].nil?
-          index_hash[obj.first_name].push(obj)
-          index_hash[obj.city] = [] if index_hash[obj.city].nil?
-          index_hash[obj.city].push(obj)
-          index_hash[obj.state] = [] if index_hash[obj.state].nil?
-          index_hash[obj.state].push(obj)
+          index_hash[obj.name.downcase] = [] if index_hash[obj.name.downcase].nil?
+          index_hash[obj.name.downcase].push(obj)
+          index_hash[obj.last_name.downcase] = [] if index_hash[obj.last_name.downcase].nil?
+          index_hash[obj.last_name.downcase].push(obj)
+          index_hash[obj.first_name.downcase] = [] if index_hash[obj.first_name.downcase].nil?
+          index_hash[obj.first_name.downcase].push(obj)
+          index_hash[obj.city.downcase] = [] if index_hash[obj.city.downcase].nil?
+          index_hash[obj.city.downcase].push(obj)
+          index_hash[obj.state.downcase] = [] if index_hash[obj.state.downcase].nil?
+          index_hash[obj.state.downcase].push(obj)
         end
         index_hash
       end
