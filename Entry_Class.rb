@@ -4,7 +4,7 @@ class Entry
 
   attr_accessor :first_name, :last_name, :name, :address,
               :street_address, :city, :state, :zipcode,
-              :phone_number, :email, :touch_points, :entry_info
+              :phone_number, :email, :touch_points
 
 
 
@@ -18,7 +18,7 @@ class Entry
     @state = @address["state"]
     @zipcode = @address["zipcode"]
     @email = hash["email"]
-    @touch_points = hash["touch_points"]
+    @touch_points = []
   end
 
     def first_name=(first_name)

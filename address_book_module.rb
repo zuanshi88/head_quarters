@@ -1,3 +1,4 @@
+require 'time'
 module Address_book_module
 #should this methods be stored here? or inside SESSION?
 
@@ -55,23 +56,27 @@ end
 def marshal_save(obj_array, file)
   File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
 end
-      # def open_directory(file)
-      #   new_open_directory = []
-      #   directory = File.open(file, "r")
-      #   directory.each_line do |entry|
-      #   new_open_directory << eval(entry)
-      #   end
-      #     directory.close
-      #     obj_array(new_open_directory, Entry)
-      # end
 
-      # def obj_array(database, type)
-      #     obj_array = []
-      #     database.each do |entry|
-      #     obj_array << type.new(entry)
-      #   end
-      #   obj_array
-      # end
+
+  def add_touch_point(entry)
+    begin
+      puts "Date? \#,\#,\# (year, month, day)"
+      response = gets.chomp
+      match_set = response.scan(/(\d+)/)
+      info = match_set.map{|int| int[0].to_i}
+      new_time = Time.mktime(info[0], info[1],info[2])
+      create_date = response.empty? ? Time.now : new_time
+    rescue
+      puts "Did you put the year first?"
+      add_touch_point(entry)
+    else
+      tp = Touch_Point.new(entry, create_date)
+      entry.touch_points << tp
+      save_update(entry)
+      display_contact(entry)
+      entry_menu(entry)
+    end
+  end
 
   def open_touch_points(obj)
       obj.touch_points
@@ -82,6 +87,13 @@ end
         new_entry = Entry.new(entry_info)
         updated_database = database.push(new_entry)
         updated_database
+      end
+
+      def save_update(entry)
+        database.accounts.delete(entry)
+        updated_database = database.accounts.push(entry)
+        marshal_save(updated_database, ENTRIES)
+        puts "#{entry.name}: updated"
       end
 
       def prepare_argument_hashes(objs)

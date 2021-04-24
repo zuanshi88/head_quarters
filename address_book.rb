@@ -1,22 +1,12 @@
-#12/16/2020: Make a new menu to display different views of directory_hash
-#alphbetic, last contact, etc,
+=begin
 
-#12/19/2020:  Working on full integrating the ENTRY OBJECT into the design.
-#             Should have started with this approach from the beginning,
-# =>          But did not know this apprach-- it has been a learning process!
-# =>          But very good I think!!
-
-#12/19/2020: Stuck trying to clean up the touch_point mess
-# =>        learning why design saves time.
-# =>        stuck in ab_sketchbook_5 on creating an array of symbols...
+* Marshal Module is having issues...
+* Also... did not do a good job keeping up with commits
 
 
-#12/24/2020:
-# => touch point object
-# => display object
+=end
 
-#04/17/2021
-# => have added Marshalling and index
+
 
 
 require 'json'
@@ -25,24 +15,37 @@ require_relative 'Entry_Class.rb'
 require_relative 'Touch_Point_Class.rb'
 include Address_book_module
 
-ENTRIES = "backup_entries_4.txt"
-
+ENTRIES = "backup_entries_5.txt"
 
 class Session
 
-  attr_reader :database
+  attr_reader :database, :touch_points
 
   def initialize
     @database = Directory.new(ENTRIES)
+    @touch_points = create_tps
     main_menu
   end
 
+  def create_tps
+    tps = []
+      database.accounts.each do |entry|
+      unless entry.touch_points.empty?
+        entry.touch_points.each do |tp|
+          tps << tp
+        end
+      end
+      end
+      return tps
+    end
+
 
   def main_menu
+
     puts "                                                                 ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
     puts "                                                                  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== ====="
     puts "                                                                  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "                                                                             add (1) |  touch_points (3) | contacts (6) | open (7)"
+    puts "                                                                             add (1) |  touch points (3) | contacts (6) | open (7)"
     puts "                                                                   = == ========= =========== == == ==== ============= ===== === = ===="
     puts "                                                                   ======== =============== ======== = = ====== ===== == ======== ========== =="
     puts "                                                                 === ===== == = = = ===== === ===== === == == = == ===== == === === === =="
@@ -53,7 +56,7 @@ class Session
         when 1
           marshal_save(save_entry(add_entry, database.accounts), ENTRIES)
         when 3
-          touch_points_menu
+          display_points
         when 6
           directory(database.accounts)
           main_menu
@@ -114,6 +117,8 @@ class Session
         # 1st  used address_hash = JSON.parse(obj["address"])
         # 2nd did the JSON conversion earlier and then used HASH KEYS to access info_hash
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
+
+        %x(echo clr)
         puts " "
         puts " "
         puts " "
@@ -132,8 +137,8 @@ class Session
         if obj.touch_points.empty?
           puts ""
         else
-          tp_obj_array = obj_array(obj)
-          tp_obj_array.each { |tp| puts "#{tp.create_date}: #{tp.activity}"}
+          tp_obj_array = obj.touch_points
+          tp_obj_array.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
         end
           2.times{puts""}
         end
@@ -141,6 +146,9 @@ class Session
 
 #12/15/2020: how to delete a hash in an array of hashes?
 
+    def display_points
+      @touch_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+    end
 
       def open_contact
         #NEED to rewrite hasher suite with the object oriented comparisons.
@@ -165,14 +173,9 @@ class Session
         when 1
           edit(entry)
         when 5
-         entry.touch_points.each {|point| puts point }
+         entry.touch_points.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
         when 9
-          touch_point_collection = open_directory(TOUCH_POINTS, Touch_Point)
-          update = gets.chomp
-          touch_point = Touch_Point.new(entry.name, update)
-          touch_point_collection << touch_point
-          hard_save_directory(touch_point_collection, TOUCH_POINTS)
-          puts "The Touch Point for #{entry.name} has been added."
+          add_touch_point(entry)
         else
           main_menu
        end
@@ -181,7 +184,7 @@ class Session
       def edit(entry)
         puts "    == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
         puts "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
-        puts "    name (1) | address (2) | phone (3) | email (4) | entry menu (9) | main menu (*) "
+        puts "    name (1) | address (2) | phone (3) | email (4) | touch points (6) | entry menu (9) | main menu (*) "
         puts " == = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
         puts "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
 
@@ -220,24 +223,34 @@ class Session
           puts "NEW email"
           email = gets.chomp
           entry.email = email
+        when 6
+          tp_hash = {}
+          unless entry.touch_points.empty?
+          entry.touch_points.each_with_index do |tp, i|
+            tp_hash[i] = tp
+          end
+        end
+        puts "this hash has #{tp_hash.size} elements"
+          tp_hash.each{|k,v| puts "#{k}: #{v.date}, #{v.activity}"}
+          puts "Delete \# ?"
+          delete_tp = gets.to_i
+          tp_hash.delete(delete_tp)
+          entry.touch_points.delete_at(delete_tp)
         when 9
           entry_menu(entry)
         else
           main_menu
       end
       #have I moved away from the dup design?
-        database.accounts.delete(entry)
-        updated_database = database.accounts.push(entry)
-        marshal_save(updated_database, ENTRIES)
-        puts "#{entry.name}: updated"
+        save_update(entry)
+        display_contact(entry)
         edit(entry)
-
        end
 
   def touch_points_menu
     puts "   ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
     puts "  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "                main menu (1) |  all (3) | a-z (5) | z-a (6) | open (7)"
+    puts "              main menu (1) |  all (3) | a-z (5) | z-a (6)"
     puts "  = == ========= =========== == == ==== ============= ===== === = ===="
     puts "  ======== =============== ======== = = ====== ===== == ======== ========== =="
 
@@ -248,7 +261,7 @@ class Session
     when 1
       main_menu
     when 3
-      all_touch_points
+      puts "Monkey"
     when 5
       display_a_to_z
     when 6
@@ -256,17 +269,13 @@ class Session
     end
 
     def all_touch_points
-        # directory = @database.accounts
-        #
-        # puts directory[0].touch_points
-        # directory.each do |account|
-        #   puts accou
-        #   end
-
-        puts "This is not working why?"
-        touch_points_menu
-    end
-
+      main_menu
+      # puts "Make this work!"
+      tps = @touch_points
+        tps.sort_by{|tp| tp.create_date}
+        tps.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+        main_menu
+      end
 end
 
 
@@ -283,3 +292,23 @@ Session.new
 #add time stamp and a sort by date function
 #list all enties alphabetically...
 #add touch_points
+
+#12/16/2020: Make a new menu to display different views of directory_hash
+#alphbetic, last contact, etc,
+
+#12/19/2020:  Working on full integrating the ENTRY OBJECT into the design.
+#             Should have started with this approach from the beginning,
+# =>          But did not know this apprach-- it has been a learning process!
+# =>          But very good I think!!
+
+#12/19/2020: Stuck trying to clean up the touch_point mess
+# =>        learning why design saves time.
+# =>        stuck in ab_sketchbook_5 on creating an array of symbols...
+
+
+#12/24/2020:
+# => touch point object2
+# => display object
+
+#04/17/2021
+# => have added Marshalling and index

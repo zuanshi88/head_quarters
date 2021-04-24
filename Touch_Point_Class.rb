@@ -3,28 +3,15 @@
 
 class Touch_Point
 
-  attr_reader :date, :create_date, :activity, :person, :entry_info
+  attr_reader :date, :create_date, :activity, :account_name, :account
 
-  attr_accessor :save_info
 
-  POINTS = []
-
-    def initialize(name, activity, create_date = Time.now)
-
-          if create_date.class == String
-            create_date = Time.new(create_date)
-          end
-
-          @create_date = create_date
-          @date = @create_date.strftime("%m/%d/%Y")
-          @activity = activity
-          @person = name
-          @entry_info = {"person" => @person, "activity" => @activity, "create_date" => @create_date}
+    def initialize(entry, create_date)
+          @date_obj = create_date
+          @date = create_date.strftime("%m/%d/%Y")
+          puts "Activity: "
+          @activity = gets.chomp
+          @account = entry
+          @account_name = @account.name
     end
-
-    def add_point
-      POINTS << self
-    end
-
-
 end
