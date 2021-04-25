@@ -56,7 +56,7 @@ class Session
         when 1
           marshal_save(save_entry(add_entry, database.accounts), ENTRIES)
         when 3
-          display_points
+          touch_points_menu
         when 6
           directory(database.accounts)
           main_menu
@@ -150,10 +150,6 @@ class Session
 
 #12/15/2020: how to delete a hash in an array of hashes?
 
-    def display_points
-      all_points = @touch_points.sort_by{|tp| tp.date_obj}.reverse
-      all_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
-    end
 
     def open_contact
         target = gets.chomp
@@ -264,36 +260,68 @@ class Session
         edit(entry)
        end
 
+
+
+
   def touch_points_menu
     puts "   ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
     puts "  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "              main menu (1) |  all (3) | a-z (5) | z-a (6)"
+    puts "       display (1) | all (3) | current (5) | historical (6) | main_menu (*)"
     puts "  = == ========= =========== == == ==== ============= ===== === = ===="
     puts "  ======== =============== ======== = = ====== ===== == ======== ========== =="
 
 
     selection = gets.chomp
 
-    case selection
+    case selection.to_i
+
     when 1
-      main_menu
+      display_points
+      touch_points_menu
     when 3
-      puts "Monkey"
+      display_all_descending
+      touch_points_menu
     when 5
-      display_a_to_z
+      from_today_descending
+      touch_points_menu
     when 6
-      display_z_to_a
+      from_start_ascending
+      touch_points_menu
+    else
+      main_menu
+    end
+  end
+
+    def display_points
+      puts "are we in???"
+        all_points = @touch_points.sort_by{|tp| tp.date_obj}.reverse
+        all_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
 
-    def all_touch_points
-      main_menu
-      # puts "Make this work!"
+    def display_all_descending
       tps = @touch_points
-        tps.sort_by{|tp| tp.create_date}
-        tps.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
-        main_menu
+        descending = tps.sort_by{|tp| tp.date_obj}.reverse
+        descending.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
       end
-end
+
+    # def sort_and_print
+    #   tps = @touch_points
+    #     tps.sort_by{|tp| tp.date_obj}
+    #     tps.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+    #   end
+
+    def from_today_descending
+      from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
+      descending = from_today.sort_by{|tp| tp.date_obj}.reverse
+      descending.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+    end
+
+    def from_start_ascending
+      tps = @touch_points
+        ascending = tps.sort_by{|tp| tp.date_obj}
+        ascending.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+    end
+
 
 
 
