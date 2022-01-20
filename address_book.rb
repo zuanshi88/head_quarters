@@ -1,15 +1,4 @@
-=begin
 
-* Marshal Module is having issues...
-* Also... did not do a good job keeping up with commits
-
-
-=end
-
-
-
-
-require 'json'
 require_relative 'address_book_module.rb'
 require_relative 'Entry_Class.rb'
 require_relative 'Touch_Point_Class.rb'
@@ -166,7 +155,7 @@ class Session
       def entry_menu(entry)
 
         puts "      = = = == === = = = == = == =  === = === === ===== =="
-        puts "          edit (1) | all (5) | add (9) | main menu (0) | exit (*)"
+        puts "          edit (1) | all (5) | add (9) | main menu (*)"
         puts "       === == ==  = = =  = = = ==== === = = = = = = = = = == "
 
         selection = gets.to_i
@@ -179,17 +168,15 @@ class Session
          entry.touch_points.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
         when 9
           add_touch_point(entry)
-        when 0
-          main_menu
         else
-          exit
+          main_menu
        end
       end
 
       def edit(entry)
         puts "    == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
         puts "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
-        puts "    name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (9) | main menu (*) "
+        puts "    name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)"
         puts " == = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
         puts "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
 
@@ -249,10 +236,8 @@ class Session
           response.downcase.include?("y") ? @database.accounts.delete_at(index) : entry_menu(entry)
           marshal_save(@database.accounts, ENTRIES)
           main_menu
-        when 9
-          entry_menu(entry)
         else
-          main_menu
+          entry_menu(entry)
       end
       #have I moved away from the dup design?
         save_update(entry)
@@ -266,7 +251,7 @@ class Session
   def touch_points_menu
     puts "   ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
     puts "  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "       display (1) | all (3) | current (5) | historical (6) | main_menu (*)"
+    puts "          all (3) | current (5) | historical (6) | main_menu (*)"
     puts "  = == ========= =========== == == ==== ============= ===== === = ===="
     puts "  ======== =============== ======== = = ====== ===== == ======== ========== =="
 
@@ -275,25 +260,20 @@ class Session
 
     case selection.to_i
 
-    when 1
-      display_points
-      touch_points_menu
     when 3
       display_all_descending
-      touch_points_menu
     when 5
       from_today_descending
-      touch_points_menu
     when 6
       from_start_ascending
-      touch_points_menu
     else
       main_menu
     end
+    3.times {puts " "}
+    touch_points_menu
   end
 
     def display_points
-      puts "are we in???"
         all_points = @touch_points.sort_by{|tp| tp.date_obj}.reverse
         all_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
@@ -301,7 +281,7 @@ class Session
     def display_all_descending
       tps = @touch_points
         descending = tps.sort_by{|tp| tp.date_obj}.reverse
-        descending.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+        descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
       end
 
     # def sort_and_print
@@ -312,14 +292,14 @@ class Session
 
     def from_today_descending
       from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
-      descending = from_today.sort_by{|tp| tp.date_obj}.reverse
-      descending.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+      descending = from_today.sort_by{|tp| tp.date_obj}
+      descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
 
     def from_start_ascending
       tps = @touch_points
         ascending = tps.sort_by{|tp| tp.date_obj}
-        ascending.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+        ascending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
 
 
