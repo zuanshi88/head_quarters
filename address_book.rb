@@ -2,11 +2,12 @@
 require_relative 'address_book_module.rb'
 require_relative 'Entry_Class.rb'
 require_relative 'Touch_Point_Class.rb'
-include Address_book_module
 
 ENTRIES = "backup_entries_5.txt"
 
 class Session
+  
+  include Address_book_module
 
   attr_reader :database, :touch_points
 
@@ -30,6 +31,8 @@ class Session
 
 
   def main_menu
+    system("cls")
+    30.times{puts ""}
 
     puts "                                                                 ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
     puts "                                                                  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== ====="
@@ -105,36 +108,39 @@ class Session
         end
       end
 
+      def center_text(text)
+        50.times{print " "}
+        print text 
+      end 
+
       def display_contact(obj)
         # 1st  used address_hash = JSON.parse(obj["address"])
         # 2nd did the JSON conversion earlier and then used HASH KEYS to access info_hash
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
 
         %x(echo clr)
-        puts " "
-        puts " "
-        puts " "
-        print "          ", obj.name
+        center_text(obj.name)
         puts ""
-        print "          "
-        puts obj.street_address
-        print "          ", obj.city, ", "
+        center_text(obj.street_address)
+        puts ""
+        center_text(obj.city)
+        print " "
         print obj.state
         print " "
         puts obj.zipcode
-        print "          "
-        puts obj.phone_number
-        print "          "
-        puts obj.email
+        center_text(obj.phone_number)
+        puts ""
+        center_text(obj.email)
+        puts ""
         if obj.touch_points.empty?
           puts ""
         else
           tp_obj_array = obj.touch_points
           sorted_tp_obj_array = tp_obj_array.sort_by{|tp| tp.date_obj }.reverse
-          sorted_tp_obj_array.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+          puts ""
+          sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}"); puts ""}
         end
           2.times{puts""}
-        end
       end
 
 #12/15/2020: how to delete a hash in an array of hashes?
@@ -144,20 +150,26 @@ class Session
         target = gets.chomp
       begin
         result = @database.search(target.downcase)
-        display_contact(result)
       rescue
         p "#{target} not found. Try again."
         open_contact
       end
+        system("cls")
+        Utilities::drop_center
         entry_menu(result)
     end
 
       def entry_menu(entry)
-
-        puts "      = = = == === = = = == = == =  === = === === ===== =="
-        puts "          edit (1) | all (5) | add (9) | main menu (*)"
-        puts "       === == ==  = = =  = = = ==== === = = = = = = = = = == "
-
+        puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
+        puts "                                                                 = = = == === = = = == = == =  === = === === ===== =="
+        puts "                                                                      edit (1) | all (5) | add (9) | main menu (*)"
+        puts "                                                                === == ==  = = =  = = = ==== === = = = = = = = = = == "
+        puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
+        puts " "
+        puts " "   
+        display_contact(entry)
+      
+        
         selection = gets.to_i
 
         case selection
@@ -169,16 +181,19 @@ class Session
         when 9
           add_touch_point(entry)
         else
+          system("cls")
           main_menu
        end
+
       end
 
       def edit(entry)
-        puts "    == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
-        puts "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
-        puts "    name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)"
-        puts " == = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
-        puts "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
+        puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
+        puts "                                                          == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
+        puts "                                                        === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
+        puts "                                                          name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)"
+        puts "                                                         == = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
+        puts "                                                         = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
 
         selection = gets.chomp
 
@@ -249,11 +264,11 @@ class Session
 
 
   def touch_points_menu
-    puts "   ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
-    puts "  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "          all (3) | current (5) | historical (6) | main_menu (*)"
-    puts "  = == ========= =========== == == ==== ============= ===== === = ===="
-    puts "  ======== =============== ======== = = ====== ===== == ======== ========== =="
+    puts "                                                                ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
+    puts "                                                               =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
+    puts "                                                                    all (3) | current (5) | historical (6) | main_menu (*)"
+    puts "                                                                = == ========= =========== == == ==== ============= ===== === = ===="
+    puts "                                                                ======== =============== ======== = = ====== ===== == ======== ========== =="
 
 
     selection = gets.chomp
@@ -301,6 +316,7 @@ class Session
         ascending = tps.sort_by{|tp| tp.date_obj}
         ascending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
+  end 
 
 
 

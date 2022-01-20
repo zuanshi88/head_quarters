@@ -6,8 +6,22 @@ module Address_book_module
 
 # takes a file, returns an array of objects
 
+module Utilities 
+  
+  def self.drop_center 
+    30.times{ puts ""}
+  end 
+
+   def self.center_text(text)
+        50.times{print " "}
+        print text 
+      end 
+
+end 
+
 
 class Directory
+  include Utilities
 
   attr_reader :accounts, :accounts_index
 
@@ -27,13 +41,13 @@ class Directory
         if account_hash.length == 1
           return account_hash[0]
         else
-          account_hash.each_key{|key| puts "#{key}: #{account_hash[key].name}"}
+          account_hash.each_key{|key| Utilities::center_text("#{key}: #{account_hash[key].name}"); puts ""}
           selection = gets.chomp
           return account_hash[selection.to_i]
         end
       end
     rescue
-      puts "account not found"
+      puts "You wrote a bad song Petey!"
       exit
     end
 
