@@ -164,6 +164,8 @@ class Session
     end
 
       def entry_menu(entry)
+        system('clear')
+        drop_center
         puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
         puts "                                                                 = = = == === = = = == = == =  === = === === ===== =="
         puts "                                                                      edit (1) | all (5) | add (9) | main menu (*)"

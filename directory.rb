@@ -1,4 +1,8 @@
+require_relative 'address_book_module'
+
 class Directory
+
+  include Address_book_module
 
   attr_reader :accounts, :accounts_index
 
@@ -21,10 +25,11 @@ class Directory
             account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}"); puts ""}
             selection = gets.chomp
             return account_hash[selection.to_i]
-            end
         end
-        rescue
-        puts "You wrote a bad song Petey!"
+    end
+        rescue => error  
+        puts "You wrote a bad, bad song!"
+        puts error.message
         exit
         end
     end 

@@ -7,11 +7,11 @@ module Address_book_module
 # takes a file, returns an array of objects
 
 
-  def self.drop_center 
+  def drop_center 
     30.times{ puts ""}
   end 
 
-  def self.center_text(text)
+  def center_text(text)
         50.times{print " "}
         print text 
   end 
