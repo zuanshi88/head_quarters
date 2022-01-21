@@ -1,5 +1,7 @@
 
 require_relative 'address_book_module.rb'
+require_relative 'directory.rb'
+require_relative 'word_index.rb'
 require_relative 'Entry_Class.rb'
 require_relative 'Touch_Point_Class.rb'
 
@@ -155,7 +157,7 @@ class Session
         p "#{target} not found. Try again."
         open_contact
       end
-        system("cls")
+        # system("cls")
         drop_center
         entry_menu(result)
     end
@@ -295,8 +297,8 @@ class Session
     end
 
     def display_all_descending
-      tps = @touch_points
-        descending = tps.sort_by{|tp| tp.date_obj}.reverse
+      
+        descending = @touch_points.sort_by{|tp| tp.date_obj}.reverse
         descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
       end
 
