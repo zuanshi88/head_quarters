@@ -3,6 +3,7 @@ require_relative 'address_book_module.rb'
 require_relative 'Entry_Class.rb'
 require_relative 'Touch_Point_Class.rb'
 
+#marhaled database
 ENTRIES = "backup_entries_5.txt"
 
 class Session
@@ -30,8 +31,12 @@ class Session
     end
 
 
-  def main_menu
-    system("cls")
+  def main_menu(status = true)
+
+    if status == true 
+      system("cls")
+    end 
+
     30.times{puts ""}
 
     puts "                                                                 ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
@@ -51,7 +56,7 @@ class Session
           touch_points_menu
         when 6
           directory(database.accounts)
-          main_menu
+          main_menu(false)
         when 7
           open_contact
           main_menu
@@ -108,10 +113,6 @@ class Session
         end
       end
 
-      def center_text(text)
-        50.times{print " "}
-        print text 
-      end 
 
       def display_contact(obj)
         # 1st  used address_hash = JSON.parse(obj["address"])
@@ -155,7 +156,7 @@ class Session
         open_contact
       end
         system("cls")
-        Utilities::drop_center
+        drop_center
         entry_menu(result)
     end
 
