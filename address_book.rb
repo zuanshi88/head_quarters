@@ -1,9 +1,9 @@
 
-require_relative 'address_book_module.rb'
-require_relative 'directory.rb'
-require_relative 'word_index.rb'
-require_relative 'Entry_Class.rb'
-require_relative 'Touch_Point_Class.rb'
+require_relative 'address_book_module'
+require_relative 'directory'
+require_relative 'word_index'
+require_relative 'Entry_Class'
+require_relative 'Touch_Point_Class'
 
 #marhaled database
 ENTRIES = "backup_entries_5.txt"
@@ -20,6 +20,7 @@ class Session
     main_menu
   end
 
+  # this is more about the database
   def create_tps
     tps = []
       database.accounts.each do |entry|
@@ -32,7 +33,7 @@ class Session
       return tps
     end
 
-
+#could have a menu module
   def main_menu(status = true)
 
     if status == true 
@@ -101,9 +102,9 @@ class Session
       end
 
 
-      def directory(database)
+      def directory
         #this is all pushed way over for easier reading upon display
-        alphbetic_directory = database.sort_by{|obj| obj.last_name.downcase}
+        alphbetic_directory = @database.sort_by{|obj| obj.last_name.downcase}
           puts ""
           puts ""
           puts "                                                                _________________________________________________________________________"
@@ -181,6 +182,8 @@ class Session
           edit(entry)
         when 5
          entry.touch_points.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+        when 6 
+          show_last_ten(entry)
         when 9
           add_touch_point(entry)
         else
@@ -297,7 +300,7 @@ class Session
     end
 
     def display_all_descending
-      
+      #removed unnecessary variable in a_b.rb
         descending = @touch_points.sort_by{|tp| tp.date_obj}.reverse
         descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
       end
@@ -315,8 +318,7 @@ class Session
     end
 
     def from_start_ascending
-      tps = @touch_points
-        ascending = tps.sort_by{|tp| tp.date_obj}
+        ascending = @touch_points.sort_by{|tp| tp.date_obj}
         ascending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
     end
   end 
@@ -356,3 +358,9 @@ Session.new
 
 #04/17/2021
 # => have added Marshalling and index
+
+#01/22/2022 
+# => back refactoring codebase with gusto. Utilizing git
+#    with a lot more ease. Wanting to use it. Thinking 
+#    more about testing.  Writing tests for this system 
+#    would be a great bridge to cross as well. 

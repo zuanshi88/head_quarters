@@ -17,11 +17,11 @@ module Address_book_module
   end 
 
 
+  #more database types
 
 def marshal_save(obj_array, file)
   File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
 end
-
 
   def add_touch_point(entry)
       puts "Date? \#,\#,\# (year, month, day)"
@@ -118,8 +118,7 @@ end
       end
 
       def best_match(matches, search_hash, database)
-        final_match = matches.select{ |match| match[1].first == search_hash.first}.pop
-        final_match
+        matches.select{ |match| match[1].first == search_hash.first}.pop
       end
 
 
@@ -127,8 +126,7 @@ end
         hash_name_array = obj_to_fullname_hash(database)
         search_hash = name_hasher(search.downcase.split(""))
         matches = calculate_fudge(search_hash, hash_name_array, search)
-        final_match = best_match(matches, search_hash, database)
-        final_match
+        best_match(matches, search_hash, database)
       end
 
       def value_checker(value, file)
@@ -142,7 +140,7 @@ end
       end
 
       def select_entry(search, database)
-        selection = database.select{|obj| obj.name == search}
+        database.select{|obj| obj.name == search}
       end
 
 
