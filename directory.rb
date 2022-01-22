@@ -2,7 +2,7 @@ require_relative 'address_book_module'
 
 class Directory
 
-  include Address_book_module
+  include Address_Book_Module
 
   attr_reader :accounts, :accounts_index
 

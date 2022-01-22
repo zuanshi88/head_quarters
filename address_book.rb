@@ -1,5 +1,5 @@
 
-require_relative 'address_book_module'
+# require_relative 'address_book_module'
 require_relative 'directory'
 require_relative 'word_index'
 require_relative 'Entry_Class'
@@ -11,19 +11,16 @@ ENTRIES = "backup_entries_5.txt"
 
 class Session
   
-  include Address_book_module
-  include Menu 
+    # include Address_book_module
+    include Menu 
 
-  attr_reader :database, :touch_points
+    attr_reader :database, :touch_points
 
-  def initialize
-    @database = Directory.new(ENTRIES)
-    @touch_points = @database.create_tps
-    main_menu
-  end
-
-  # this is more about the database
-
+    def initialize
+      @database = Directory.new(ENTRIES)
+      @touch_points = @database.create_tps
+      main_menu
+    end
 
   end 
 

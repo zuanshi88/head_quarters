@@ -1,5 +1,5 @@
 require 'time'
-module Address_book_module
+module Address_Book_Module
 #should this methods be stored here? or inside SESSION?
 
 # can I access the ENTRIES and convert them to HASHes and put them back?
@@ -11,9 +11,13 @@ module Address_book_module
     30.times{ puts ""}
   end 
 
-  def center_text(text)
+  def center_text(text, new_line = true)
         50.times{print " "}
-        print text 
+      if new_line 
+        puts text 
+      else 
+        print text
+      end 
   end 
 
 

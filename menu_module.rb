@@ -1,7 +1,10 @@
+require_relative 'address_book_module'
+
 module Menu 
 
+  include Address_Book_Module
 
-#could have a menu module
+
   def main_menu(status = true)
 
     if status == true 
@@ -10,13 +13,15 @@ module Menu
 
     30.times{puts ""}
 
-    puts "                                                                 ==== === =   === === ===== = ======= ==== === ===== === == ==== = == =="
-    puts "                                                                  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== ====="
-    puts "                                                                  =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
-    puts "                                                                     add (1) |  touch points (3) | contacts (6) | open (7) | exit (*)"
-    puts "                                                                   = == ========= =========== == == ==== ============= ===== === = ===="
-    puts "                                                                   ======== =============== ======== = = ====== ===== == ======== ========== =="
-    puts "                                                                 === ===== == = = = ===== === ===== === == == = == ===== == === === === =="
+    menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
+    "  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== =====",
+    "   == ==== ===== ===== ==== === ==== == ===== ========= ===== ===== === ===== == =",
+    "          add (1) |  touch points (3) | contacts (6) | open (7) | exit (*)",
+    "  == == === = == ===== ======= ======== == == ==== ===== ============= === = ====",
+    "    ======== =============== ======== = = ====== ===== == ======== ========== ==",
+    "  === ===== == = = = ===== === ===== === == == = == ===== == === === === =="]
+
+    menu.each {|line| center_text(line) }
 
         action = gets.to_i
 
@@ -95,25 +100,21 @@ module Menu
 
         %x(echo clr)
         center_text(obj.name)
-        puts ""
         center_text(obj.street_address)
-        puts ""
-        center_text(obj.city)
+        center_text(obj.city, false)
         print " "
         print obj.state
         print " "
         puts obj.zipcode
         center_text(obj.phone_number)
-        puts ""
         center_text(obj.email)
-        puts ""
         if obj.touch_points.empty?
           puts ""
         else
           tp_obj_array = obj.touch_points
           sorted_tp_obj_array = tp_obj_array.sort_by{|tp| tp.date_obj }.reverse
           puts ""
-          sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}"); puts ""}
+          sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
         end
           2.times{puts""}
       end
@@ -134,17 +135,22 @@ module Menu
         entry_menu(result)
     end
 
-      def entry_menu(entry)
-        system('clear')
+      def entry_menu(entry, full = true)
+        if full 
+          system('clear')
+        end 
+
         drop_center
-        puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
-        puts "                                                                 = = = == === = = = == = == =  === = === === ===== =="
-        puts "                                                                      edit (1) | all (5) | add (9) | main menu (*)"
-        puts "                                                                === == ==  = = =  = = = ==== === = = = = = = = = = == "
-        puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
-        puts " "
+          center_text( "=== === ===== = ======= ==== === ===== === == ==== = == ==")
+          center_text( "= = = == === = = = == = == =  === = === === ===== ==")
+          center_text( "edit (1) | all (5) | last_ten (6) add (9) | main menu (*)")
+          center_text( "=== == ==  = = =  = = = ==== === = = = = = = = = = == ")
+          center_text( "=== === ===== = ======= ==== === ===== === == ==== = == ==")
         puts " "   
-        display_contact(entry)
+
+        if full
+          display_contact(entry)
+        end 
       
         
         selection = gets.to_i
@@ -154,9 +160,12 @@ module Menu
         when 1
           edit(entry)
         when 5
-         entry.touch_points.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+         entry.touch_points.sort_by{|tp| tp.date }.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+         entry_menu(entry, full = false)
         when 6 
-          show_last_ten(entry)
+          last_ten = entry.touch_points.sort_by{|tp| tp.date }.slice(10)
+          last_ten.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+          entry_menu(entry, full = false)
         when 9
           add_touch_point(entry)
         else
@@ -167,12 +176,12 @@ module Menu
       end
 
       def edit(entry)
-        puts "                                                                === === ===== = ======= ==== === ===== === == ==== = == =="
-        puts "                                                          == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
-        puts "                                                        === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
-        puts "                                                          name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)"
-        puts "                                                         == = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
-        puts "                                                         = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
+        puts "=== === ===== = ======= ==== === ===== === == ==== = == =="
+        puts "== = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
+        puts "=== == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
+        puts " name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)"
+        puts "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
+        puts "= = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
 
         selection = gets.chomp
 
