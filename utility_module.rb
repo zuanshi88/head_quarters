@@ -1,5 +1,5 @@
 require 'time'
-module Address_Book_Module
+module Utility_Module
 #should this methods be stored here? or inside SESSION?
 
 # can I access the ENTRIES and convert them to HASHes and put them back?

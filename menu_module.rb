@@ -1,8 +1,8 @@
-require_relative 'address_book_module'
+require_relative 'utility_module'
 
 module Menu 
 
-  include Address_Book_Module
+  include Utility_Module
 
 
   def main_menu(status = true)
@@ -142,10 +142,10 @@ module Menu
 
         drop_center
           center_text( "=== === ===== = ======= ==== === ===== === == ==== = == ==")
-          center_text( "= = = == === = = = == = == =  === = === === ===== ==")
-          center_text( "edit (1) | all (5) | last_ten (6) add (9) | main menu (*)")
-          center_text( "=== == ==  = = =  = = = ==== === = = = = = = = = = == ")
-          center_text( "=== === ===== = ======= ==== === ===== === == ==== = == ==")
+          center_text( "   = = = == === = = = == = == =  === = === === ===== ==")
+          center_text( "  edit (1) | all (5) | last_ten (6) add (9) | main menu (*)")
+          center_text( "  === == ==  = = =  = = = ==== === = = = = = = = = = == ")
+          center_text( " === === ===== = ======= ==== === ===== === == ==== = == ==")
         puts " "   
 
         if full
@@ -176,12 +176,12 @@ module Menu
       end
 
       def edit(entry)
-        puts "=== === ===== = ======= ==== === ===== === == ==== = == =="
-        puts "== = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ="
-        puts "=== == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = "
-        puts " name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)"
-        puts "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = ="
-        puts "= = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "
+        center_text("           === === ===== = ======= ==== === ===== === == ==== = == ==")
+        center_text("   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = =")
+        center_text("  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ")
+        center_text(" name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)")
+        center_text(  "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =")
+        center_text("  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = ")
 
         selection = gets.chomp
 

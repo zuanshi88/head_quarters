@@ -1,8 +1,8 @@
-require_relative 'address_book_module'
+require_relative 'utility_module'
 
 class Directory
 
-  include Address_Book_Module
+  include Utility_Module
 
   attr_reader :accounts, :accounts_index
 
