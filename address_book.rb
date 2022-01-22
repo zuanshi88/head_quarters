@@ -1,8 +1,7 @@
-
-require_relative 'directory'
-require_relative 'Entry_Class'
-require_relative 'Touch_Point_Class'
-require_relative 'menu_module'
+require './Classes/directory_class'
+require './Classes/entry_class'
+require './Classes/touch_point_class'
+require './Modules/menu_module'
 
 #marshaled database
 ENTRIES = "marshaled_database.txt"

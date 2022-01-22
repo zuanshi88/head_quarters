@@ -32,6 +32,7 @@ module Menu
         when 3
           touch_points_menu
         when 6
+            #fix this next
             #this is broken now-- I need to think about
             #how this should work...
           directory(@directory)
