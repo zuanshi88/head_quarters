@@ -99,20 +99,20 @@ module Menu
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
 
         %x(echo clr)
-        center_text(obj.name)
-        center_text(obj.street_address)
-        center_text(obj.city, false)
-        print " "
-        print obj.state
-        print " "
-        puts obj.zipcode
-        center_text(obj.phone_number)
-        center_text(obj.email)
+        [[obj.name, true], 
+        [obj.street_address, true], 
+        [obj.city, false]].each do |info, status|
+          center_text(info, status)
+        end 
+        print " " + obj.state + " " + obj.zipcode 
+        puts ""
+        [obj.phone_number, obj.email].each do |info| 
+          center_text(info)
+        end 
         if obj.touch_points.empty?
           puts ""
         else
-          tp_obj_array = obj.touch_points
-          sorted_tp_obj_array = tp_obj_array.sort_by{|tp| tp.date_obj }.reverse
+          sorted_tp_obj_array = obj.touch_points.sort_by{|tp| tp.date_obj }.reverse
           puts ""
           sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
         end
@@ -130,29 +130,33 @@ module Menu
         p "#{target} not found. Try again."
         open_contact
       end
-        # system("cls")
         drop_center
         entry_menu(result)
     end
 
       def entry_menu(entry, full = true)
+
         if full 
           system('clear')
         end 
 
         drop_center
-          center_text( "=== === ===== = ======= ==== === ===== === == ==== = == ==")
-          center_text( "   = = = == === = = = == = == =  === = === === ===== ==")
-          center_text( "  edit (1) | all (5) | last_ten (6) add (9) | main menu (*)")
-          center_text( "  === == ==  = = =  = = = ==== === = = = = = = = = = == ")
-          center_text( " === === ===== = ======= ==== === ===== === == ==== = == ==")
+
+        menu = ["=== === ===== = ======= ==== === ===== === == ==== = == ==",
+                "   = = = == === = = = == = == =  === = === === ===== ==",
+                "  edit (1) | all (5) | last_ten (6) add (9) | main menu (*)",
+                "  === == ==  = = =  = = = ==== === = = = = = = = = = == ",
+                " === === ===== = ======= ==== === ===== === == ==== = == =="]
+
+          menu.each{ |line| center_text(line) }
+              
+
         puts " "   
 
         if full
           display_contact(entry)
         end 
       
-        
         selection = gets.to_i
 
         case selection
@@ -176,12 +180,19 @@ module Menu
       end
 
       def edit(entry)
-        center_text("           === === ===== = ======= ==== === ===== === == ==== = == ==")
-        center_text("   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = =")
-        center_text("  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ")
-        center_text(" name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)")
-        center_text(  "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =")
-        center_text("  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = ")
+
+        #method with block called on this array of lines.
+
+        ["     === ===  === == === === ===== = ======= ==== === ===== === == ==== = == == == === == =====",
+        "   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ==== = ===",
+        "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ===== == = ===",
+        "   name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)",
+        "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
+        "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
+
+          center_text(line)
+
+        end 
 
         selection = gets.chomp
 
