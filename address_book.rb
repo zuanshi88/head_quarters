@@ -4,7 +4,7 @@ require_relative 'Entry_Class'
 require_relative 'Touch_Point_Class'
 require_relative 'menu_module'
 
-#marhaled database
+#marshaled database
 ENTRIES = "marshaled_database.txt"
 
 class Session

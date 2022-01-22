@@ -1,8 +1,10 @@
 require_relative 'utility_module'
+require_relative 'menu_methods_module'
 
 module Menu 
 
   include Utility_Module
+  include Menu_Methods_Module
 
 
   def main_menu(status = true)
@@ -164,12 +166,9 @@ module Menu
         when 1
           edit(entry)
         when 5
-         entry.touch_points.sort_by{|tp| tp.date }.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
-         entry_menu(entry, full = false)
+          entry_display_all(entry)
         when 6 
-          last_ten = entry.touch_points.sort_by{|tp| tp.date }.slice(10)
-          last_ten.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
-          entry_menu(entry, full = false)
+          last_ten_touch_points(entry)
         when 9
           add_touch_point(entry)
         else
@@ -179,95 +178,100 @@ module Menu
 
       end
 
-      def edit(entry)
+      def last_ten_touch_points(entry)
+          system("cls")
+          drop_center
+          entry_last_ten_descending(entry)
+          entry_menu(entry, full = false)
+      end 
 
-        #method with block called on this array of lines.
+      def edit_menu
 
-        ["     === ===  === == === === ===== = ======= ==== === ===== === == ==== = == == == === == =====",
-        "   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ==== = ===",
-        "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ===== == = ===",
-        "   name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)",
-        "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
-        "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
+            ["     === ===  === == === === ===== = ======= ==== === ===== === == ==== = == == == === == =====",
+            "   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ==== = ===",
+            "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ===== == = ===",
+            "   name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)",
+            "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
+            "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
 
-          center_text(line)
+              center_text(line)
 
+            end 
         end 
 
-        selection = gets.chomp
+        def edit(entry)
 
-        #dup the entry to remove to preserve original copy in order to delete original
-        #from database array after editing and before re-adding edited area to avoid
-        #entry duplication.
+            edit_menu
+
+            selection = gets.chomp
+
+            #dup the entry to remove to preserve original copy in order to delete original
+            #from database array after editing and before re-adding edited area to avoid
+            #entry duplication.
 
 
 
-        case selection.to_i
-        when 1
-          puts "NEW first name:"
-          first_name = gets.chomp
-          entry.first_name =  first_name
-          puts "NEW last name"
-          last_name = gets.chomp
-          entry.last_name = last_name
-        when 2
-          puts "NEW street address"
-          street_address = gets.chomp
-          entry.street_address = street_address
-          puts "City, State Zip"
-          city_state_zip = gets.chomp
-          search_form = /(\w+),?\s+(\w+)\s+(\d+)/
-          results = search_form.match(city_state_zip)
-          entry.city = results[1]
-          entry.state = results[2]
-          entry.zipcode = results[3]
-        when 3
-          puts "NEW phone number"
-          phone_number = gets.chomp
-          entry.phone_number = phone_number
-        when 4
-          puts "NEW email"
-          email = gets.chomp
-          entry.email = email
-        when 6
-          tp_hash = {}
-          unless entry.touch_points.empty?
-          entry.touch_points.each_with_index do |tp, i|
-            tp_hash[i] = tp
+            case selection.to_i
+            when 1
+              puts "NEW first name:"
+              first_name = gets.chomp
+              entry.first_name =  first_name
+              puts "NEW last name"
+              last_name = gets.chomp
+              entry.last_name = last_name
+            when 2
+              puts "NEW street address"
+              street_address = gets.chomp
+              entry.street_address = street_address
+              puts "City, State Zip"
+              city_state_zip = gets.chomp
+              search_form = /(\w+),?\s+(\w+)\s+(\d+)/
+              results = search_form.match(city_state_zip)
+              entry.city = results[1]
+              entry.state = results[2]
+              entry.zipcode = results[3]
+            when 3
+              puts "NEW phone number"
+              phone_number = gets.chomp
+              entry.phone_number = phone_number
+            when 4
+              puts "NEW email"
+              email = gets.chomp
+              entry.email = email
+            when 6
+              tp_hash = {}
+              unless entry.touch_points.empty?
+              entry.touch_points.each_with_index do |tp, i|
+                tp_hash[i] = tp
+              end
+            end
+            puts "this hash has #{tp_hash.size} elements"
+              tp_hash.each{|k,v| puts "#{k}: #{v.date}, #{v.activity}"}
+              puts "Delete \# ?"
+              delete_tp = gets.to_i
+              tp_hash.delete(delete_tp)
+              entry.touch_points.delete_at(delete_tp)
+            when 7
+              puts "Are you sure?"
+              response = gets.chomp
+              index = @database.accounts.index(entry)
+              response.downcase.include?("y") ? @database.accounts.delete_at(index) : entry_menu(entry)
+              marshal_save(@database.accounts, ENTRIES)
+              main_menu
+            else
+              entry_menu(entry)
           end
-        end
-        puts "this hash has #{tp_hash.size} elements"
-          tp_hash.each{|k,v| puts "#{k}: #{v.date}, #{v.activity}"}
-          puts "Delete \# ?"
-          delete_tp = gets.to_i
-          tp_hash.delete(delete_tp)
-          entry.touch_points.delete_at(delete_tp)
-        when 7
-          puts "Are you sure?"
-          response = gets.chomp
-          index = @database.accounts.index(entry)
-
-          response.downcase.include?("y") ? @database.accounts.delete_at(index) : entry_menu(entry)
-          marshal_save(@database.accounts, ENTRIES)
-          main_menu
-        else
-          entry_menu(entry)
-      end
-      #have I moved away from the dup design?
-        save_update(entry)
-        display_contact(entry)
-        edit(entry)
        end
 
    def touch_points_menu
         
         menu = ["    ===  ==== ==== ===== === ==== = = == = == == = == == === =========== =====",
         "    =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= =",
-        "       all (3) | current (5) | historical (6) | main_menu (*)",
+        "     all (3) | current (5) | historical (6) | last_ten (9) | main_menu (*)",
         "   = = == ========= =========== == == ==== ============= ===== === = ====",
         "   ======== =============== ======== = = ====== ===== == ======== ========== =="]
 
-        menu.each{|line| center_text(menu)}
+        menu.each{|line| center_text(line)}
 
     selection = gets.chomp
     
@@ -278,41 +282,13 @@ module Menu
     when 5
       from_today_descending
     when 6
-      from_start_ascending
+      from_start_ascending 
+    when 9 
+      last_ten_descending
     else
       main_menu
     end
     3.times {puts " "}
     touch_points_menu
   end
-
-    def display_points
-        all_points = @touch_points.sort_by{|tp| tp.date_obj}.reverse
-        all_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
-    end
-
-    def display_all_descending
-      #removed unnecessary variable in a_b.rb
-        descending = @touch_points.sort_by{|tp| tp.date_obj}.reverse
-        descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
-      end
-
-    # def sort_and_print
-    #   tps = @touch_points
-    #     tps.sort_by{|tp| tp.date_obj}
-    #     tps.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
-    #   end
-
-    def from_today_descending
-      from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
-      descending = from_today.sort_by{|tp| tp.date_obj}
-      descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
-    end
-
-    def from_start_ascending
-        ascending = @touch_points.sort_by{|tp| tp.date_obj}
-        ascending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
-    end
-
-
 end 
