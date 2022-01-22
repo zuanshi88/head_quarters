@@ -9,7 +9,7 @@ module Address_book_module
 
   def drop_center 
     30.times{ puts ""}
-  end q2
+  end 
 
   def center_text(text)
         50.times{print " "}

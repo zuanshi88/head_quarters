@@ -11,6 +11,18 @@ class Directory
     @accounts_index = WordIndex.new(@accounts).index
   end
 
+  def create_tps
+    tps = []
+      @accounts.each do |entry|
+      unless entry.touch_points.empty?
+        entry.touch_points.each do |tp|
+          tps << tp
+        end
+      end
+      end
+      return tps
+    end
+
   def search(target)
         begin
         result =  @accounts_index[target]
