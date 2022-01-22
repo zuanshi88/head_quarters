@@ -21,9 +21,6 @@ class Session
 
   end 
 
-
-
-
 Session.new
 
 #TO DO list

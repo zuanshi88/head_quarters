@@ -267,7 +267,7 @@ module Menu
         menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
         "  ===  ==== ==== ===== === ==== TOUCH POINTS == = == == === =========== =====",
         "    =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= =",
-        "     all (3) | current (5) | historical (6) | last_ten (9) | main_menu (*)",
+        "     all (3) | current (5) | future (7) | last_ten (9) | main_menu (*)",
         "   = = == ========= =========== == == ==== ============= ===== === = ====",
         "   ======== =============== ======== = = ====== ===== == ======== ========== =="]
 
@@ -281,8 +281,8 @@ module Menu
       display_all_descending
     when 5
       from_today_descending
-    when 6
-      from_start_ascending 
+    when 7 
+      show_the_future 
     when 9 
       last_ten_descending
     else

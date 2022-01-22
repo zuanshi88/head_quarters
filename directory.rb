@@ -15,11 +15,11 @@ class Directory
   def create_tps
     tps = []
       @accounts.each do |entry|
-      unless entry.touch_points.empty?
-        entry.touch_points.each do |tp|
-          tps << tp
+        unless entry.touch_points.empty?
+          entry.touch_points.each do |tp|
+            tps << tp
+          end
         end
-      end
       end
       return tps
     end

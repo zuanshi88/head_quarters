@@ -2,33 +2,35 @@
 require_relative 'utility_module'
 
 module Menu_Methods_Module
-
-      include Utility_Module
-
-        def display_points
-            @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|
-                puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})" 
-            end 
-        end
-
+    
+    include Utility_Module
+    
         def display_all_descending
             @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|
-                puts "#{tp.date}: PENIS #{tp.account_name} (#{tp.activity})"
+                puts "#{tp.date}: #{tp.account_name} (#{tp.activity})"
             end 
         end
 
+        def show_the_future
+            system("cls")
+            drop_center
+            the_future = @touch_points.select{|tp| tp.date_obj > Time.now}
+            the_future.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+        end 
+
+        def from_today 
+            @touch_points.select{|tp| tp.date_obj < Time.now}
+        end 
+
         def from_today_descending
-            from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
-            descending = from_today.sort_by{|tp| tp.date_obj}
-            descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+            from_today.sort_by{|tp| tp.date_obj}.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end
 
         def last_ten_descending
             system("clear")
             drop_center
-            from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
-            descending = from_today.sort_by{|tp| tp.date_obj}.reverse.first(10)
-            descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+            last_ten = from_today.sort_by{|tp| tp.date_obj}.reverse.first(10)
+            last_ten.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
 
         def entry_last_ten_descending(entry)
@@ -47,17 +49,6 @@ module Menu_Methods_Module
             entry.touch_points.sort_by{|tp| tp.date }.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
             entry_menu(entry, full = false)
         end 
-
-        def from_start_ascending
-            ascending = @touch_points.sort_by{|tp| tp.date_obj}
-            ascending.reverse.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
-        end
-
-    # def sort_and_print
-    #   tps = @touch_points
-    #     tps.sort_by{|tp| tp.date_obj}
-    #     tps.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
-    #   end
 
 
 end 
