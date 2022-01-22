@@ -26,7 +26,9 @@ module Menu
         when 3
           touch_points_menu
         when 6
-          directory(database.accounts)
+            #this is broken now-- I need to think about
+            #how this should work...
+          directory(@directory)
           main_menu(false)
         when 7
           open_contact
@@ -69,10 +71,11 @@ module Menu
         entry_info
       end
 
+      #interesting-- this is now a design issue
 
-      def directory
+      def directory(directory)
         #this is all pushed way over for easier reading upon display
-        alphbetic_directory = @database.sort_by{|obj| obj.last_name.downcase}
+        alphbetic_directory = directory.sort_by{|obj| obj.last_name.downcase}
           puts ""
           puts ""
           puts "                                                                _________________________________________________________________________"
@@ -235,6 +238,59 @@ module Menu
         display_contact(entry)
         edit(entry)
        end
+
+        def touch_points_menu
+    puts "                                                                ===  ==== ==== ===== === ==== = = == = == == = == == === =========== ====="
+    puts "                                                               =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= ="
+    puts "                                                                    all (3) | current (5) | historical (6) | main_menu (*)"
+    puts "                                                                = == ========= =========== == == ==== ============= ===== === = ===="
+    puts "                                                                ======== =============== ======== = = ====== ===== == ======== ========== =="
+
+
+    selection = gets.chomp
+    
+    case selection.to_i
+
+    when 3
+      display_all_descending
+    when 5
+      from_today_descending
+    when 6
+      from_start_ascending
+    else
+      main_menu
+    end
+    3.times {puts " "}
+    touch_points_menu
+  end
+
+    def display_points
+        all_points = @touch_points.sort_by{|tp| tp.date_obj}.reverse
+        all_points.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+    end
+
+    def display_all_descending
+      #removed unnecessary variable in a_b.rb
+        descending = @touch_points.sort_by{|tp| tp.date_obj}.reverse
+        descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+      end
+
+    # def sort_and_print
+    #   tps = @touch_points
+    #     tps.sort_by{|tp| tp.date_obj}
+    #     tps.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
+    #   end
+
+    def from_today_descending
+      from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
+      descending = from_today.sort_by{|tp| tp.date_obj}
+      descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+    end
+
+    def from_start_ascending
+        ascending = @touch_points.sort_by{|tp| tp.date_obj}
+        ascending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+    end
 
 
 end 
