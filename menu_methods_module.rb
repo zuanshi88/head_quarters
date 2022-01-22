@@ -1,6 +1,9 @@
 
+require_relative 'utility_module'
 
 module Menu_Methods_Module
+
+      include Utility_Module
 
         def display_points
             @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|
@@ -22,13 +25,22 @@ module Menu_Methods_Module
 
         def last_ten_descending
             system("clear")
+            drop_center
             from_today = @touch_points.select{|tp| tp.date_obj < Time.now}
             descending = from_today.sort_by{|tp| tp.date_obj}.reverse.first(10)
             descending.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
 
         def entry_last_ten_descending(entry)
-            entry.touch_points.last(10).each { |tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})" }
+            entry.touch_points.last(10).each { |tp| puts "#{tp.date}:  #{tp.activity}" }
+        end 
+
+        def last_ten_touch_points(entry)
+            system("cls")
+            drop_center
+            puts "Last Ten Touch Points:"
+            entry_last_ten_descending(entry)
+            entry_menu(entry, full = false)
         end 
 
         def entry_display_all(entry)

@@ -1,9 +1,8 @@
-require_relative 'utility_module'
 require_relative 'menu_methods_module'
 
 module Menu 
 
-  include Utility_Module
+
   include Menu_Methods_Module
 
 
@@ -140,13 +139,14 @@ module Menu
 
         if full 
           system('clear')
+          drop_center
         end 
 
-        drop_center
+        
 
         menu = ["=== === ===== = ======= ==== === ===== === == ==== = == ==",
                 "   = = = == === = = = == = == =  === = === === ===== ==",
-                "  edit (1) | all (5) | last_ten (6) add (9) | main menu (*)",
+                "  edit (1) | last_ten (5) | add (8) | entry menu (9) | main menu (*)",
                 "  === == ==  = = =  = = = ==== === = = = = = = = = = == ",
                 " === === ===== = ======= ==== === ===== === == ==== = == =="]
 
@@ -166,11 +166,11 @@ module Menu
         when 1
           edit(entry)
         when 5
-          entry_display_all(entry)
-        when 6 
           last_ten_touch_points(entry)
-        when 9
+        when 8
           add_touch_point(entry)
+        when 9 
+          entry_menu(entry)
         else
           system("cls")
           main_menu
@@ -178,12 +178,6 @@ module Menu
 
       end
 
-      def last_ten_touch_points(entry)
-          system("cls")
-          drop_center
-          entry_last_ten_descending(entry)
-          entry_menu(entry, full = false)
-      end 
 
       def edit_menu
 
@@ -263,9 +257,15 @@ module Menu
           end
        end
 
-   def touch_points_menu
+   def touch_points_menu(status = true)
+
+      if status 
+        system("cls")
+        drop_center
+      end
         
-        menu = ["    ===  ==== ==== ===== === ==== = = == = == == = == == === =========== =====",
+        menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
+        "  ===  ==== ==== ===== === ==== TOUCH POINTS == = == == === =========== =====",
         "    =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= =",
         "     all (3) | current (5) | historical (6) | last_ten (9) | main_menu (*)",
         "   = = == ========= =========== == == ==== ============= ===== === = ====",
@@ -289,6 +289,6 @@ module Menu
       main_menu
     end
     3.times {puts " "}
-    touch_points_menu
+    touch_points_menu(false)
   end
 end 
