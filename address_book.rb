@@ -1,7 +1,5 @@
 
-# require_relative 'address_book_module'
 require_relative 'directory'
-require_relative 'word_index'
 require_relative 'Entry_Class'
 require_relative 'Touch_Point_Class'
 require_relative 'menu_module'
@@ -11,7 +9,6 @@ ENTRIES = "marshaled_database.txt"
 
 class Session
   
-    # include Address_book_module
     include Menu 
 
     attr_reader :database, :touch_points

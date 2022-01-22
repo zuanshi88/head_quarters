@@ -1,4 +1,5 @@
 require_relative 'utility_module'
+require_relative 'word_index.rb'
 
 class Directory
 
