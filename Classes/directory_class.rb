@@ -1,9 +1,9 @@
-require './Modules/utility_module'
+require './Modules/formatting_module'
 require_relative 'word_index_class'
 
 class Directory
 
-  include Utility_Module
+  include Formatting_Module
 
   attr_reader :accounts, :accounts_index
 

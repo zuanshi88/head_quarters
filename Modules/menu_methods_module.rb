@@ -1,9 +1,8 @@
-
-# require_relative 'utility_module'
+ 
 
 module Menu_Methods_Module
     
-    include Utility_Module
+    include Formatting_Module
     
         def display_all_descending
             @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|

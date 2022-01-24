@@ -1,6 +1,4 @@
 
-
-
 class Touch_Point
 
   attr_reader :date, :create_date, :activity, :account_name, :account, :date_obj

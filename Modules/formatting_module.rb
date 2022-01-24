@@ -1,5 +1,5 @@
 require 'time'
-module Utility_Module
+module Formatting_Module
 #should this methods be stored here? or inside SESSION?
 
 # can I access the ENTRIES and convert them to HASHes and put them back?
@@ -56,10 +56,4 @@ end
   end
 
 
-      def save_update(entry)
-        database.accounts.delete(entry)
-        updated_database = database.accounts.push(entry)
-        marshal_save(updated_database, ENTRIES)
-        puts "#{entry.name}: updated"
-      end
   end
