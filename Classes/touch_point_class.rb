@@ -12,4 +12,5 @@ class Touch_Point
           @account = entry
           @account_name = @account.name
     end
+
 end

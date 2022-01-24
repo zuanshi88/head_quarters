@@ -1,10 +1,12 @@
 require_relative 'menu_methods_module'
 require_relative 'menu_display_module'
+require_relative 'menu_action_module'
 
 module Menu 
 
 
   include Menu_Methods
+  include Menu_Action
 
 
   def main_menu(status = true, message = "")
@@ -49,41 +51,6 @@ module Menu
         else 
           exit
         end
-      end
-
-      def add_entry
-        #this method collects all info via menu prompts
-        #then passes info on to save entry
-        puts "first name:"
-        first_name = gets.chomp
-        puts "last name:"
-        last_name = gets.chomp
-        puts "street address:"
-        street_address = gets.chomp
-        puts "city:"
-        city = gets.chomp
-        puts "state:"
-        state = gets.chomp
-        puts "zipcode"
-        zipcode = gets.chomp
-        address = {"street_address" => street_address,
-                        "city" => city,
-                        "state" => state,
-                        "zipcode" => zipcode
-                      }
-        name = "#{first_name} #{last_name}"
-
-        puts "phone:"
-
-        phone_number = gets.chomp.to_s
-
-        puts "email:"
-        email = gets.chomp.to_s
-
-        touch_points = []
-
-        entry_info = {"first name" => first_name, "last name" => last_name, "address" => address, "phone number" => phone_number, "email" => email, "name" => name, "touch_points" => touch_points}
-        entry_info
       end
 
       #interesting-- this is now a design issue
@@ -177,7 +144,13 @@ module Menu
           clear_drop_center
           last_ten_touch_points(entry)
         when 8
-          add_touch_point(entry)
+          create_date = add_touch_point
+          tp = Touch_Point.new(entry, create_date)
+          entry.touch_points << tp
+          save_update(entry)
+          system('cls')
+          display_contact(entry)
+          entry_menu(entry)
         when 9 
           entry_menu(entry)
         else

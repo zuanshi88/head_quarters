@@ -25,6 +25,10 @@ class Directory
       return tps
     end
 
+    #removing (entry) argument
+
+     
+
     def search(target)
         begin
         result =  @accounts_index[target]
