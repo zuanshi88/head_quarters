@@ -1,4 +1,8 @@
+require_relative 'marshaled_database_module'
+
 module Utility 
+
+    include Marshaled_Database
 
     def marshal_save(obj_array, file)
     File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}

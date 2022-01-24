@@ -38,8 +38,14 @@ module Menu
           main_menu(false)
         when 7
           target = gets.chomp
-          open_contact(@database.search(target.downcase))
-          main_menu
+          account_hash = @database.search(target.downcase) 
+            if account_hash.length == 1
+              open_contact(account_hash[0])
+            else 
+              account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}"); puts ""}
+              selection = gets.chomp
+              open_contact(account_hash[selection.to_i])
+            end 
         else 
           exit
         end

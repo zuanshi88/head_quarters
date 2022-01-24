@@ -12,6 +12,7 @@ class Session
   
     include Menu 
     include Formatting 
+    include Utility
 
     attr_reader :database, :touch_points
 
