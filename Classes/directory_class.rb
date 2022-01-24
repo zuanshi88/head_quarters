@@ -1,10 +1,6 @@
-require './Modules/formatting_module'
-require './Modules/utility_module'
 require_relative 'word_index_class'
 
 class Directory
-
-  include Utility
 
   attr_reader :accounts, :accounts_index
 
@@ -13,6 +9,8 @@ class Directory
     @accounts_index = WordIndex.new(@accounts).index
   end
 
+  #instance variable called by all instances of directories to provide
+  #up-to-date touch points 
   def create_tps
     tps = []
       @accounts.each do |entry|
@@ -24,8 +22,6 @@ class Directory
       end
       return tps
     end
-
-    #removing (entry) argument
 
      
 
