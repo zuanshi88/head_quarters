@@ -244,6 +244,7 @@ module Menu
               tp_hash.each{|k,v| puts "#{k}: #{v.date}, #{v.activity}"}
               puts "Delete \# ?"
               delete_tp = gets.to_i
+              # an unnecessary delete. the tp_hass is all going away
               tp_hash.delete(delete_tp)
               entry.touch_points.delete_at(delete_tp)
             when 7
@@ -254,6 +255,7 @@ module Menu
               marshal_save(@database.accounts, ENTRIES)
               main_menu
             else
+              puts "Where is this?"
               entry_menu(entry)
           end
        end
