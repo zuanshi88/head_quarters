@@ -6,13 +6,13 @@ module Menu
   include Menu_Methods_Module
 
 
-  def main_menu(status = true)
+  def main_menu(status = true, message = "")
 
     if status == true 
       system("cls")
+      drop_center
     end 
 
-    30.times{puts ""}
 
     menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
     "  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== =====",
@@ -23,6 +23,8 @@ module Menu
     "  === ===== == = = = ===== === ===== === == == = == ===== == === === === =="]
 
     menu.each {|line| center_text(line) }
+      
+    center_text(message)
 
         action = gets.to_i
 
@@ -99,26 +101,26 @@ module Menu
         # 1st  used address_hash = JSON.parse(obj["address"])
         # 2nd did the JSON conversion earlier and then used HASH KEYS to access info_hash
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
-
+      
         %x(echo clr)
-        [[obj.name, true], 
-        [obj.street_address, true], 
-        [obj.city, false]].each do |info, status|
-          center_text(info, status)
-        end 
-        print " " + obj.state + " " + obj.zipcode 
-        puts ""
-        [obj.phone_number, obj.email].each do |info| 
-          center_text(info)
-        end 
-        if obj.touch_points.empty?
+          [[obj.name, true], 
+          [obj.street_address, true], 
+          [obj.city, false]].each do |info, status|
+            center_text(info, status)
+          end 
+          print " " + obj.state + " " + obj.zipcode 
           puts ""
-        else
-          sorted_tp_obj_array = obj.touch_points.sort_by{|tp| tp.date_obj }.reverse
-          puts ""
-          sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
-        end
-          2.times{puts""}
+          [obj.phone_number, obj.email].each do |info| 
+            center_text(info)
+          end 
+          if obj.touch_points.empty?
+            puts ""
+          else
+            sorted_tp_obj_array = obj.touch_points.sort_by{|tp| tp.date_obj }.reverse
+            puts ""
+            sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
+          end
+            2.times{puts""}
       end
 
 #12/15/2020: how to delete a hash in an array of hashes?
@@ -126,14 +128,15 @@ module Menu
 
     def open_contact
         target = gets.chomp
-      begin
         result = @database.search(target.downcase)
-      rescue
-        p "#{target} not found. Try again."
-        open_contact
-      end
-        drop_center
-        entry_menu(result)
+        if result == nil 
+          main_menu(status = true, message = "Account Not Found, Please select again")
+        else 
+          drop_center
+          if result 
+            entry_menu(result)
+          end 
+        end 
     end
 
       def entry_menu(entry, full = true)
@@ -157,8 +160,14 @@ module Menu
         puts " "   
 
         if full
-          display_contact(entry)
+          if entry != nil 
+            display_contact(entry)
+          else  
+            puts "This isn't a valid account, try another selection"
+            main_menu(false)
+          end 
         end 
+
       
         selection = gets.to_i
 

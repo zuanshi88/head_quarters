@@ -20,31 +20,6 @@ module Utility_Module
       end 
   end 
 
-  def search(target)
-        begin
-        result =  @accounts_index[target]
-        if result.nil?
-            puts "#{result} didn't return a match. Try again"
-        else
-            account_hash = {}
-            result.each_with_index{|acc, index| account_hash[index] = acc}
-            if account_hash.length == 1
-            return account_hash[0]
-            else
-            account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}"); puts ""}
-            selection = gets.chomp
-            return account_hash[selection.to_i]
-        end
-    end
-        rescue => error  
-        puts "You wrote a bad, bad song!"
-        puts error.message
-        exit
-        end
-    end 
-
-
-
   #more database types
 
 def marshal_save(obj_array, file)
