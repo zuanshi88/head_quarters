@@ -56,12 +56,6 @@ end
   end
 
 
-      def save_entry(entry_info, database)
-        new_entry = Entry.new(entry_info)
-        updated_database = database.push(new_entry)
-        updated_database
-      end
-
       def save_update(entry)
         database.accounts.delete(entry)
         updated_database = database.accounts.push(entry)

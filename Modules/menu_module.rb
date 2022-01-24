@@ -14,10 +14,10 @@ module Menu
     end 
 
 
-    menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
+    display_main_menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
     "  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== =====",
     "   == ==== ===== ===== ==== === ==== == ===== ========= ===== ===== === ===== == =",
-    "          add (1) |  ESME (3) | contacts (6) | open (7) | exit (*)",
+    "          add (1) |  points (3) | contacts (6) | open (7) | exit (*)",
     "  == == === = == ===== ======= ======== == == ==== ===== ============= === = ====",
     "    ======== =============== ======== = = ====== ===== == ======== ========== ==",
     "  === ===== == = = = ===== === ===== === == == = == ===== == === === === =="]
@@ -31,7 +31,11 @@ module Menu
         case action
         when 1
           #menu call to the directory
-          marshal_save(save_entry(add_entry, @database.accounts), ENTRIES)
+          #solved this using Director#save_entry
+          #01/24/2022-- still need to resolve 
+          #editing persistency issues. 
+          #Also need to encapsulate more depencies.
+          marshal_save(Directory.save_entry(Entry.new(add_entry), @database.accounts), ENTRIES)
         when 3
           touch_points_menu
         when 6

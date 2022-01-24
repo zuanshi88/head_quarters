@@ -53,8 +53,9 @@ class Directory
       @accounts.delete(entry)
     end
 
-    def self.save_entry 
-
+    def self.save_entry(new_entry, database)
+        updated_database = database.push(new_entry)
+        updated_database
     end 
 
 
