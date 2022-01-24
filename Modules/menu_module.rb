@@ -30,24 +30,28 @@ module Menu
 
         case action
         when 1
-          marshal_save(save_entry(add_entry, database.accounts), ENTRIES)
+          #menu call to the directory
+          marshal_save(save_entry(add_entry, @database.accounts), ENTRIES)
         when 3
           touch_points_menu
         when 6
             #fix this next
             #this is broken now-- I need to think about
             #how this should work...
-          directory(@directory)
+          display_all_accounts(@database.accounts)
           main_menu(false)
         when 7
-          open_contact
+          target = gets.chomp
+          open_contact(@database.search(target.downcase))
           main_menu
-        else
+        else 
           exit
         end
       end
 
       def add_entry
+        #this method collects all info via menu prompts
+        #then passes info on to save entry
         puts "first name:"
         first_name = gets.chomp
         puts "last name:"
@@ -82,18 +86,19 @@ module Menu
 
       #interesting-- this is now a design issue
 
-      def directory(directory)
+      def display_all_accounts(accounts)
         #this is all pushed way over for easier reading upon display
-        alphbetic_directory = directory.sort_by{|obj| obj.last_name.downcase}
+        
           puts ""
           puts ""
-          puts "                                                                _________________________________________________________________________"
-          puts ""
-        alphbetic_directory.each do |entry|
-          puts "                                                                  - #{entry.last_name}, #{entry.first_name} |  #{entry.street_address} | #{entry.city}, #{entry.state} #{entry.zipcode} - "
-          puts "                                                                _________________________________________________________________________"
-          puts ""
-        end
+      
+          accounts.sort_by{|obj| obj.last_name.downcase}.each do |entry|
+              puts ""
+              ["- #{entry.last_name}, #{entry.first_name} |  #{entry.street_address} | #{entry.city}, #{entry.state} #{entry.zipcode} - ",
+              "_________________________________________________________________________"].each do |line|
+                center_text(line)
+              end 
+          end
       end
 
 
@@ -116,8 +121,8 @@ module Menu
           if obj.touch_points.empty?
             puts ""
           else
-            sorted_tp_obj_array = obj.touch_points.sort_by{|tp| tp.date_obj }.reverse
             puts ""
+            sorted_tp_obj_array = obj.touch_points.sort_by{|tp| tp.date_obj }.reverse
             sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
           end
             2.times{puts""}
@@ -126,9 +131,7 @@ module Menu
 #12/15/2020: how to delete a hash in an array of hashes?
 
 
-    def open_contact
-        target = gets.chomp
-        result = @database.search(target.downcase)
+    def open_contact(result)
         if result == nil 
           main_menu(status = true, message = "Account Not Found, Please select again")
         else 

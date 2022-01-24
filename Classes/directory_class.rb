@@ -53,5 +53,9 @@ class Directory
       @accounts.delete(entry)
     end
 
+    def self.save_entry 
+
+    end 
+
 
   end
