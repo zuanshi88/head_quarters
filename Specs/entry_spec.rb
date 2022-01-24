@@ -1,5 +1,5 @@
-require '../Classes/entry_test_class'
-require '../Classes/test_class'
+require '../Classes/entry_class'
+# require '../Classes/test_class'
 require 'test/unit'
 
 
@@ -12,10 +12,38 @@ require 'test/unit'
 # puts entry.name 
 # puts "#{entry.first_name} is a fine chap."
 class TestEntry < Test::Unit::TestCase 
-    def test_entry_name 
-        entry = EntryTest.new({"first_name" => "Aaron", "last_name" => "Whitmer"})
-        assert_equal("Karen Whitmer", entry.name)
+
+    def setup 
+        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
     end 
+
+    def test_entry_name 
+        assert_equal("Aaron", @entry.first_name)
+        assert_equal("Whitmer", @entry.last_name)
+        assert_equal("Aaron Whitmer", @entry.name)
+    end 
+
+    def test_entry_address 
+        assert_equal("filler", @entry.address)
+        assert_equal("filler", @entry.street_address)
+        assert_equal("filler", @entry.city)
+        assert_equal("filler", @entry.state)
+        assert_equal("filler", @entry.zipcode)
+    end 
+
+    def test_entry_email 
+         assert_equal("adwhitmer@gmail.com", @entry.email)
+    end 
+
+    def test_entry_phone_number 
+        assert_equal("(773) 673-0803", @entry.phone_number)
+    end 
+
+    def test_entry_array_empty 
+        assert_empty(@entry.touch_points)
+    end 
+
+
 end 
 
 
