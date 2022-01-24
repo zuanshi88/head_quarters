@@ -12,7 +12,7 @@ module Utility_Module
   end 
 
   def center_text(text, new_line = true)
-        50.times{print " "}
+        50.times{ print " "}
       if new_line 
         puts text 
       else 
@@ -61,100 +61,5 @@ end
         updated_database = database.accounts.push(entry)
         marshal_save(updated_database, ENTRIES)
         puts "#{entry.name}: updated"
-      end
-
-      def prepare_argument_hashes(objs)
-        save_array = []
-        objs.each{|obj| save_array << Marshal.dump(obj)}
-        save_array
-      end
-
-      # def hard_save_directory(database, file)
-      #   hash_array = prepare_argument_hashes(database)
-      #   write_file = File.open(file, "w")
-      #   write_file.puts hash_array
-      #   write_file.close
-      # end
-
-      def simplify(database)
-        database.map { |obj| obj.name.downcase.scan(/[\w]/).uniq}
-      end
-
-      def name_hasher(name)
-          name_hash = {}
-          name.map{|char| name_hash[char] = char}
-          name_hash
-      end
-
-      def obj_to_fullname_hash(database)
-        simple_name_database = simplify(database)
-        name_hash_array = []
-        simple_name_database.each do |obj|
-          new_hash = {}
-          obj.map do |letter|
-          new_hash[letter] = letter
-          end
-          name_hash_array << name_hasher(obj)
-        end
-          name_hash_array
-      end
-
-
-      def capture_hash_and_index(hash, index,fudge_width)
-            matches = []
-            match = hash.values.join("")
-            matches << [index, hash, fudge_width]
-            matches
-      end
-
-      def calculate_fudge(search_hash, hash_name_array, search)
-        hash_name_array.each_with_index do |hash, index|
-        fudge_width = search_hash.merge(hash).length - search.length
-        fudge_width <= 0 ? capture_hash_and_index(hash, index, matches, fudge_width) : next
-         end
-      end
-
-      def best_match(matches, search_hash, database)
-        matches.select{ |match| match[1].first == search_hash.first}.pop
-      end
-
-
-      def hash_name_compare(search, database)
-        hash_name_array = obj_to_fullname_hash(database)
-        search_hash = name_hasher(search.downcase.split(""))
-        matches = calculate_fudge(search_hash, hash_name_array, search)
-        best_match(matches, search_hash, database)
-      end
-
-      def value_checker(value, file)
-        value_array = []
-        value_file = File.open(file, "r")
-        value_array.each{|entry| value_array << entry}
-        time_now = Time.new
-        value_array << "time: #{time_now.month}/#{time_now.day}/#{time_now.year}class:#{value.class}; #{value}"
-        write_to_file = File.open(file, "w")
-        write_to_file.puts value_array
-      end
-
-      def select_entry(search, database)
-        database.select{|obj| obj.name == search}
-      end
-
-
-      def reset_touch_points(obj_array)
-        obj_array.each{|obj| obj.touch_points = []}
-        obj_array
-      end
-
-      def search_exist?(search, database)
-        exist = false
-        directory.each do |entry|
-          if entry.name == search
-            exist = true
-          else
-            next
-          end
-        end
-        exist
       end
   end
