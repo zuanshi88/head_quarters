@@ -1,4 +1,5 @@
 require_relative 'menu_methods_module'
+require_relative 'menu_display_module'
 
 module Menu 
 
@@ -182,23 +183,9 @@ module Menu
       end
 
 
-      def edit_menu
-
-            ["     === ===  === == === === ===== = ======= ==== === ===== === == ==== = == == == === == =====",
-            "   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ==== = ===",
-            "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ===== == = ===",
-            "   name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (7) | entry menu (*)",
-            "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
-            "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
-
-              center_text(line)
-
-            end 
-        end 
-
         def edit(entry)
 
-            edit_menu
+            display_edit_menu
 
             selection = gets.chomp
 
@@ -269,14 +256,7 @@ module Menu
         drop_center
       end
         
-        menu = ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
-        "  ===  ==== ==== ===== === ==== TOUCH POINTS == = == == === =========== =====",
-        "    =  ==  ===== == ======= === ==== == ===== ========= ===== ===== ======= =",
-        "     all (3) | current (5) | future (7) | last_ten (9) | main_menu (*)",
-        "   = = == ========= =========== == == ==== ============= ===== === = ====",
-        "   ======== =============== ======== = = ====== ===== == ======== ========== =="]
-
-        menu.each{|line| center_text(line)}
+    display_touch_point_menu
 
     selection = gets.chomp
     

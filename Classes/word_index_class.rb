@@ -1,5 +1,8 @@
 class WordIndex
 
+    #would like to make an index of touch points and return
+    #all touch points containing key word
+
         def initialize(accounts)
             @accounts = accounts
         end

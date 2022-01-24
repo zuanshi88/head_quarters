@@ -1,5 +1,5 @@
 
-require_relative 'utility_module'
+# require_relative 'utility_module'
 
 module Menu_Methods_Module
     
@@ -50,29 +50,4 @@ module Menu_Methods_Module
             entry_menu(entry, full = false)
         end 
 
-        def display_main_menu
-
-                ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
-                "  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== =====",
-                "   == ==== ===== ===== ==== === ==== == ===== ========= ===== ===== === ===== == =",
-                "          add (1) |  points (3) | contacts (6) | open (7) | exit (*)",
-                "  == == === = == ===== ======= ======== == == ==== ===== ============= === = ====",
-                "    ======== =============== ======== = = ====== ===== == ======== ========== ==",
-                "  === ===== == = = = ===== === ===== === == == = == ===== == === === === =="].each do |line| 
-                    
-                    center_text(line) 
-                end
-        end 
-
-        def display_entry_menu
-            
-                ["=== === ===== = ======= ==== === ===== === == ==== = == ==",
-                "   = = = == === = = = == = == =  === = === === ===== ==",
-                "  edit (1) | last_ten (5) | add (8) | entry menu (9) | main menu (*)",
-                "  === == ==  = = =  = = = ==== === = = = = = = = = = == ",
-                " === === ===== = ======= ==== === ===== === == ==== = == =="].each do |line|
-
-                center_text(line) 
-            end 
-        end 
 end 

@@ -48,7 +48,6 @@ class Directory
     end 
 
 
-
     def delete_account(entry)
       @accounts.delete(entry)
     end
