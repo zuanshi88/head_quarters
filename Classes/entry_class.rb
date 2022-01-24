@@ -14,7 +14,7 @@ class Entry
     @name = "#{first_name} #{last_name}"
     @address = hash["address"]
     @street_address = @address["street_address"]
-    @city = @address["city"]
+    @city = @address["city"] 
     @state = @address["state"]
     @zipcode = @address["zipcode"]
     @email = hash["email"]
