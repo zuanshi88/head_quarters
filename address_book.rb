@@ -2,7 +2,7 @@ require './Classes/directory_class'
 require './Classes/entry_class'
 require './Classes/touch_point_class'
 require './Modules/menu_module'
-# require './Modules/utility_module'
+require './Modules/formatting_module'
 
 
 #marshaled database
@@ -11,6 +11,7 @@ ENTRIES = "marshaled_database.txt"
 class Session
   
     include Menu 
+    include Formatting 
 
     attr_reader :database, :touch_points
 

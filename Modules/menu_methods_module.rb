@@ -1,9 +1,7 @@
  
 
-module Menu_Methods_Module
+module Menu_Methods
     
-    include Formatting_Module
-
         def display_all_descending
             @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|
                 puts "#{tp.date}: #{tp.account_name} (#{tp.activity})"
@@ -11,8 +9,6 @@ module Menu_Methods_Module
         end
 
         def show_the_future
-            system("cls")
-            drop_center
             the_future = @touch_points.select{|tp| tp.date_obj > Time.now}
             the_future.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
@@ -26,8 +22,6 @@ module Menu_Methods_Module
         end
 
         def last_ten_descending
-            system("clear")
-            drop_center
             last_ten = from_today.sort_by{|tp| tp.date_obj}.reverse.first(10)
             last_ten.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
@@ -37,9 +31,9 @@ module Menu_Methods_Module
         end 
 
         def last_ten_touch_points(entry)
-            system("cls")
-            drop_center
             puts "Last Ten Touch Points:"
+            puts "______________________"
+            puts ""
             entry_last_ten_descending(entry)
             entry_menu(entry, full = false)
         end 

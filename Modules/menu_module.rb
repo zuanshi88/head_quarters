@@ -4,14 +4,13 @@ require_relative 'menu_display_module'
 module Menu 
 
 
-  include Menu_Methods_Module
+  include Menu_Methods
 
 
   def main_menu(status = true, message = "")
 
     if status == true 
-      system("cls")
-      drop_center
+      clear_drop_center
     end 
 
 
@@ -142,8 +141,7 @@ module Menu
       def entry_menu(entry, full = true)
 
         if full 
-          system('clear')
-          drop_center
+            clear_drop_center
         end 
 
         
@@ -168,8 +166,9 @@ module Menu
         case selection
 
         when 1
-          edit(entry)
+          edit(entry)     
         when 5
+          clear_drop_center
           last_ten_touch_points(entry)
         when 8
           add_touch_point(entry)
@@ -267,8 +266,10 @@ module Menu
     when 5
       from_today_descending
     when 7 
+      clear_drop_center
       show_the_future 
     when 9 
+      clear_drop_center
       last_ten_descending
     else
       main_menu

@@ -1,5 +1,5 @@
 require 'time'
-module Formatting_Module
+module Formatting
 #should this methods be stored here? or inside SESSION?
 
 # can I access the ENTRIES and convert them to HASHes and put them back?
@@ -9,6 +9,11 @@ module Formatting_Module
 
   def drop_center 
     30.times{ puts ""}
+  end 
+
+  def clear_drop_center
+      system("cls")
+      drop_center
   end 
 
   def center_text(text, new_line = true)

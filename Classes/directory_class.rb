@@ -3,7 +3,7 @@ require_relative 'word_index_class'
 
 class Directory
 
-  include Formatting_Module
+  include Formatting
 
   attr_reader :accounts, :accounts_index
 
