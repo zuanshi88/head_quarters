@@ -4,9 +4,7 @@ module Utility
 
     include Marshaled_Database
 
-    def marshal_save(obj_array, file)
-    File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
-    end
+
 
   def add_touch_point(entry)
       puts "Date? \#,\#,\# (year, month, day)"
@@ -31,10 +29,6 @@ module Utility
           display_contact(entry)
           entry_menu(entry)
       end
-  end
-
-  def open_touch_points(obj)
-      obj.touch_points
   end
 
 

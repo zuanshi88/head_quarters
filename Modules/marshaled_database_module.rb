@@ -7,4 +7,10 @@ module Marshaled_Database
         puts "#{entry.name}: updated"
       end
 
+
+   def marshal_save(obj_array, file)
+        File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
+  end
+
+
 end 
