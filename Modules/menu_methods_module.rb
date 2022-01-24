@@ -3,7 +3,7 @@
 module Menu_Methods_Module
     
     include Formatting_Module
-    
+
         def display_all_descending
             @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|
                 puts "#{tp.date}: #{tp.account_name} (#{tp.activity})"
