@@ -10,7 +10,7 @@ require './Modules/formatting_module'
 #marshaled database
 ENTRIES = "marshaled_database.txt"
 
-class Session
+class Head_Quarters
   
     include Menu 
     include Formatting 
@@ -35,7 +35,7 @@ class Session
 
   end 
 
-Session.new
+Head_Quarters.new
 
 #TO DO list
 # clean up code, get better with comments.
