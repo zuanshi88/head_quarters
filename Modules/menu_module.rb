@@ -7,6 +7,7 @@ module Menu
 
   include Menu_Methods
   include Menu_Action
+  include Menu_Display
 
 
   def main_menu(status = true, message = "")

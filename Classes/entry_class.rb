@@ -1,7 +1,5 @@
 class Entry
 
-  include Marshal
-
   attr_accessor :first_name, :last_name, :name, :address,
               :street_address, :city, :state, :zipcode,
               :phone_number, :email, :touch_points

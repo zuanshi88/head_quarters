@@ -1,4 +1,7 @@
 module Menu_Action 
+
+
+        #prompts for info and returns a hash    
      def add_entry
         #this method collects all info via menu prompts
         #then passes info on to save entry
@@ -34,7 +37,7 @@ module Menu_Action
         entry_info
       end
 
-
+        # only knows it is getting an array 
     def create_selection_hash(selection)
         begin
         if selection.nil?
@@ -50,4 +53,36 @@ module Menu_Action
             exit
         end
     end 
+
+    def add_touch_point
+            puts "Date? \#,\#,\# (year, month, day)"
+            response = gets.chomp
+            begin
+                if response.include?("n")
+                create_date = Time.now
+                else
+                    match_set = response.scan(/(\d+)/)
+                    info = match_set.map{|int| int[0].to_i}
+                    new_time = Time.mktime(info[0], info[1],info[2])
+                    create_date = new_time
+                end
+                rescue
+                    puts "Did you put the year first?"
+                    add_touch_point(entry)
+                else
+                    return create_date
+            end
+        end
+
+         def save_update(entry)
+                database.accounts.delete(entry)
+                updated_database = database.accounts.push(entry)
+                marshal_save(updated_database, ENTRIES)
+                puts "#{entry.name}: updated"
+        end
+
+         def marshal_save(obj_array, file)
+            File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
+        end
+
 end 

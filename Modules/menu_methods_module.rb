@@ -43,25 +43,4 @@ module Menu_Methods
             entry_menu(entry, full = false)
         end 
 
-        def add_touch_point
-            puts "Date? \#,\#,\# (year, month, day)"
-            response = gets.chomp
-            begin
-                if response.include?("n")
-                create_date = Time.now
-                else
-                    match_set = response.scan(/(\d+)/)
-                    info = match_set.map{|int| int[0].to_i}
-                    new_time = Time.mktime(info[0], info[1],info[2])
-                    create_date = new_time
-                end
-                rescue
-                    puts "Did you put the year first?"
-                    add_touch_point(entry)
-                else
-                    return create_date
-            end
-        end
-
-
 end 
