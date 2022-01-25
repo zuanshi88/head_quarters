@@ -2,7 +2,7 @@ module Menu_Action
 
 
         #prompts for info and returns a hash    
-     def add_entry
+    def add_entry
         #this method collects all info via menu prompts
         #then passes info on to save entry
         puts "first name:"
@@ -35,7 +35,7 @@ module Menu_Action
 
         entry_info = {"first name" => first_name, "last name" => last_name, "address" => address, "phone number" => phone_number, "email" => email, "name" => name, "touch_points" => touch_points}
         entry_info
-      end
+    end
 
         # only knows it is getting an array 
     def create_selection_hash(selection)
@@ -72,17 +72,17 @@ module Menu_Action
                 else
                     return create_date
             end
-        end
+    end
 
-         def save_update(entry)
+    def save_update(entry)
                 database.accounts.delete(entry)
                 updated_database = database.accounts.push(entry)
                 marshal_save(updated_database, ENTRIES)
                 puts "#{entry.name}: updated"
-        end
+    end
 
-         def marshal_save(obj_array, file)
+    def marshal_save(obj_array, file)
             File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
-        end
+    end
 
 end 

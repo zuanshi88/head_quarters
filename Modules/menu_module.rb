@@ -54,11 +54,10 @@ module Menu
         else 
           exit
         end
-      end
+  end
 
-      #interesting-- this is now a design issue
 
-      def display_all_accounts(accounts)
+  def display_all_accounts(accounts)
         #this is all pushed way over for easier reading upon display
         
           puts ""
@@ -71,10 +70,10 @@ module Menu
                 center_text(line)
               end 
           end
-      end
+  end
 
 
-      def display_contact(obj)
+ def display_contact(obj)
         # 1st  used address_hash = JSON.parse(obj["address"])
         # 2nd did the JSON conversion earlier and then used HASH KEYS to access info_hash
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
@@ -98,12 +97,10 @@ module Menu
             sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
           end
             2.times{puts""}
-      end
-
-#12/15/2020: how to delete a hash in an array of hashes?
+ end
 
 
-    def open_contact(result)
+ def open_contact(result)
         if result == nil 
           main_menu(status = true, message = "Account Not Found, Please select again")
         else 
@@ -112,9 +109,9 @@ module Menu
             entry_menu(result)
           end 
         end 
-    end
+ end
 
-      def entry_menu(entry, full = true)
+  def entry_menu(entry, full = true)
 
         if full 
             clear_drop_center
@@ -161,10 +158,10 @@ module Menu
           main_menu
        end
 
-      end
+  end
 
 
-        def edit(entry)
+  def edit(entry)
 
             display_edit_menu
 
@@ -228,9 +225,9 @@ module Menu
               puts "Where is this?"
               entry_menu(entry)
           end
-       end
+  end
 
-   def touch_points_menu(status = true)
+  def touch_points_menu(status = true)
 
       if status 
         system("cls")

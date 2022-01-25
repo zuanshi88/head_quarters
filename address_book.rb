@@ -2,6 +2,7 @@ require './Classes/directory_class'
 require './Classes/word_index_class'
 require './Classes/entry_class'
 require './Classes/touch_point_class'
+
 require './Modules/menu_module'
 require './Modules/formatting_module'
 

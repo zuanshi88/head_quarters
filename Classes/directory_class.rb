@@ -24,6 +24,7 @@ class Directory
     def delete_account(entry)
       @accounts.delete(entry)
     end
+#save update and save entry... where do they meet. 
 
     def self.save_entry(new_entry, database)
         updated_database = database.push(new_entry)
