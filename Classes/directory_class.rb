@@ -1,4 +1,3 @@
-require_relative 'word_index_class'
 
 class Directory
 
@@ -6,7 +5,6 @@ class Directory
 
   def initialize(file)
     @accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
-    @accounts_index = WordIndex.new(@accounts).index
   end
 
   #instance variable called by all instances of directories to provide
@@ -22,26 +20,6 @@ class Directory
       end
       return tps
     end
-
-     
-
-    def search(target)
-        begin
-        result =  @accounts_index[target]
-        if result.nil?
-            nil 
-        else
-            account_hash = {}
-            result.each_with_index{|acc, index| account_hash[index] = acc}
-            return account_hash
-        end
-        rescue => error  
-        puts "You wrote a bad, bad song!"
-        puts error.message
-        exit
-        end
-    end 
-
 
     def delete_account(entry)
       @accounts.delete(entry)

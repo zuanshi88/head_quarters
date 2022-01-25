@@ -40,7 +40,9 @@ module Menu
           main_menu(false)
         when 7
           target = gets.chomp
-          account_hash = @database.search(target.downcase) 
+          downcase_target = target.downcase
+          selection = @accounts_index[downcase_target]
+          account_hash = create_selection_hash(selection) 
             if account_hash.length == 1
               open_contact(account_hash[0])
             else 
