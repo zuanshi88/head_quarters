@@ -79,6 +79,7 @@ module Menu
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
       
         %x(echo clr)
+        puts ""
           [[obj.name, true], 
           [obj.street_address, true], 
           [obj.city, false]].each do |info, status|
@@ -93,10 +94,12 @@ module Menu
             puts ""
           else
             puts ""
-            sorted_tp_obj_array = obj.touch_points.sort_by{|tp| tp.date_obj }.reverse
-            sorted_tp_obj_array.each { |tp| center_text("#{tp.date}: #{tp.activity}")}
+            # this is where we can cap the tp display of each entry
+            obj.touch_points.sort_by{|tp| tp.date_obj }.last(15).reverse.each do |tp|
+               center_text("#{tp.date}: #{tp.activity}")
+            end 
           end
-            2.times{puts""}
+            2.times{ puts ""}
  end
 
 
@@ -139,7 +142,10 @@ module Menu
         case selection
 
         when 1
-          edit(entry)     
+          edit(entry)   
+          save_update(entry)
+          refresh_database 
+          entry_menu(entry)  
         when 5
           clear_drop_center
           last_ten_touch_points(entry)
@@ -148,6 +154,7 @@ module Menu
           tp = Touch_Point.new(entry, create_date)
           entry.touch_points << tp
           save_update(entry)
+          refresh_database
           system('cls')
           display_contact(entry)
           entry_menu(entry)

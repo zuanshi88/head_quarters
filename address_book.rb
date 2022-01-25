@@ -15,7 +15,7 @@ class Session
     include Menu 
     include Formatting 
 
-    attr_reader :database, :touch_points
+    attr_reader :database, :touch_points, :accounts_index
 
     def initialize
       @database = Directory.new(ENTRIES)
@@ -23,6 +23,13 @@ class Session
       @accounts_index = WordIndex.new(@database.accounts).index
       main_menu
     end
+
+      # caught bug here-- needed to refresh all the main points.
+    def refresh_database 
+      @database = Directory.new(ENTRIES)
+      @touch_points = @database.create_tps
+      @accounts_index = WordIndex.new(@database.accounts).index
+    end 
 
 
 
