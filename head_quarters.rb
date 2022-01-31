@@ -36,6 +36,18 @@ class Head_Quarters
     end 
 
     
+     def save_update(entry, delete = false)
+      updated_database= if delete 
+              @database.delete_account(entry) 
+            else 
+              @database.add_account(entry)
+            end 
+          marshal_save(updated_database, @database_file)
+          refresh_database
+          puts "#{entry.name}: updated"
+    end
+
+    
   end 
 
 Head_Quarters.new(ENTRIES)

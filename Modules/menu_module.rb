@@ -229,8 +229,7 @@ module Menu
             when 0
               puts "Are you sure?"
               response = gets.chomp
-              index = @database.accounts.index(entry)
-              response.downcase.include?("y") ? @database.delete_account(index) : entry_menu(entry)
+              response.downcase.include?("y") ? save_update(entry, true) : entry_menu(entry)
               main_menu
             else
               puts "Where is this?"

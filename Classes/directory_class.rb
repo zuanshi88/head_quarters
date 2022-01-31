@@ -25,24 +25,13 @@ class Directory
     # below we also reference the @database_file
 
     def add_account(entry)
-      @database.push(entry)
+      @accounts.push(entry)
     end 
 
     def delete_account(entry)
-      @database.delete(entry)
+      @accounts.delete(entry)
     end
  
-
-     def save_update(entry, delete = false)
-      updated_database= if delete 
-              database.save_update(entry, true) 
-            else 
-              database.save_update(entry, false)
-            end 
-          marshal_save(updated_database, @database_file)
-          refresh_database(@database_file)
-          puts "#{entry.name}: updated"
-    end
 
 # below this line in the private interface of this system
 
