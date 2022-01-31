@@ -226,7 +226,7 @@ module Menu
               # an unnecessary delete. the tp_hass is all going away
               tp_hash.delete(delete_tp)
               entry.touch_points.delete_at(delete_tp)
-            when 7
+            when 0
               puts "Are you sure?"
               response = gets.chomp
               index = @database.accounts.index(entry)
