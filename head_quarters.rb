@@ -18,37 +18,24 @@ class Head_Quarters
     attr_reader :database, :touch_points, :accounts_index
 
     def initialize(file)
-      # @directory_file = file
+      @database_file = file
       @database = Directory.new(file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
       main_menu
     end
 
-    
-    def save_update(entry)
-                database.delete_account(entry)
-                updated_database = database.accounts.push(entry)
-                marshal_save(updated_database, ENTRIES)
-                refresh_database(ENTRIES)
-                puts "#{entry.name}: updated"
-    end
-
-# below this line in the private interface of this system
-
-
-    def marshal_save(obj_array, file)
-            File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
-    end
-
-      # caught bug here-- needed to refresh all the main points.
+    # since this is basically just like the initialize method
+    #decided to bring it back here. 
+    # it has all the same coupling as the initialize method, but
+    #at least they are cordoned off together in the main file.
     def refresh_database(file)
       @database = Directory.new(file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
     end 
 
-
+    
   end 
 
 Head_Quarters.new(ENTRIES)

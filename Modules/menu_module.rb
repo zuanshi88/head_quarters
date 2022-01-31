@@ -159,8 +159,7 @@ module Menu
           create_date = add_touch_point
           tp = Touch_Point.new(entry, create_date)
           entry.touch_points << tp
-          save_update(entry)
-          refresh_database
+          Directory.save_update(entry)
           system('cls')
           display_contact(entry)
           entry_menu(entry)
@@ -231,8 +230,7 @@ module Menu
               puts "Are you sure?"
               response = gets.chomp
               index = @database.accounts.index(entry)
-              response.downcase.include?("y") ? @database.accounts.delete_at(index) : entry_menu(entry)
-              marshal_save(@database.accounts, ENTRIES)
+              response.downcase.include?("y") ? @database.delete_account(index) : entry_menu(entry)
               main_menu
             else
               puts "Where is this?"

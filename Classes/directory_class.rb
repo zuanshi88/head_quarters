@@ -21,15 +21,35 @@ class Directory
       return tps
     end
 
-    def delete_account(entry)
-      @accounts.delete(entry)
-    end
-#save update and save entry... where do they meet. 
+    # here we couple the main app to the directory class
+    # below we also reference the @database_file
 
-    def self.save_entry(new_entry, database)
-        updated_database = database.push(new_entry)
-        updated_database
+    def add_account(entry)
+      @database.push(entry)
     end 
+
+    def delete_account(entry)
+      @database.delete(entry)
+    end
+ 
+
+     def save_update(entry, delete = false)
+      updated_database= if delete 
+              database.save_update(entry, true) 
+            else 
+              database.save_update(entry, false)
+            end 
+          marshal_save(updated_database, @database_file)
+          refresh_database(@database_file)
+          puts "#{entry.name}: updated"
+    end
+
+# below this line in the private interface of this system
+
+
+    def marshal_save(obj_array, file)
+        File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
+    end
 
 
   end
