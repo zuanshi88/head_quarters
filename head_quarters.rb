@@ -18,7 +18,7 @@ class Head_Quarters
     attr_reader :database, :touch_points, :accounts_index
 
     def initialize(file)
-      @directory_file = file
+      # @directory_file = file
       @database = Directory.new(file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index

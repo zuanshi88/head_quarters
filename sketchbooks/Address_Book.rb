@@ -8,10 +8,11 @@ ENTRIES = []
 class Address_Book
 
   attr_accessor :list
-  
+
     def initialize
       @list = []
     end
+    
     def add(entry)
       @list << entry.name
     end
