@@ -19,6 +19,7 @@ module Menu
 
     display_main_menu
       
+    puts ""
     center_text(message)
 
         action = gets.to_i
@@ -40,11 +41,16 @@ module Menu
           display_all_accounts(@database.accounts)
           main_menu(false)
         when 7
+          puts "Enter name:"
           target = gets.chomp
           downcase_target = target.downcase
           selection = @accounts_index[downcase_target]
           account_hash = create_selection_hash(selection) 
-            if account_hash.length == 1
+            if account_hash.nil? 
+              main_menu(true, "      <<<<<<   try another selection #{target} could not be located   >>>>>>")
+              center_text("Try again, #{target} not found")
+            
+            elsif  account_hash.length == 1
               open_contact(account_hash[0])
             else 
               account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}"); puts ""}

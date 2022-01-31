@@ -2,7 +2,7 @@ require 'time'
 module Formatting
 
       def drop_center 
-        30.times{ puts ""}
+        20.times{ puts ""}
       end 
 
       def clear_drop_center

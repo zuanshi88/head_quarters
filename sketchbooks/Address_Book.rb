@@ -6,7 +6,9 @@
 
 ENTRIES = []
 class Address_Book
+
   attr_accessor :list
+  
     def initialize
       @list = []
     end

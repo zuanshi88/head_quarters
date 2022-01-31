@@ -17,8 +17,9 @@ class Head_Quarters
 
     attr_reader :database, :touch_points, :accounts_index
 
-    def initialize
-      @database = Directory.new(ENTRIES)
+    def initialize(file)
+      @directory_file = file
+      @database = Directory.new(file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
       main_menu
@@ -26,16 +27,15 @@ class Head_Quarters
 
       # caught bug here-- needed to refresh all the main points.
     def refresh_database 
-      @database = Directory.new(ENTRIES)
+      @database = Directory.new(@directory_file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
     end 
 
 
-
   end 
 
-Head_Quarters.new
+Head_Quarters.new(ENTRIES)
 
 #TO DO list
 # clean up code, get better with comments.

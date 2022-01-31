@@ -1,0 +1,26 @@
+2022-01-26 17:21:11 This DOES still work!
+2022-01-26 17:20:39 Does this still work
+2022-01-26 17:18:32 Adding to bin level journal
+2022-01-26 17:15:16 Checking in here, still mucking with bash
+2022-01-26 13:23:12 This is strange that we do not see the prompt...
+2022-01-26 13:22:28 Check this out.
+2022-01-26 13:21:43 What is the meaning here?
+2022-01-26 12:05:34 And this other one
+2022-01-26 12:05:14 and this?
+12:04:58 What about this?
+12:04:22 Checking out alternate date formatting
+2022-01-26 11:55:27 Now we have an effective log for whatever
+2022-01-26 11:55:09 Cool it just created the file for me!
+2022-01-26 11:54:52 Where does the text go?
+
+
+
+
+
+
+
+
+
+
+
+
