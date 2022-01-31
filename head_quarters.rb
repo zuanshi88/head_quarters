@@ -25,9 +25,25 @@ class Head_Quarters
       main_menu
     end
 
+    
+    def save_update(entry)
+                database.delete_account(entry)
+                updated_database = database.accounts.push(entry)
+                marshal_save(updated_database, ENTRIES)
+                refresh_database(ENTRIES)
+                puts "#{entry.name}: updated"
+    end
+
+# below this line in the private interface of this system
+
+
+    def marshal_save(obj_array, file)
+            File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
+    end
+
       # caught bug here-- needed to refresh all the main points.
-    def refresh_database 
-      @database = Directory.new(@directory_file)
+    def refresh_database(file)
+      @database = Directory.new(file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
     end 
