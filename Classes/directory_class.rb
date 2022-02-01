@@ -30,13 +30,14 @@ class Directory
 
     def delete_account(entry)
       @accounts.delete(entry)
+      @accounts
     end
  
 
 # below this line in the private interface of this system
 
 
-    def marshal_save(obj_array, file)
+    def self.marshal_save(obj_array, file)
         File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
     end
 
