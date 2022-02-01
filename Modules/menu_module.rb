@@ -274,6 +274,8 @@ module Menu
       show_the_future 
     when 9 
       clear_drop_center
+      display_last_ten_entry_touch_points_title
+      drop_n_lines(1)
       last_ten_descending
     else
       main_menu

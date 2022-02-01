@@ -61,7 +61,7 @@ module Menu_Display
                     ["Last Ten Touch Points:",
                     "______________________",].each do |line|
 
-                         center_text(line, 50) 
+                         center_text(line, 62) 
                     end 
                 end 
 
