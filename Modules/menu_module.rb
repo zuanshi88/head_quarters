@@ -155,6 +155,7 @@ module Menu
         when 5
           clear_drop_center
           last_ten_touch_points(entry)
+
         when 8
           create_date = add_touch_point
           tp = Touch_Point.new(entry, create_date)
@@ -172,6 +173,18 @@ module Menu
        end
 
   end
+
+        def entry_last_ten_descending(entry)
+              entry.touch_points.last(10)
+        end 
+
+
+        def last_ten_touch_points(entry)
+            display_last_ten_entry_touch_points_title  
+            display_last_ten(entry_last_ten_descending(entry))
+            drop_n_lines(1)
+            entry_menu(entry, full = false)
+        end 
 
 
   def edit(entry)

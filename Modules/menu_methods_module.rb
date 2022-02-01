@@ -26,17 +26,9 @@ module Menu_Methods
             last_ten.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
             #specific entry's LAST TEN
-        def entry_last_ten_descending(entry)
-            entry.touch_points.last(10).each { |tp| center_"#{tp.date}:  #{tp.activity}" }
-        end 
-
-        def last_ten_touch_points(entry)
-            puts "Last Ten Touch Points:"
-            puts "______________________"
-            puts ""
-            entry_last_ten_descending(entry)
-            entry_menu(entry, full = false)
-        end 
+            #place holder for code moving to menu_module
+            #display entry last ten tp
+     
 
         def entry_display_all(entry)
             entry.touch_points.sort_by{|tp| tp.date }.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
