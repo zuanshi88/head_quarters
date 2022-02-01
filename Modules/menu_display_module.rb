@@ -13,7 +13,7 @@ module Menu_Display
                         "    ======== =============== ======== = = ====== ===== == ======== ========== ==",
                         "  === ===== == = = = ===== === ===== === == == = == ===== == === === === =="].each do |line| 
                             
-                            center_text(line) 
+                            center_text(line, 50) 
                         end
                 end 
 
@@ -25,7 +25,7 @@ module Menu_Display
                         "  === == ==  = = =  = = = ==== === = = = = = = = = = == ",
                         " === === ===== = ======= ==== === ===== === == ==== = == =="].each do |line|
 
-                            center_text(line) 
+                            center_text(line, 50) 
                         end 
                 end 
 
@@ -39,7 +39,7 @@ module Menu_Display
                     "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
                     "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
 
-                        center_text(line)
+                        center_text(line, 50)
 
                     end 
                 end 
@@ -52,7 +52,7 @@ module Menu_Display
                     "   = = == ========= =========== == == ==== ============= ===== === = ====",
                     "   ======== =============== ======== = = ====== ===== == ======== ========== =="].each do |line|
 
-                        center_text(line)
+                        center_text(line, 50)
                     end 
                 end 
 end 

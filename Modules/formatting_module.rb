@@ -14,21 +14,12 @@ module Formatting
           drop_center
       end 
 
-      def center_text(text, new_line = true)
-            50.times{ print " "}
+      def center_text(text, n, new_line = true)
+            n.times{ print " "}
           if new_line 
             puts text 
           else 
             print text
           end 
       end 
-
-      def off_center_text
-          38.times{ print " "}
-          if new_line 
-            puts text 
-          else 
-            print text
-          end 
-        end 
   end

@@ -20,7 +20,7 @@ module Menu
     display_main_menu
       
     puts ""
-    center_text(message)
+    center_text(message, 50)
 
         action = gets.to_i
 
@@ -48,12 +48,12 @@ module Menu
           account_hash = create_selection_hash(selection) 
             if account_hash.nil? 
               main_menu(true, "      <<<<<<   try another selection #{target} could not be located   >>>>>>")
-              center_text("Try again, #{target} not found")
+              center_text("Try again, #{target} not found", 50)
             
             elsif  account_hash.length == 1
               open_contact(account_hash[0])
             else 
-              account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}"); puts ""}
+              account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}", 38); puts ""}
               selection = gets.chomp
               open_contact(account_hash[selection.to_i])
             end 
@@ -73,7 +73,7 @@ module Menu
               puts ""
               ["- #{entry.last_name}, #{entry.first_name} |  #{entry.street_address} | #{entry.city}, #{entry.state} #{entry.zipcode} - ",
               "_________________________________________________________________________"].each do |line|
-                center_text(line)
+                center_text(line, 50)
               end 
           end
   end
@@ -89,12 +89,12 @@ module Menu
           [[obj.name, true], 
           [obj.street_address, true], 
           [obj.city, false]].each do |info, status|
-            center_text(info, status)
+            center_text(info, 50)
           end 
           print " " + obj.state + " " + obj.zipcode 
           puts ""
           [obj.phone_number, obj.email].each do |info| 
-            center_text(info)
+            center_text(info, 50, false)
           end 
           if obj.touch_points.empty?
             puts ""
@@ -102,7 +102,7 @@ module Menu
             puts ""
             # this is where we can cap the tp display of each entry
             obj.touch_points.sort_by{|tp| tp.date_obj }.last(15).reverse.each do |tp|
-               center_text("#{tp.date}: #{tp.activity}")
+               center_text("#{tp.date}: #{tp.activity}", 38)
             end 
           end
             2.times{ puts ""}
