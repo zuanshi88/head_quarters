@@ -20,6 +20,7 @@ class Address_Book
     def list
       puts @list
     end
+    end
 
   end
 
