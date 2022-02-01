@@ -8,7 +8,7 @@ module Menu_Display
                     ["   ==== === =   === === ===== = ======= ==== === ===== === == ==== = == ==",
                     "  ===  ==== ==== ===== === ==== ADDRESS BOOK 7 == = == == === =========== =====",
                     "   == ==== ===== ===== ==== === ==== == ===== ========= ===== ===== === ===== == =",
-                    "          add (1) |  points (3) | contacts (6) | open (7) | exit (*)",
+                    "          add (3) |  points (4) | contacts (8) | open (9) | exit (*)",
                     "  == == === = == ===== ======= ======== == == ==== ===== ============= === = ====",
                     "    ======== =============== ======== = = ====== ===== == ======== ========== ==",
                     "  === ===== == = = = ===== === ===== === == == = == ===== == === === === =="].each do |line| 
@@ -21,7 +21,7 @@ module Menu_Display
                 
                     ["=== === ===== = ======= ==== === ===== === == ==== = == ==",
                     "   = = = == === = = = == = == =  === = === === ===== ==",
-                    "  edit (1) | last_ten (5) | add (8) | entry menu (9) | main menu (*)",
+                    "  edit (3) | last_ten (4) | add (8) | entry menu (9) | main menu (*)",
                     "  === == ==  = = =  = = = ==== === = = = = = = = = = == ",
                     " === === ===== = ======= ==== === ===== === == ==== = == =="].each do |line|
 
@@ -35,7 +35,7 @@ module Menu_Display
                     ["     === ===  === == === === ===== = ======= ==== === ===== === == ==== = == == == === == =====",
                     "   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ==== = ===",
                     "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ===== == = ===",
-                    "   name (1) | address (2) | phone (3) | email (4) | touch points (6) | delete (0) | entry menu (*)",
+                    "   name (1) | address (2) | phone (3) | email (4) | touch points (8) | delete (9) | entry menu (*)",
                     "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
                     "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
 
@@ -61,13 +61,13 @@ module Menu_Display
                     ["Last Ten Touch Points:",
                     "______________________",].each do |line|
 
-                         center_text(line, 25) 
+                         center_text(line, 50) 
                     end 
                 end 
 
                 def display_last_ten(last_ten_tps)
-                    last_ten_tps do |tp| 
-                        center_text("#{tp.date}:  #{tp.activity}", 25)
+                    last_ten_tps.each do |tp| 
+                        center_text("#{tp.date}:  #{tp.activity}", 50)
                     end 
                 end 
 

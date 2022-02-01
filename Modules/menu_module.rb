@@ -25,22 +25,22 @@ module Menu
         action = gets.to_i
 
         case action
-        when 1
+        when 3
           #menu call to the directory
           #solved this using Director#save_entry
           #01/24/2022-- still need to resolve 
           #editing persistency issues. 
           #Also need to encapsulate more depencies.
           save_update(Entry.new(add_entry))
-        when 3
+        when 4
           touch_points_menu
-        when 6
+        when 8
             #fix this next
             #this is broken now-- I need to think about
             #how this should work...
           display_all_accounts(@database.accounts)
           main_menu(false)
-        when 7
+        when 9
           puts "Enter name:"
           target = gets.chomp
           downcase_target = target.downcase
@@ -147,15 +147,18 @@ module Menu
 
         case selection
 
-        when 1
+        when 3
           edit(entry)   
           save_update(entry)
           refresh_database 
           entry_menu(entry)  
-        when 5
+        when 4
           clear_drop_center
+          display_last_ten_entry_touch_points_title  
+          drop_n_lines(1)
           last_ten_touch_points(entry)
-
+          drop_n_lines(1)
+          entry_menu(entry, full = false)
         when 8
           create_date = add_touch_point
           tp = Touch_Point.new(entry, create_date)
@@ -180,10 +183,8 @@ module Menu
 
 
         def last_ten_touch_points(entry)
-            display_last_ten_entry_touch_points_title  
-            display_last_ten(entry_last_ten_descending(entry))
-            drop_n_lines(1)
-            entry_menu(entry, full = false)
+            last_ten = entry_last_ten_descending(entry)
+            display_last_ten(last_ten)
         end 
 
 
@@ -226,7 +227,7 @@ module Menu
               puts "NEW email"
               email = gets.chomp
               entry.email = email
-            when 6
+            when 8
               tp_hash = {}
               unless entry.touch_points.empty?
               entry.touch_points.each_with_index do |tp, i|
@@ -240,7 +241,7 @@ module Menu
               # an unnecessary delete. the tp_hass is all going away
               tp_hash.delete(delete_tp)
               entry.touch_points.delete_at(delete_tp)
-            when 0
+            when 9
               puts "Are you sure?"
               response = gets.chomp
               response.downcase.include?("y") ? save_update(entry, true) : entry_menu(entry)
