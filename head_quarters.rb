@@ -43,11 +43,14 @@ class Head_Quarters
               @database.delete_account(entry)
               @database.add_account(entry)
             end 
-          Directory.marshal_save(updated_database, @database_file)
+          marshal_save(updated_database, @database_file)
           refresh_database
           puts "#{entry.name}: updated"
     end
 
+    def marshal_save(obj_array, file)
+        File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
+    end
     
   end 
 

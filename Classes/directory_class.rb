@@ -37,9 +37,5 @@ class Directory
 # below this line in the private interface of this system
 
 
-    def self.marshal_save(obj_array, file)
-        File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
-    end
-
 
   end
