@@ -31,7 +31,7 @@ module Menu
           #01/24/2022-- still need to resolve 
           #editing persistency issues. 
           #Also need to encapsulate more depencies.
-          marshal_save(Directory.save_entry(Entry.new(add_entry), @database.accounts), ENTRIES)
+          save_update(Entry.new(add_entry))
         when 3
           touch_points_menu
         when 6
@@ -160,6 +160,7 @@ module Menu
           tp = Touch_Point.new(entry, create_date)
           entry.touch_points << tp
           save_update(entry)
+          refresh_database 
           system('cls')
           display_contact(entry)
           entry_menu(entry)

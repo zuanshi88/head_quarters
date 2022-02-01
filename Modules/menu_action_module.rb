@@ -59,8 +59,8 @@ module Menu_Action
             response = gets.chomp
             begin
                 if response.include?("n")
-                create_date = Time.now
-                else
+                    create_date = Time.now
+                elsif
                     match_set = response.scan(/(\d+)/)
                     info = match_set.map{|int| int[0].to_i}
                     new_time = Time.mktime(info[0], info[1],info[2])
@@ -68,10 +68,9 @@ module Menu_Action
                 end
                 rescue
                     puts "Did you put the year first?"
-                    add_touch_point(entry)
-                else
-                    return create_date
-            end
+                    add_touch_point(entry)    
+                end
+            return create_date
     end
 
 

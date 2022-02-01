@@ -40,6 +40,7 @@ class Head_Quarters
       updated_database= if delete 
               @database.delete_account(entry) 
             else 
+              @database.delete_account(entry)
               @database.add_account(entry)
             end 
           Directory.marshal_save(updated_database, @database_file)
