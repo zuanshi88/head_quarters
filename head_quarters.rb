@@ -29,8 +29,8 @@ class Head_Quarters
     #decided to bring it back here. 
     # it has all the same coupling as the initialize method, but
     #at least they are cordoned off together in the main file.
-    def refresh_database(file)
-      @database = Directory.new(file)
+    def refresh_database
+      @database = Directory.new(@database_file)
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
     end 

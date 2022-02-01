@@ -159,7 +159,7 @@ module Menu
           create_date = add_touch_point
           tp = Touch_Point.new(entry, create_date)
           entry.touch_points << tp
-          Directory.save_update(entry)
+          save_update(entry)
           system('cls')
           display_contact(entry)
           entry_menu(entry)
