@@ -264,7 +264,7 @@ module Menu
     else
       main_menu
     end
-    3.times {puts " "}
+    drop_n_lines(3)
     touch_points_menu(false)
   end
 end 
