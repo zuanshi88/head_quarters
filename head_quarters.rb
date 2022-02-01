@@ -42,7 +42,7 @@ class Head_Quarters
             else 
               @database.add_account(entry)
             end 
-          marshal_save(updated_database, @database_file)
+          Directory.marshal_save(updated_database, @database_file)
           refresh_database
           puts "#{entry.name}: updated"
     end
