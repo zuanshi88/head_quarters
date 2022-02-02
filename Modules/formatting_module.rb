@@ -5,7 +5,7 @@ module Formatting
         20.times{ puts ""}
       end 
 
-      def drop_n_lines(n)
+      def drop_n_lines(n = 1)
         n.times {puts " "}
       end 
 

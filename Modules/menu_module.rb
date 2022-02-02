@@ -10,67 +10,66 @@ module Menu
   include Menu_Display
 
 
-  def main_menu(status = true, message = "")
+          def main_menu(status = true, message = "")
 
-    if status == true 
-      clear_drop_center
-    end 
-
-
-    display_main_menu
-      
-    puts ""
-    center_text(message, 50)
-
-        action = gets.to_i
-
-        case action
-        when 3
-          #menu call to the directory
-          #solved this using Director#save_entry
-          #01/24/2022-- still need to resolve 
-          #editing persistency issues. 
-          #Also need to encapsulate more depencies.
-          save_update(Entry.new(add_entry))
-        when 4
-          touch_points_menu
-        when 8
-            #fix this next
-            #this is broken now-- I need to think about
-            #how this should work...
-          display_all_accounts(@database.accounts)
-          main_menu(false)
-        when 9
-          puts "Enter name:"
-          target = gets.chomp
-          downcase_target = target.downcase
-          selection = @accounts_index[downcase_target]
-          account_hash = create_selection_hash(selection) 
-            if account_hash.nil? 
-              main_menu(true, "      <<<<<<   try another selection #{target} could not be located   >>>>>>")
-              center_text("Try again, #{target} not found", 50)
-            
-            elsif  account_hash.length == 1
-              open_contact(account_hash[0])
-            else 
-              account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}", 38); puts ""}
-              selection = gets.chomp
-              open_contact(account_hash[selection.to_i])
+            if status == true 
+              clear_drop_center
             end 
-        else 
-          exit
-        end
-  end
+
+
+            display_main_menu
+              
+            drop_n_lines
+            center_text(message, 50)
+
+                action = gets.to_i
+
+                case action
+                when 3
+                  #menu call to the directory
+                  #solved this using Director#save_entry
+                  #01/24/2022-- still need to resolve 
+                  #editing persistency issues. 
+                  #Also need to encapsulate more depencies.
+                  save_update(Entry.new(add_entry))
+                when 4
+                  touch_points_menu
+                when 8
+                    #fix this next
+                    #this is broken now-- I need to think about
+                    #how this should work...
+                  display_all_accounts(@database.accounts)
+                  main_menu(false)
+                when 9
+                  puts "Enter name:"
+                  target = gets.chomp
+                  downcase_target = target.downcase
+                  selection = @accounts_index[downcase_target]
+                  account_hash = create_selection_hash(selection) 
+                    if account_hash.nil? 
+                      main_menu(true, "      <<<<<<   try another selection #{target} could not be located   >>>>>>")
+                      center_text("Try again, #{target} not found", 50)
+                    
+                    elsif  account_hash.length == 1
+                      open_contact(account_hash[0])
+                    else 
+                      account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}", 38); puts ""}
+                      selection = gets.chomp
+                      open_contact(account_hash[selection.to_i])
+                    end 
+                else 
+                  exit
+                end
+          end
 
 
   def display_all_accounts(accounts)
         #this is all pushed way over for easier reading upon display
         
-          puts ""
-          puts ""
+            drop_n_lines(2)
       
           accounts.sort_by{|obj| obj.last_name.downcase}.each do |entry|
-              puts ""
+                drop_n_lines
               ["- #{entry.last_name}, #{entry.first_name} |  #{entry.street_address} | #{entry.city}, #{entry.state} #{entry.zipcode} - ",
               "_________________________________________________________________________"].each do |line|
                 center_text(line, 50)
@@ -85,100 +84,101 @@ module Menu
         # 3rd decided to initiate defined ENTRY obj before displaying or editing.
       
         %x(echo clr)
-        puts ""
+        drop_n_lines
           [[obj.name, true], 
           [obj.street_address, true], 
           [obj.city, false]].each do |info, status|
-            center_text(info, 50)
+            center_text(info, 50, status)
           end 
+
           print " " + obj.state + " " + obj.zipcode 
-          puts ""
+          drop_n_lines
+
           [obj.phone_number, obj.email].each do |info| 
             center_text(info, 50, false)
           end 
-          if obj.touch_points.empty?
-            puts ""
-          else
-            puts ""
-            # this is where we can cap the tp display of each entry
-            obj.touch_points.sort_by{|tp| tp.date_obj }.last(15).reverse.each do |tp|
-               center_text("#{tp.date}: #{tp.activity}", 38)
-            end 
-          end
-            2.times{ puts ""}
+            if obj.touch_points.empty?
+              drop_n_lines
+            else
+              drop_n_lines
+              # this is where we can cap the tp display of each entry
+              obj.touch_points.sort_by{|tp| tp.date_obj }.last(15).reverse.each do |tp|
+                center_text("#{tp.date}: #{tp.activity}", 38)
+              end 
+            end
+            
+            drop_n_lines(2)
  end
 
 
- def open_contact(result)
-        if result == nil 
-          main_menu(status = true, message = "Account Not Found, Please select again")
-        else 
-          drop_center
-          if result 
-            entry_menu(result)
-          end 
-        end 
- end
+        def open_contact(result)
+                if result == nil 
+                  main_menu(status = true, message = "Account Not Found, Please select again")
+                else 
+                  drop_center
+                  #removed if result code here, seemed unnecessary
+                    entry_menu(result)
+                end 
+        end
 
-  def entry_menu(entry, full = true)
+        def entry_menu(entry, full = true)
 
-        if full 
-            clear_drop_center
-        end 
+              if full 
+                  clear_drop_center
+              end 
 
-        
 
-        display_entry_menu
-              
+              display_entry_menu
+              drop_n_lines  
 
-        puts " "   
+              #why the double full???
 
-        if full
-          if entry != nil 
-            display_contact(entry)
-          else  
-            puts "This isn't a valid account, try another selection"
-            main_menu(false)
-          end 
-        end 
+              if full
+                if entry != nil 
+                  display_contact(entry)
+                else  
+                  puts "This isn't a valid account, try another selection"
+                  main_menu(false)
+                end 
+              end 
 
-      
-        selection = gets.to_i
+            
+              selection = gets.to_i
 
-        case selection
+              case selection
 
-        when 3
-          edit(entry)   
-          save_update(entry)
-          refresh_database 
-          entry_menu(entry)  
-        when 4
-          clear_drop_center
-          display_last_ten_entry_touch_points_title  
-          drop_n_lines(1)
-          last_ten_touch_points(entry)
-          drop_n_lines(1)
-          entry_menu(entry, full = false)
-        when 8
-          create_date = add_touch_point
-          tp = Touch_Point.new(entry, create_date)
-          entry.touch_points << tp
-          save_update(entry)
-          refresh_database 
-          system('cls')
-          display_contact(entry)
-          entry_menu(entry)
-        when 9 
-          entry_menu(entry)
-        else
-          system("cls")
-          main_menu
-       end
+              when 3
+                edit(entry)   
+                save_update(entry)
+                refresh_database 
+                entry_menu(entry)  
+              when 4
+                clear_drop_center
+                display_last_ten_entry_touch_points_title  
+                drop_n_lines(1)
+                last_ten_touch_points(entry)
+                drop_n_lines(1)
+                entry_menu(entry, full = false)
+              when 8
+                create_date = add_touch_point
+                tp = Touch_Point.new(entry, create_date)
+                entry.touch_points << tp
+                save_update(entry)
+                refresh_database 
+                system('cls')
+                display_contact(entry)
+                entry_menu(entry)
+              when 9 
+                entry_menu(entry)
+              else
+                system("cls")
+                main_menu
+            end
 
-  end
+        end
 
         def entry_last_ten_descending(entry)
-              entry.touch_points.last(10)
+            entry.touch_points.last(10)
         end 
 
 
@@ -230,17 +230,17 @@ module Menu
             when 8
               tp_hash = {}
               unless entry.touch_points.empty?
-              entry.touch_points.each_with_index do |tp, i|
-                tp_hash[i] = tp
+                  entry.touch_points.each_with_index do |tp, i|
+                    tp_hash[i] = tp
+                  end
               end
-            end
-            puts "this hash has #{tp_hash.size} elements"
-              tp_hash.each{|k,v| puts "#{k}: #{v.date}, #{v.activity}"}
-              puts "Delete \# ?"
-              delete_tp = gets.to_i
-              # an unnecessary delete. the tp_hass is all going away
-              tp_hash.delete(delete_tp)
-              entry.touch_points.delete_at(delete_tp)
+                  puts "this hash has #{tp_hash.size} elements"
+                  tp_hash.each{|k,v| puts "#{k}: #{v.date}, #{v.activity}"}
+                  puts "Delete \# ?"
+                  delete_tp = gets.to_i
+                  # an unnecessary delete. the tp_hass is all going away
+                  tp_hash.delete(delete_tp)
+                  entry.touch_points.delete_at(delete_tp)
             when 9
               puts "Are you sure?"
               response = gets.chomp
@@ -250,37 +250,48 @@ module Menu
               puts "Where is this?"
               entry_menu(entry)
           end
-  end
-
-  def touch_points_menu(status = true)
-
-      if status 
-        system("cls")
-        drop_center
-      end
-        
-    display_touch_point_menu
-
-    selection = gets.chomp
-    
-    case selection.to_i
-
-    when 3
-      display_all_descending
-    when 5
-      from_today_descending
-    when 7 
-      clear_drop_center
-      show_the_future 
-    when 9 
-      clear_drop_center
-      display_last_ten_entry_touch_points_title
-      drop_n_lines(1)
-      last_ten_descending
-    else
-      main_menu
     end
-    drop_n_lines(3)
-    touch_points_menu(false)
-  end
-end 
+
+          def touch_points_menu(status = true)
+
+              if status 
+                system("cls")
+                drop_center
+              end
+                
+            display_touch_point_menu
+
+            selection = gets.chomp
+            
+            case selection.to_i
+
+            when 3
+              display_all_descending
+            when 5
+              from_today_descending
+            when 7 
+              clear_drop_center
+              show_the_future 
+            when 9 
+              clear_drop_center
+              display_last_ten_entry_touch_points_title
+              drop_n_lines
+              display(last_ten_descending)
+            else
+              main_menu
+            end
+            drop_n_lines(3)
+            touch_points_menu(false)
+          end
+        end 
+
+        def last_ten_descending 
+            @touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(10).reverse
+        end 
+
+        def display(tps)
+            tps.each do |tp|
+                center_text("#{tp.date}:  #{tp.account_name.split(/ /)[1]}    --    #{tp.activity}", 48)
+            end 
+        end
+
