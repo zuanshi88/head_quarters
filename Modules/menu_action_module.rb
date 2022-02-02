@@ -68,7 +68,7 @@ module Menu_Action
                 end
                 rescue
                     puts "Did you put the year first?"
-                    add_touch_point(entry)    
+                    add_touch_point    
                 end
             return create_date
     end
