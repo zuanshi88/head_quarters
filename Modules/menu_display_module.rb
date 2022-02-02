@@ -71,6 +71,12 @@ module Menu_Display
                     end 
                 end 
 
+                def display_last_ten_combined 
+                    #formatting_module
+                    #menu_display_module
+                    display(last_n_descending(10))
+                end 
+
                 def display(tps)
                     tps.each do |tp|
                         title = tp.account_name.split(/ /)[1]

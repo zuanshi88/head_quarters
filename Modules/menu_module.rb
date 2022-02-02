@@ -26,27 +26,26 @@ module Menu
               
             drop_n_lines
             center_text(message, 50)
-            
-            main_menu_options
+
+           # main_menu_options
+           # -- head_quarters (save_update)
+           # -- where should "last_ten_combined" go?
+           # -- formatting 
+           # -- menu display module
 
                 action = gets.to_i
 
                 case action
                 when 3
-                  #menu call to the directory
-                  #solved this using Director#save_entry
-                  #01/24/2022-- still need to resolve 
-                  #editing persistency issues. 
-                  #Also need to encapsulate more depencies.
                   save_update(Entry.new(add_entry))
                 when 4
-                  last_ten_combined
-                  drop_n_lines
+                    clear_drop_center
+                    # display_last_ten_entry_touch_points_title
+                    drop_n_lines
+                  display(last_n_descending(10))
+                    drop_n_lines
                   touch_points_menu(false)
                 when 8
-                    #fix this next
-                    #this is broken now-- I need to think about
-                    #how this should work...
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
@@ -56,7 +55,11 @@ module Menu
                 end
           end
 
+  
+
   def display_account 
+    # head_quarters
+    # WordIndex
        puts "Enter name:"
                   target = gets.chomp
                   downcase_target = target.downcase
@@ -283,7 +286,10 @@ module Menu
               clear_drop_center
               full_display(the_future)
             when 8
-              last_ten_combined
+                clear_drop_center
+                display_last_ten_entry_touch_points_title
+                drop_n_lines
+             display(last_n_descending(10))
             when 9 
               display_account
             else
@@ -296,20 +302,6 @@ module Menu
           def from_today_descending
             display(from_today)
           end 
-
-
-          def last_ten_combined 
-            #formatting_module
-              clear_drop_center
-              #menu_display_module
-              display_last_ten_entry_touch_points_title
-              #formating_module
-              drop_n_lines
-              #menu_display_module
-              display(last_n_descending(10))
-          end 
-
-
 end 
 
       
