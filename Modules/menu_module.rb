@@ -4,6 +4,11 @@ require_relative 'menu_action_module'
 
 module Menu 
 
+  # dependencies
+  # -- menu_methods_module
+  # -- formatting module via head_quarters
+  # -- menu_display_module
+
 
   include Menu_Methods
   include Menu_Action
@@ -21,6 +26,8 @@ module Menu
               
             drop_n_lines
             center_text(message, 50)
+            
+            main_menu_options
 
                 action = gets.to_i
 
@@ -33,7 +40,7 @@ module Menu
                   #Also need to encapsulate more depencies.
                   save_update(Entry.new(add_entry))
                 when 4
-                  display_last_ten_combined
+                  last_ten_combined
                   drop_n_lines
                   touch_points_menu(false)
                 when 8
@@ -274,9 +281,9 @@ module Menu
               full_display(from_today)
             when 7 
               clear_drop_center
-              display(the_future)
+              full_display(the_future)
             when 8
-              display_last_ten_combined
+              last_ten_combined
             when 9 
               display_account
             else
@@ -291,7 +298,7 @@ module Menu
           end 
 
 
-          def display_last_ten_combined 
+          def last_ten_combined 
             #formatting_module
               clear_drop_center
               #menu_display_module
