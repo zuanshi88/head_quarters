@@ -38,7 +38,7 @@ module Menu_Action
     end
 
         # only knows it is getting an array 
-    def create_selection_hash(selection)
+    def create_selection_hash_action(selection)
         begin
         if selection.nil?
             nil 
@@ -54,7 +54,7 @@ module Menu_Action
         end
     end 
 
-    def add_touch_point
+    def add_touch_point_action
             puts "Date? \#,\#,\# (year, month, day)"
             response = gets.chomp
             begin

@@ -66,7 +66,7 @@ module Menu
     # head_quarters
     # WordIndex
       
-                  account_hash = create_selection_hash(selection) 
+                  account_hash = create_selection_hash_action(selection) 
                     if account_hash.nil? 
                       main_menu(true, "      <<<<<<   try another selection #{selection} could not be located   >>>>>>")
                       center_text("Try again, #{selection} not found", 50)
@@ -181,7 +181,7 @@ module Menu
                 drop_n_lines(1)
                 entry_menu(entry, full = false)
               when 8
-                create_date = add_touch_point
+                create_date = add_touch_point_action
                 tp = Touch_Point.new(entry, create_date)
                 entry.touch_points << tp
                 save_update(entry)
