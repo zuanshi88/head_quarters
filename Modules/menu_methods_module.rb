@@ -13,6 +13,10 @@ module Menu_Methods
             the_future.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
 
+        def last_ten_descending 
+            @touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(10).reverse
+        end 
+
         
             #specific entry's LAST TEN
             #place holder for code moving to menu_module

@@ -289,9 +289,4 @@ module Menu
             @touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(10).reverse
         end 
 
-        def display(tps)
-            tps.each do |tp|
-                center_text("#{tp.date}:  #{tp.account_name.split(/ /)[1]}    --    #{tp.activity}", 48)
-            end 
-        end
-
+     
