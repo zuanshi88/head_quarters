@@ -41,7 +41,14 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  puts "Enter name:"
+                  display_account
+                else 
+                  exit
+                end
+          end
+
+  def display_account 
+       puts "Enter name:"
                   target = gets.chomp
                   downcase_target = target.downcase
                   selection = @accounts_index[downcase_target]
@@ -57,10 +64,9 @@ module Menu
                       selection = gets.chomp
                       open_contact(account_hash[selection.to_i])
                     end 
-                else 
-                  exit
-                end
-          end
+  end 
+
+      
 
 
   def display_all_accounts(accounts)
@@ -272,11 +278,13 @@ module Menu
             when 7 
               clear_drop_center
               show_the_future 
-            when 9 
+            when 8
               clear_drop_center
               display_last_ten_entry_touch_points_title
               drop_n_lines
               display(last_ten_descending)
+            when 9 
+              display_account
             else
               main_menu
             end
