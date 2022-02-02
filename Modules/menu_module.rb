@@ -33,7 +33,9 @@ module Menu
                   #Also need to encapsulate more depencies.
                   save_update(Entry.new(add_entry))
                 when 4
-                  touch_points_menu
+                  display_last_ten_combined
+                  drop_n_lines
+                  touch_points_menu(false)
                 when 8
                     #fix this next
                     #this is broken now-- I need to think about
@@ -159,6 +161,7 @@ module Menu
                 refresh_database 
                 entry_menu(entry)  
               when 4
+                
                 clear_drop_center
                 display_last_ten_entry_touch_points_title  
                 drop_n_lines(1)
@@ -189,7 +192,7 @@ module Menu
 
 
         def last_ten_touch_points(entry)
-            last_ten = entry_last_ten_descending(entry)
+            last_ten = entry_last_n_descending(10,entry)
             display_last_ten(last_ten)
         end 
 
@@ -199,12 +202,6 @@ module Menu
             display_edit_menu
 
             selection = gets.chomp
-
-            #dup the entry to remove to preserve original copy in order to delete original
-            #from database array after editing and before re-adding edited area to avoid
-            #entry duplication.
-
-
 
             case selection.to_i
             when 1
@@ -272,17 +269,14 @@ module Menu
             case selection.to_i
 
             when 3
-              display_all_descending
+              full_display(all_descending)
             when 5
-              from_today_descending
+              full_display(from_today)
             when 7 
               clear_drop_center
-              show_the_future 
+              display(the_future)
             when 8
-              clear_drop_center
-              display_last_ten_entry_touch_points_title
-              drop_n_lines
-              display(last_ten_descending)
+              display_last_ten_combined
             when 9 
               display_account
             else
@@ -291,7 +285,25 @@ module Menu
             drop_n_lines(3)
             touch_points_menu(false)
           end
-        end 
+
+          def from_today_descending
+            display(from_today)
+          end 
+
+
+          def display_last_ten_combined 
+            #formatting_module
+              clear_drop_center
+              #menu_display_module
+              display_last_ten_entry_touch_points_title
+              #formating_module
+              drop_n_lines
+              #menu_display_module
+              display(last_n_descending(10))
+          end 
+
+
+end 
 
       
 

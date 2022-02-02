@@ -2,26 +2,22 @@
 
 module Menu_Methods
     
-        def display_all_descending
-            @touch_points.sort_by{|tp| tp.date_obj}.reverse.each do |tp|
-                puts "#{tp.date}: #{tp.account_name} (#{tp.activity})"
-            end 
-        end
 
-        def show_the_future
-            the_future = @touch_points.select{|tp| tp.date_obj > Time.now}
-            the_future.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
+        def from_today 
+            @touch_points.filter{ |tp| tp.date_obj <= Time.now}
         end 
 
-        def last_ten_descending 
-            @touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(10).reverse
+        def the_future
+            @touch_points.select{|tp| tp.date_obj > Time.now}
         end 
 
-        
-            #specific entry's LAST TEN
-            #place holder for code moving to menu_module
-            #display entry last ten tp
-     
+        def last_n_descending(n)
+            @touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(n).reverse
+        end 
+
+        def all_descending(tps = @touch_points)
+            tps.sort_by{|tp| tp.date_obj }.reverse
+        end 
 
         def entry_display_all(entry)
             entry.touch_points.sort_by{|tp| tp.date }.each { |tp| puts "          #{tp.date}: #{tp.activity}"}
