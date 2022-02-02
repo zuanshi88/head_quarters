@@ -37,7 +37,7 @@ module Menu
 
                 case action
                 when 3
-                  save_update(Entry.new(add_entry))
+                  save_update(Entry.new(add_entry_action))
                 when 4
                     clear_drop_center
                     # display_last_ten_entry_touch_points_title

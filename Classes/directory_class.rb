@@ -21,8 +21,6 @@ class Directory
       return tps
     end
 
-    # here we couple the main app to the directory class
-    # below we also reference the @database_file
 
     def add_account(entry)
       @accounts.push(entry)
@@ -32,10 +30,6 @@ class Directory
       @accounts.delete(entry)
       @accounts
     end
- 
-
-# below this line in the private interface of this system
-
 
 
   end

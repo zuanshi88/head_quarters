@@ -2,7 +2,7 @@ module Menu_Action
 
 
         #prompts for info and returns a hash    
-    def add_entry
+    def add_entry_action
         #this method collects all info via menu prompts
         #then passes info on to save entry
         center_text("first name:", 15)
@@ -61,10 +61,18 @@ module Menu_Action
                 if response.include?("n")
                     create_date = Time.now
                 elsif
-                    match_set = response.scan(/\d+/)
-                    info = match_set.map{|int| int[0].to_i}
-                    new_time = Time.mktime(info[0], info[1],info[2])
-                    create_date = new_time
+
+                        #02/02/2022--this is a big problem here-- how do we sanitize a date
+                        # from user input
+
+                    info= response.split(',').map{|item|item.to_i} 
+                    if info[0].size == 4
+                        new_time = Time.mktime(info[0], info[1],info[2])
+                        create_date = new_time
+                    else  
+                         puts "Did you lead with a 4 digit year"
+                        add_touch_point 
+                    end 
                 end
                 rescue
                     puts "Did you put the year first?"
