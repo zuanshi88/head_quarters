@@ -5,11 +5,11 @@ module Menu_Action
     def add_entry
         #this method collects all info via menu prompts
         #then passes info on to save entry
-        puts "first name:"
+        center_text("first name:", 15)
         first_name = gets.chomp
         puts "last name:"
         last_name = gets.chomp
-        puts "street address:"
+        "street address:"
         street_address = gets.chomp
         puts "city:"
         city = gets.chomp
@@ -61,7 +61,7 @@ module Menu_Action
                 if response.include?("n")
                     create_date = Time.now
                 elsif
-                    match_set = response.scan(/(\d+)/)
+                    match_set = response.scan(/\d+/)
                     info = match_set.map{|int| int[0].to_i}
                     new_time = Time.mktime(info[0], info[1],info[2])
                     create_date = new_time
