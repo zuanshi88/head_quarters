@@ -49,25 +49,27 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  display_account
+                  display_account(select_account)
                 else 
                   exit
                 end
           end
 
-  
+        def select_account 
+            puts "Enter name:"
+            target = gets.chomp
+            downcase_target = target.downcase
+            @accounts_index[downcase_target]
+        end 
 
-  def display_account 
+  def display_account(selection) 
     # head_quarters
     # WordIndex
-       puts "Enter name:"
-                  target = gets.chomp
-                  downcase_target = target.downcase
-                  selection = @accounts_index[downcase_target]
+      
                   account_hash = create_selection_hash(selection) 
                     if account_hash.nil? 
-                      main_menu(true, "      <<<<<<   try another selection #{target} could not be located   >>>>>>")
-                      center_text("Try again, #{target} not found", 50)
+                      main_menu(true, "      <<<<<<   try another selection #{selection} could not be located   >>>>>>")
+                      center_text("Try again, #{selection} not found", 50)
                     
                     elsif  account_hash.length == 1
                       open_contact(account_hash[0])
@@ -112,8 +114,8 @@ module Menu
           print " " + obj.state + " " + obj.zipcode 
           drop_n_lines
 
-          [obj.phone_number, obj.email].each do |info| 
-            center_text(info, 50, false)
+          [[obj.phone_number, true], [obj.email, true]].each do |info, status| 
+            center_text(info, 50, status)
           end 
             if obj.touch_points.empty?
               drop_n_lines
@@ -175,7 +177,7 @@ module Menu
                 clear_drop_center
                 display_last_ten_entry_touch_points_title  
                 drop_n_lines(1)
-                last_ten_touch_points(entry)
+                display_entry_tps(last_n_descending(10,entry))
                 drop_n_lines(1)
                 entry_menu(entry, full = false)
               when 8
@@ -200,10 +202,10 @@ module Menu
             entry.touch_points.last(10)
         end 
 
-
-        def last_ten_touch_points(entry)
-            last_ten = entry_last_n_descending(10,entry)
-            display_last_ten(last_ten)
+   def last_ten_touch_points(entry)
+             
+     
+            display_entry_tps(last_n_descending(10,entry))
         end 
 
 
@@ -289,9 +291,9 @@ module Menu
                 clear_drop_center
                 display_last_ten_entry_touch_points_title
                 drop_n_lines
-             display(last_n_descending(10))
+                display(last_n_descending(10))
             when 9 
-              display_account
+              display_account(select_account)
             else
               main_menu
             end
