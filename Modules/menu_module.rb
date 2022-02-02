@@ -285,8 +285,6 @@ module Menu
           end
         end 
 
-        def last_ten_descending 
-            @touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(10).reverse
-        end 
+      
 
      
