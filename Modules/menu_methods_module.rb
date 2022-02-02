@@ -13,7 +13,7 @@ module Menu_Methods
             the_future.each{|tp| puts "#{tp.date}:  #{tp.account_name} (#{tp.activity})"}
         end 
 
-     
+        
             #specific entry's LAST TEN
             #place holder for code moving to menu_module
             #display entry last ten tp
