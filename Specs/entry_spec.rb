@@ -1,5 +1,4 @@
 require '../Classes/entry_class'
-# require '../Classes/test_class'
 require 'test/unit'
 
 

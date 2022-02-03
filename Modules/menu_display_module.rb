@@ -5,9 +5,9 @@ module Menu_Display
 
     # DIS_NOT_FOUND = "      <<<<<<   try another selection #{selection} could not be located   >>>>>>"
 
-                def display_not_found(input)
-                    "      <<<<<<   try another selection #{input} could not be fuckin located   >>>>>>"
-                end 
+                # def display_not_found(input)
+                #     "      <<<<<<   try another selection #{input} could not be fuckin located   >>>>>>"
+                # end 
 
                 def display_main_menu
 

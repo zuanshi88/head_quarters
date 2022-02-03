@@ -1,7 +1,7 @@
-require './Classes/directory_class'
-require './Classes/word_index_class'
-require './Classes/entry_class'
-require './Classes/touch_point_class'
+# require './Classes/directory_class'
+# require './Classes/word_index_class'
+# require './Classes/entry_class'
+# require './Classes/touch_point_class'
 
 require './Modules/menu_module'
 require './Modules/formatting_module'
@@ -40,7 +40,7 @@ class Head_Quarters
       entry.touch_points << Touch_Point.new(entry, create_date)
     end 
     
-     def save_update(entry, delete = false)
+    def save_update(entry)
       updated_database= if delete 
               @database.delete_account(entry) 
             else 
