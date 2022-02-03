@@ -7,13 +7,13 @@ class Touch_Point
 # this has a code smell. Needing to have the entry available 
 # at the time of initiliazing. 
 # this just should me that I want to seperate getting the info from creating the touch_point. 
-    def initialize(entry, create_date)
+    def initialize(entry, create_date, activity)
           @date_obj = create_date
           @date = create_date.strftime("%m/%d/%Y")
           puts "Activity: "
           @activity = gets.chomp
           @account = entry
-          @account_name = @account.name
+          @account_name = entry.name
     end
 
 end

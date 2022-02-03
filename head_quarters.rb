@@ -36,11 +36,12 @@ class Head_Quarters
     end 
 
     def create_touch_point(entry)
-      create_date = add_touch_point_action
-      entry.touch_points << Touch_Point.new(entry, create_date)
+      create_date = touch_point_create_date_action
+      activity = touch_point_create_activity_action
+      entry.touch_points << Touch_Point.new(entry, create_date, activity)
     end 
     
-    def save_update(entry)
+    def save_update(entry, delete = false)
       updated_database= if delete 
               @database.delete_account(entry) 
             else 

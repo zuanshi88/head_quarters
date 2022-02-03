@@ -54,7 +54,7 @@ module Menu_Action
         end
     end 
 
-    def add_touch_point_action
+    def touch_point_create_date_action
             puts "Date? \#,\#,\# (year, month, day)"
             response = gets.chomp
             begin
@@ -80,6 +80,11 @@ module Menu_Action
                 end
             return create_date
     end
+
+    def touch_point_create_activity_action
+          puts "Activity: "
+          activity = gets.chomp
+    end 
 
 
 end 
