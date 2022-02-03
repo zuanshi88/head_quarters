@@ -64,12 +64,10 @@ module Menu
 
   def display_account(selection) 
     # head_quarters
-    # WordIndex
       
                   account_hash = create_selection_hash_action(selection) 
                     if account_hash.nil? 
                       main_menu(true, "      <<<<<<   try another selection #{selection} could not be located   >>>>>>")
-                      center_text("Try again, #{selection} not found", 50)
                     
                     elsif  account_hash.length == 1
                       open_contact(account_hash[0])
@@ -202,9 +200,7 @@ module Menu
             entry.touch_points.last(10)
         end 
 
-   def last_ten_touch_points(entry)
-             
-     
+        def last_ten_touch_points(entry)
             display_entry_tps(last_n_descending(10,entry))
         end 
 
