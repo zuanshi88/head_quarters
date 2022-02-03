@@ -3,6 +3,12 @@ module Menu_Display
 
     #center_text calls are a dependency to the formatting module
 
+    # DIS_NOT_FOUND = "      <<<<<<   try another selection #{selection} could not be located   >>>>>>"
+
+                def display_not_found(input)
+                    "      <<<<<<   try another selection #{input} could not be fuckin located   >>>>>>"
+                end 
+
                 def display_main_menu
 
                     ["--------------------------------------------------------------------------------",
