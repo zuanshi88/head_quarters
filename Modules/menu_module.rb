@@ -180,9 +180,7 @@ module Menu
                 drop_n_lines(1)
                 entry_menu(entry, full = false)
               when 8
-                create_date = add_touch_point_action
-                tp = Touch_Point.new(entry, create_date)
-                entry.touch_points << tp
+                create_touch_point(entry)
                 save_update(entry)
                 refresh_database 
                 system('cls')

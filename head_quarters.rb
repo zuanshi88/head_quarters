@@ -35,6 +35,10 @@ class Head_Quarters
       @accounts_index = WordIndex.new(@database.accounts).index
     end 
 
+    def create_touch_point(entry)
+      create_date = add_touch_point_action
+      entry.touch_points << Touch_Point.new(entry, create_date)
+    end 
     
      def save_update(entry, delete = false)
       updated_database= if delete 
