@@ -10,10 +10,8 @@ class Touch_Point
     def initialize(entry, create_date, activity)
           @date_obj = create_date
           @date = create_date.strftime("%m/%d/%Y")
-          puts "Activity: "
-          @activity = gets.chomp
+          @activity = activity
           @account = entry
           @account_name = entry.name
     end
-
 end

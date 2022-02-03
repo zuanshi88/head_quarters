@@ -57,18 +57,17 @@ module Menu_Action
     def touch_point_create_date_action
             puts "Date? \#,\#,\# (year, month, day)"
             response = gets.chomp
-            begin
+            begin   
                 if response.include?("n")
-                    create_date = Time.now
+                   return create_date = Time.now
                 elsif
-
                         #02/02/2022--this is a big problem here-- how do we sanitize a date
                         # from user input
 
                     info= response.split(',').map{|item|item.to_i} 
                     if info[0].size == 4
-                        new_time = Time.mktime(info[0], info[1],info[2])
-                        create_date = new_time
+                        create_date = Time.mktime(info[0], info[1],info[2])
+                        return create_date
                     else  
                          puts "Did you lead with a 4 digit year"
                         add_touch_point 
@@ -78,7 +77,6 @@ module Menu_Action
                     puts "Did you put the year first?"
                     add_touch_point    
                 end
-            return create_date
     end
 
     def touch_point_create_activity_action
