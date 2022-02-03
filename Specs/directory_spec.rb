@@ -11,6 +11,7 @@ class TestDirectory < Test::Unit::TestCase
         file = 'tester_database.txt'
         @directory = Directory.new(file)
         @accounts = @directory.accounts
+        @entry = @accounts[-1]
     end 
 
 
@@ -25,6 +26,17 @@ class TestDirectory < Test::Unit::TestCase
     def test_accounts_length 
         assert_equal(93, @accounts.length)
     end 
+
+    def test_entry_class
+        assert_equal(Entry, @entry.class)
+    end 
+
+    #create_tps 
+
+
+    #add_account 
+
+    #delete_account 
 
 
 
