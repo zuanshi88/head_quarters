@@ -37,7 +37,7 @@ module Menu
 
                 case action
                 when 3
-                  save_update(Entry.new(add_entry_action))
+                  save_update(entry: Entry.new(add_entry_action))
                   refresh_database
                 when 4
                     clear_drop_center
@@ -73,7 +73,7 @@ module Menu
           elsif  account_hash.length == 1
             open_contact(account_hash[0])
           else 
-            account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name}", 38); puts ""}
+            account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name} -- #{account_hash[key].object_id}", 38); puts ""}
             selection = gets.chomp
             open_contact(account_hash[selection.to_i])
           end 
@@ -255,7 +255,7 @@ module Menu
             when 9
               puts "Are you sure?"
               response = gets.chomp
-              response.downcase.include?("y") ? save_update(entry, true) : entry_menu(entry)
+              response.downcase.include?("y") ? save_update(entry) : entry_menu(entry)
               refresh_database  
               main_menu
             else

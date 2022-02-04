@@ -35,23 +35,16 @@ class Head_Quarters
       @accounts_index = WordIndex.new(@database.accounts).index
     end 
 
+    def save_update(entry)
+      Directory.save_update(database: @database, database_file: @database_file, entry: entry, delete:)
+    end 
+
     def create_touch_point(entry)
       create_date = touch_point_create_date_action
       activity = touch_point_create_activity_action
       entry.touch_points << Touch_Point.new(entry, create_date, activity)
     end 
-    
-    def save_update(database, entry, delete = false)
-          database.delete_account(entry) 
-            if delete == false 
-               @database.add_account(entry)
-            end 
-          marshal_save(@database.accounts, @database_file)
-    end
-
-    def marshal_save(obj_array, file)
-        File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
-    end
+ 
     
   end 
 
