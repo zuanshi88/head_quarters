@@ -9,8 +9,8 @@ class TestProject < Test::Unit::TestCase
     def setup
         @entry = Entry.new("first name" => "Aaron", "last name" => "Whitmer")
         @project = Project.new("Ruby", "Computers")
-        @touch_point = Touch_Point.new(@entry, Time.now)
-        @project_tp = Touch_Point.new(@project, Time.now)
+        @touch_point = Touch_Point.new(@entry.object_id, @entry.name, Time.now, "Played disc golf.")
+        @project_tp = Touch_Point.new(@project.object_id, @project.name, Time.now, "Ate delicious food.")
     end 
 
     def test_entry_has_first_name 

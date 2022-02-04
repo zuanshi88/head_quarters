@@ -14,7 +14,7 @@ class Directory
   # of its data. Directory can ask for the touch points from touch_points. 
   def create_tps
     tps = []
-      @accounts.each do |entry|
+      self.accounts.each do |entry|
         unless entry.touch_points.empty?
           entry.touch_points.each do |tp|
             tps << tp

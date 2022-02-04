@@ -20,6 +20,7 @@ class Head_Quarters
     def initialize(file)
       @database_file = file
       @database = Directory.new(file)
+      #change this to a Directory call...
       @touch_points = @database.create_tps
       @accounts_index = WordIndex.new(@database.accounts).index
       main_menu
@@ -36,13 +37,13 @@ class Head_Quarters
     end 
 
     def save_update(entry)
-      Directory.save_update(database: @database, database_file: @database_file, entry: entry, delete:)
+      Directory.save_update(database: @database, database_file: @database_file, entry: entry)
     end 
 
     def create_touch_point(entry)
       create_date = touch_point_create_date_action
       activity = touch_point_create_activity_action
-      entry.touch_points << Touch_Point.new(entry, create_date, activity)
+      entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
     end 
  
     
