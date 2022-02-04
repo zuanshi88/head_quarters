@@ -7,6 +7,7 @@ require 'test/unit'
 
 class TestDirectory < Test::Unit::TestCase 
 
+    #set up to read from one file and write to a new file so the tests don't break each time.
 
     # bring in save_update method here so it is easir to test and because that makes sense
     # we can see how coupled the directory already is to all of these other models
@@ -72,8 +73,9 @@ class TestDirectory < Test::Unit::TestCase
 
     
     def test_save_update_add 
+        entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         initial_size = @directory.accounts.size
-        Directory.save_update(database: @directory, database_file: @write_file, entry: @entry, delete: false)
+        Directory.save_update(database: @directory, database_file: @write_file, entry: entry, delete: false)
         resulting_size = @directory.accounts.size 
         assert_equal(initial_size + 1, resulting_size)
     end 

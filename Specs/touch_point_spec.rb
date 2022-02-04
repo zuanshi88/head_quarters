@@ -6,7 +6,7 @@ require 'test/unit'
 class TestTouchPoint < Test::Unit::TestCase 
 
     def setup 
-        @touch_point = Touch_Point.new("aaron", Time.now)
+        @touch_point = Touch_Point.new("aaron", Time.now, "Played euchre")
     end 
 
     def test_has_class 
