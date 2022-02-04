@@ -29,7 +29,7 @@ class Directory
        #this instance of directory with this instance of headquarters. 
        #here we are using a global method to encapsulate calls to 
        #instance methods
-    def self.save_update(database:, database_file:, delete: false, entry:)
+    def self.save_update(database:, database_file:, entry:, delete: false)
           database.delete_account(entry) 
             if delete == false 
                database.add_account(entry)
@@ -43,12 +43,12 @@ class Directory
 
 
     def add_account(entry)
-      @accounts.push(entry)
+      self.accounts.push(entry)
     end 
 
     def delete_account(entry)
-      @accounts.delete(entry)
-      @accounts
+      self.accounts.delete(entry)
+      self.accounts
     end
 
 
