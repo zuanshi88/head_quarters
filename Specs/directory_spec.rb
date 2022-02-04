@@ -41,7 +41,7 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_create_tps 
-         assert_equal(Array,@touch_points.class)
+         assert_equal(Array, @touch_points.class)
     end 
 
     def test_touch_point_length 
@@ -60,6 +60,11 @@ class TestDirectory < Test::Unit::TestCase
     def test_can_delete_account
         @directory.delete_account(@entry) 
         assert_equal(92, @directory.accounts.length)
+    end 
+
+    def test_save_update 
+
+
     end 
 
 

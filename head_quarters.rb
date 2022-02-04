@@ -41,13 +41,12 @@ class Head_Quarters
       entry.touch_points << Touch_Point.new(entry, create_date, activity)
     end 
     
-    def save_update(entry, delete = false)
-          @database.delete_account(entry) 
+    def save_update(database, entry, delete = false)
+          database.delete_account(entry) 
             if delete == false 
                @database.add_account(entry)
             end 
           marshal_save(@database.accounts, @database_file)
-          refresh_database
     end
 
     def marshal_save(obj_array, file)

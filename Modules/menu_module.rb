@@ -38,6 +38,7 @@ module Menu
                 case action
                 when 3
                   save_update(Entry.new(add_entry_action))
+                  refresh_database
                 when 4
                     clear_drop_center
                     # display_last_ten_entry_touch_points_title
@@ -255,6 +256,7 @@ module Menu
               puts "Are you sure?"
               response = gets.chomp
               response.downcase.include?("y") ? save_update(entry, true) : entry_menu(entry)
+              refresh_database  
               main_menu
             else
               puts "Where is this?"
