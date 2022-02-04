@@ -48,7 +48,6 @@ class Head_Quarters
             end 
           marshal_save(@database.accounts, @database_file)
           refresh_database
-          puts "#{entry.name}: updated"
     end
 
     def marshal_save(obj_array, file)
