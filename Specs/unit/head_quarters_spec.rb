@@ -15,12 +15,14 @@ class Test_Head_Quarters < Test::Unit::TestCase
 
     def setup 
         @head_quarters = Head_Quarters.new(TEST_DATABASE)
+        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
     end 
 
     def test_head_quarters_has_class 
         assert_equal(Head_Quarters, @head_quarters.class)
     end 
 
+    
     def test_head_quarters_has_database_array 
         assert_equal(Directory, @head_quarters.database.class)
     end 
@@ -30,26 +32,8 @@ class Test_Head_Quarters < Test::Unit::TestCase
     end 
 
     def test_head_quarters_can_create_word_index 
-        assert_equal(WordIndex, @head_quarters.accounts_index.class)
+        assert_equal(Hash, @head_quarters.accounts_index.class)
     end 
-
-    #  attr_reader :database, :touch_points, :accounts_index
-
-# def refresh_database
-#       @database = Directory.new(@database_file)
-#       @touch_points = @database.create_tps
-#       @accounts_index = WordIndex.new(@database.accounts).index
-#     end 
-
-#     def save_update(entry)
-#       Directory.save_update(database: @database, database_file: @database_file, entry: entry)
-#     end 
-
-#     def create_touch_point(entry)
-#       create_date = touch_point_create_date_action
-#       activity = touch_point_create_activity_action
-#       entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
-#     end 
 
 
 end 

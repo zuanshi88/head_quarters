@@ -21,6 +21,21 @@ class Test_Head_Quarters < Test::Unit::TestCase
         assert_equal(Head_Quarters, @head_quarters.class)
     end 
 
+    def test_head_quarters_has_database_array 
+        assert_equal(Directory, @head_quarters.database.class)
+    end 
+
+    def test_head_quarters_has_array_of_touch_points 
+        assert_equal(Array, @head_quarters.touch_points.class)
+    end 
+
+    def test_head_quarters_can_create_word_index 
+        assert_equal(Hash, @head_quarters.accounts_index.class)
+    end 
+
+
+    
+
     #  attr_reader :database, :touch_points, :accounts_index
 
 # def refresh_database
