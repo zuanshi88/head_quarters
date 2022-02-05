@@ -31,9 +31,5 @@ class Test_Head_Quarters < Test::Unit::TestCase
         assert_equal(Array, @head_quarters.touch_points.class)
     end 
 
-    def test_head_quarters_can_create_word_index 
-        assert_equal(Hash, @head_quarters.accounts_index.class)
-    end 
-
 
 end 
