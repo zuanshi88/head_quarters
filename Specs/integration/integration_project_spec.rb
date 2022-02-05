@@ -4,7 +4,7 @@ require '../Classes/entry_class'
 require 'test/unit'
 
 
-class TestProject < Test::Unit::TestCase
+class TestProjectIntegration < Test::Unit::TestCase
 
     def setup
         @entry = Entry.new("first name" => "Aaron", "last name" => "Whitmer")
@@ -29,30 +29,6 @@ class TestProject < Test::Unit::TestCase
     def test_touch_point_has_entry 
         @project.add_touch_point(@touch_point)
         assert_equal(1, @project.touch_points.size)
-    end 
-
-    def test_ruby_is_ruby
-        assert_equal("Ruby", "Ruby")
-    end 
-
-    def test_project_is_nil 
-        assert_not_nil(@project)
-    end 
-
-    def test_project_has_name 
-        assert_equal("Ruby", @project.name)
-    end 
-
-    def test_project_has_class 
-        assert_equal(Project, @project.class)
-    end 
-
-    def test_has_tag 
-         assert_equal("Computers", @project.tag)
-    end 
-
-    def touch_points_empty
-        assert_empty(@project.touch_points)
     end 
 
 end 

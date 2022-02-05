@@ -50,7 +50,7 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  display_account(select_account_action)
+                  display_account(@database.accounts_index[select_account_action])
                 else 
                   exit
                 end

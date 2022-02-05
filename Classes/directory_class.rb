@@ -5,6 +5,7 @@ class Directory
 
   def initialize(file)
     @accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
+    @accounts_index = self.index
   end
 
   #instance variable called by all instances of directories to provide
@@ -12,6 +13,27 @@ class Directory
 
   #pull instance variable out and pass it to Touchpoints to produce all
   # of its data. Directory can ask for the touch points from touch_points. 
+  
+   def index
+            information = ["name", "last_name", "first_name"]
+            index_hash = {}
+            self.accounts.cycle(1) do |obj|
+            index_hash[obj.name.downcase] = [] if index_hash[obj.name.downcase].nil?
+            index_hash[obj.name.downcase].push(obj)
+            index_hash[obj.last_name.downcase] = [] if index_hash[obj.last_name.downcase].nil?
+            index_hash[obj.last_name.downcase].push(obj)
+            index_hash[obj.first_name.downcase] = [] if index_hash[obj.first_name.downcase].nil?
+            index_hash[obj.first_name.downcase].push(obj)
+            index_hash[obj.city.downcase] = [] if index_hash[obj.city.downcase].nil?
+            index_hash[obj.city.downcase].push(obj)
+            index_hash[obj.state.downcase] = [] if index_hash[obj.state.downcase].nil?
+            index_hash[obj.state.downcase].push(obj)
+            end
+            index_hash
+    end
+  
+  # make a call over to touch_points perhaps?  
+  
   def create_tps
     tps = []
       self.accounts.each do |entry|

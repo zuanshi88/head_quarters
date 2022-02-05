@@ -29,13 +29,43 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
 
-    def test_directory_index_retrieves_value
+    def test_directory_accounts_index_class
         assert_equal(Hash, @directory.accounts_index.class)
     end 
 
     def test_directory_index_size 
          assert_equal(275, @directory.accounts_index.size)
     end 
+
+    def test_directory_accounts_index_retrieves_array_of_multiple_matches
+        assert_equal(Array, @directory.accounts_index["birkey"].class)
+    end 
+
+    def test_directory_accounts_index_retrieves_single_match
+        assert_equal(Entry, @directory.accounts_index["annette"][0].class)
+    end 
+
+    def test_directory_accounts_index_retrieves_single_match_in_single_item_array
+        assert_equal(1, @directory.accounts_index["annette"].size)
+    end 
+
+    def test_directory_accounts_index_retrieves_entry_match
+        assert_equal("Summersett", @directory.accounts_index["annette"][0].last_name)
+    end 
+
+
+    def test_directory_accounts_index_retrieves_value
+        assert_equal(Entry, @directory.accounts_index["latham"][0].class)
+    end 
+
+    def test_directory_index_can_search_cities 
+        assert_equal(4, @directory.accounts_index["portland"].size)
+    end 
+
+    def test_directory_index_can_access_first_search_return
+        assert_equal(Entry, @directory.accounts_index["portland"][0].class)
+    end 
+
 
     
 

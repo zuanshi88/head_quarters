@@ -1,22 +1,17 @@
-require_relative 'word_index_class'
 require_relative 'directory_class'
 require_relative 'entry_class'
 require_relative 'touch_point_class'
+# require '../Modules/menu_module'
+# require '../Modules/formatting_module'
 
-require '../Modules/menu_module'
-require '../Modules/formatting_module'
 
-
-#marshaled database
-# ENTRIES = "a_marshaled_database.txt"
-# ENTRIES = "a_test_marshaled_database.txt"
 
 class Head_Quarters
   
-    include Menu 
-    include Formatting 
+    # include Menu 
+    # include Formatting 
 
-    attr_reader :database, :touch_points, :accounts_index
+    attr_reader :database, :touch_points
 
     # decouple @touch_points from headquarters-- just make it travel wtih directory
     # headquarters doesn't care how database keeps track of the touch_points or even 
@@ -26,12 +21,13 @@ class Head_Quarters
     #also, extract the WordIndex and just create it when it is called 
     # so that it is using the most upto date information
 
-    def initialize(file)
+  FILE = "./a_marshaled_database.txt"
+
+    def initialize(file = FILE)
       @database_file = file
       @database = Directory.new(file)
       #change this to a Directory call...
       @touch_points = @database.create_tps
-      @accounts_index = WordIndex.new(@database.accounts).index
     end
 
     # since this is basically just like the initialize method
@@ -41,7 +37,6 @@ class Head_Quarters
     def refresh_database
       @database = Directory.new(@database_file)
       @touch_points = @database.create_tps
-      @accounts_index = WordIndex.new(@database.accounts).index
     end 
 
     def save_update(entry)
@@ -57,13 +52,8 @@ class Head_Quarters
     
   end 
 
-#needs to be uncommented out in order to run app
 
-# Head_Quarters.new(ENTRIES)
-# moved main_menu call out of the Head_Quarters initialize method
-# could moved back if makes sense, but for testing need it out. 
 
- # main_menu
 
 #TO DO list
 # clean up code, get better with comments.

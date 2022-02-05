@@ -58,8 +58,7 @@ module Menu_Action
         def select_account_action 
             puts "Enter name:"
             target = gets.chomp
-            downcase_target = target.downcase
-            @accounts_index[downcase_target]
+            target.downcase
         end 
 
     def touch_point_create_date_action
