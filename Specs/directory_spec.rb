@@ -15,9 +15,9 @@ class TestDirectory < Test::Unit::TestCase
 
     def setup 
         #we are loading our data from the @read_file
-        @read_file = 'tester_database.txt'
+        @read_file = 'read_test_database.txt'
         #we are saving the results of our test runs to the @write file
-        @write_file = 'write_tester.txt'
+        @write_file = 'write_test_database.txt'
         @directory = Directory.new(@read_file)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
@@ -33,34 +33,33 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_accounts_length 
-        assert_equal(90, @directory.accounts.length)
+        assert_equal(96, @directory.accounts.length)
     end 
 
     def test_entry_class
         assert_equal(Entry, @entry.class)
     end 
 
-
     def test_create_tps 
          assert_equal(Array, @touch_points.class)
     end 
 
     def test_touch_point_length 
-        assert_equal(415, @touch_points.length)
+        assert_equal(430, @touch_points.length)
     end 
 
     # #add_account 
 
     def test_can_add_account 
         @directory.add_account(@entry)
-        assert_equal(91, @directory.accounts.length)
+        assert_equal(97, @directory.accounts.length)
     end 
 
     # #delete_account 
 
     def test_can_delete_account
         @directory.delete_account(@entry) 
-        assert_equal(89, @directory.accounts.length)
+        assert_equal(95, @directory.accounts.length)
     end 
 
     def test_save_update_delete 

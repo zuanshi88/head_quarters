@@ -1,6 +1,6 @@
-require '../head_quarters.rb'
-require '../../Classes/directory_class'
+require '../Classes/head_quarters'
 require '../Classes/word_index_class'
+require '../Classes/directory_class'
 require '../Classes/entry_class'
 require '../Classes/touch_point_class'
 

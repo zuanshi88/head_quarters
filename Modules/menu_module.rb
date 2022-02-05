@@ -56,13 +56,6 @@ module Menu
                 end
           end
 
-        def select_account_action 
-            puts "Enter name:"
-            target = gets.chomp
-            downcase_target = target.downcase
-            @accounts_index[downcase_target]
-        end 
-
   def display_account(selection) 
     # head_quarters
       
