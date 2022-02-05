@@ -50,13 +50,13 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  display_account(select_account)
+                  display_account(select_account_action)
                 else 
                   exit
                 end
           end
 
-        def select_account 
+        def select_account_action 
             puts "Enter name:"
             target = gets.chomp
             downcase_target = target.downcase
@@ -290,7 +290,7 @@ module Menu
                 drop_n_lines
                 display(last_n_descending(10))
             when 9 
-              display_account(select_account)
+              display_account(select_account_action)
             else
               main_menu
             end
