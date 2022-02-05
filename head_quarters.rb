@@ -8,7 +8,8 @@ require './Modules/formatting_module'
 
 
 #marshaled database
-ENTRIES = "marshaled_database.txt"
+ENTRIES = "a_marshaled_database.txt"
+# ENTRIES = "a_test_marshaled_database.txt"
 
 class Head_Quarters
   
@@ -16,6 +17,14 @@ class Head_Quarters
     include Formatting 
 
     attr_reader :database, :touch_points, :accounts_index
+
+    # decouple @touch_points from headquarters-- just make it travel wtih directory
+    # headquarters doesn't care how database keeps track of the touch_points or even 
+    # what they are. they just want to know that the touch_points are going to be ready
+    # to serve up when needed. 
+
+    #also, extract the WordIndex and just create it when it is called 
+    # so that it is using the most upto date information
 
     def initialize(file)
       @database_file = file

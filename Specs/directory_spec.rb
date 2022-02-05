@@ -14,7 +14,9 @@ class TestDirectory < Test::Unit::TestCase
     # entry_class, touch_point_class
 
     def setup 
+        #we are loading our data from the @read_file
         @read_file = 'tester_database.txt'
+        #we are saving the results of our test runs to the @write file
         @write_file = 'write_tester.txt'
         @directory = Directory.new(@read_file)
         @entry = @directory.accounts[-1]
@@ -38,9 +40,6 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(Entry, @entry.class)
     end 
 
-    # def test_entry_name 
-    #     assert_equal("Projects REACT", @entry.name)
-    # end 
 
     def test_create_tps 
          assert_equal(Array, @touch_points.class)
