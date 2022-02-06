@@ -27,6 +27,12 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         assert_equal(true, @address_book.respond_to?(:main_menu))
     end 
 
+    def test_address_can_save_update 
+        size = @address_book.database.accounts.size
+        @address_book.add_entry_action
+        assert_equal(size + 1, @address_book.database.accounts.size)
+    end 
+
     # case action
     #             when 3
     #               save_update(entry: Entry.new(add_entry_action))

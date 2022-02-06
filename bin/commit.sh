@@ -1,6 +1,8 @@
 #!/bash/bin 
 
 
+git add .
+
 echo 'What?'
 
 read RESPONSE
