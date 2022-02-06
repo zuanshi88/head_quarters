@@ -50,11 +50,23 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
+                  # select_account_action, 
+                  # @database.accounts_index
+                  # display account
+
+                  # @database.accounts index takes a name and reurns
+                  # array of account objs 
+                  # then display_account either displays account
+                  # or a list of matching accounts
                   display_account(@database.accounts_index[select_account_action])
+                  
                 else 
                   exit
                 end
           end
+
+
+
 
   def display_account(selection) 
     # head_quarters
