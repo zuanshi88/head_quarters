@@ -15,7 +15,7 @@ class Address_Book
 
     def initialize
         @session = Head_Quarters.new() 
-        main_menu
+        # main_menu
     end 
 
 end 

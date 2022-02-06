@@ -189,13 +189,19 @@ module Menu
 
         end
 
+        # should move these to menu_methods_module
+
         def entry_last_ten_descending(entry)
             entry.touch_points.last(10)
         end 
 
         def last_ten_touch_points(entry)
-            display_entry_tps(last_n_descending(10,entry))
+            display_entry_tps(last_n_descending(10, entry))
         end 
+
+         def from_today_descending
+            display(from_today)
+          end 
 
 
   def edit(entry)
@@ -291,9 +297,6 @@ module Menu
             touch_points_menu(false)
           end
 
-          def from_today_descending
-            display(from_today)
-          end 
 end 
 
       

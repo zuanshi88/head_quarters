@@ -21,7 +21,7 @@ class Head_Quarters
     #also, extract the WordIndex and just create it when it is called 
     # so that it is using the most upto date information
 
-  FILE = "./a_marshaled_database.txt"
+  FILE = "../a_marshaled_database.txt"
 
     def initialize(file = FILE)
       @database_file = file

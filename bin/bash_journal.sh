@@ -12,7 +12,7 @@ calendar=$(date +%F)
 clock=$(date +%T)
 
 
-echo "" >> ./Address_Book/bin/bash_journal.txt
+echo "" >> ./bash_journal.txt
 # echo  `date` $text | cat - bash_journal.txt > temp && mv temp bash_journal.txt
 
 echo  $calendar $clock $text | cat - bash_journal.txt > temp && mv temp bash_journal.txt

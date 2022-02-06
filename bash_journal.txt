@@ -1,3 +1,5 @@
+2022-02-05 19:21:42 integration_menu_module all set up to work through the methods... this is such a saner way of working!
+2022-02-05 17:51:30 begin by creating an INTEGRATION test of the menu module and then step your way through.
 2022-02-05 17:46:11 further need to pull out touch points and develop word index with accounts and touch points
 2022-02-05 17:45:30 Tested back to the top of the program... now need to clean up the down stream effects
 2022-02-04 14:28:56 How do we add a folder to PATH???
@@ -5,5 +7,6 @@
 2022-01-26 17:22:27 Where will this save?
 2022-01-26 17:18:02 Adding to Address_Level journal
 2022-01-26 17:16:50 Cool, call this from up a directory
+
 
 
