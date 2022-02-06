@@ -27,5 +27,25 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         assert_equal(true, @address_book.respond_to?(:main_menu))
     end 
 
+    # case action
+    #             when 3
+    #               save_update(entry: Entry.new(add_entry_action))
+    #               refresh_database
+    #             when 4
+    #                 clear_drop_center
+    #                 # display_last_ten_entry_touch_points_title
+    #                 drop_n_lines
+    #               display(last_n_descending(10))
+    #                 drop_n_lines
+    #               touch_points_menu(false)
+    #             when 8
+    #               display_all_accounts(@database.accounts)
+    #               main_menu(false)
+    #             when 9
+    #               display_account(@database.accounts_index[select_account_action])
+    #             else 
+    #               exit
+    #             end
+
 
 end 
