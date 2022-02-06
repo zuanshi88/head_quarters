@@ -5,6 +5,7 @@ require_relative "Modules/formatting_module"
 
 # ENTRIES = "a_test_marshaled_database.txt"
 
+FILE = "./a_marshaled_database.txt"
 
 class Address_Book  
 
@@ -14,8 +15,8 @@ class Address_Book
     attr_reader :session
 
     def initialize
-        @session = Head_Quarters.new() 
-        # main_menu
+        @session = Head_Quarters.new(FILE) 
+        main_menu
     end 
 
 end 

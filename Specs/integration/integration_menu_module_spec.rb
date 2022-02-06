@@ -30,6 +30,28 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         assert_equal(true, @address_book.respond_to?(:main_menu))
     end 
 
+    def test_has_database 
+        assert_equal(Array,  @address_book.session.database.accounts.class)
+    end 
+
+    def test_database_has_accounts_index 
+        assert_equal(Hash, @address_book.session.database.accounts_index.class)
+    end 
+
+
+    def test_database_has_accounts_index_with_argument_returns_array 
+         #this creates an array on accounts
+        assert_equal(Array, @address_book.session.database.accounts_index["latham"].class)
+    end 
+
+    def test_create_selection_hash_action
+       #this turns array into a Hash
+         selection = @address_book.session.database.accounts_index["latham"]
+        assert_equal(Hash, @address_book.create_selection_hash_action(selection).class)
+    end 
+
+    #next here would be to test display_contact and open_contact ...
+
     def test_address_can_add_and_save_update 
         size = @address_book.session.database.accounts.size
         @address_book.session.save_update(Entry.new(@entry_hash))
@@ -58,9 +80,9 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
     #not finding the name searched for...
 
-    def test_display_account 
-        assert_equal(Entry, @address_book.display_account("latham").class)
-    end 
+    # # def test_display_account 
+    #     assert_equal(Entry, @address_book.display_account(["latham"]).class)
+    # # end 
 
     # case action
     #             when 3

@@ -57,9 +57,10 @@ module Menu
                   # @database.accounts index takes a name and reurns
                   # array of account objs 
                   # then display_account either displays account
-                  # or a list of matching accounts
-                  display_account(@database.accounts_index[select_account_action])
-                  
+                  # or a lists of matching accounts
+                  selection = @database.accounts_index[select_account_action]
+                  account_hash = create_selection_hash_action(selection) 
+                  display_account(selection, account_hash)
                 else 
                   exit
                 end
@@ -68,15 +69,12 @@ module Menu
 
 
 
-  def display_account(selection) 
+  def display_account(selection, account_hash) 
     # head_quarters
-      
-        account_hash = create_selection_hash_action(selection) 
           if account_hash.nil? 
-            main_menu(true, "      <<<<<<   try another selection #{selection} could not be fuckin located   >>>>>>"
-)
+            main_menu(true, "      <<<<<<   try another selection #{selection} could not be fuckin located   >>>>>>")
           elsif  account_hash.length == 1
-            open_contact(account_hash[0])
+            (account_hash[0])
           else 
             account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name} -- #{account_hash[key].object_id}", 38); puts ""}
             selection = gets.chomp
