@@ -66,6 +66,14 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(Entry, @directory.accounts_index["portland"][0].class)
     end 
 
+    def test_directory_has_touch_points  
+        assert_equal(Array, @directory.touch_points.class)
+    end 
+
+    def test_directory_touch_points_size 
+        assert_equal(430, @directory.touch_points.size)
+    end 
+
 
     
 

@@ -39,8 +39,8 @@ class Head_Quarters
       @touch_points = @database.create_tps
     end 
 
-    def save_update(entry)
-      Directory.save_update(database: @database, database_file: @database_file, entry: entry)
+    def save_update(entry, delete = false)
+      Directory.save_update(database: @database, database_file: @database_file, entry: entry, delete: delete)
     end 
 
     def create_touch_point(entry)

@@ -33,8 +33,8 @@ module Menu_Action
 
         touch_points = []
 
-        entry_info = {"first name" => first_name, "last name" => last_name, "address" => address, "phone number" => phone_number, "email" => email, "name" => name, "touch_points" => touch_points}
-        entry_info
+        {"first name" => first_name, "last name" => last_name, "address" => address, "phone number" => phone_number, "email" => email, "name" => name, "touch_points" => touch_points}
+
     end
 
         # only knows it is getting an array 

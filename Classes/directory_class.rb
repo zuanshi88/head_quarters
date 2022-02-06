@@ -1,11 +1,12 @@
 
 class Directory
 
-  attr_reader :accounts, :accounts_index
+  attr_reader :accounts, :accounts_index, :touch_points
 
   def initialize(file)
     @accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
     @accounts_index = self.index
+    @touch_points = create_tps
   end
 
   #instance variable called by all instances of directories to provide
@@ -56,7 +57,7 @@ class Directory
             if delete == false 
                database.add_account(entry)
             end 
-          Directory.marshal_save(database.accounts, database_file)
+          marshal_save(database.accounts, database_file)
     end
 
     def self.marshal_save(obj_array, file)
