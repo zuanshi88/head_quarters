@@ -1,4 +1,5 @@
 require '../address_book.rb'
+require '../Classes/entry_class.rb'
 require 'test/unit'
 
 
@@ -7,6 +8,8 @@ class TestAddressBook < Test::Unit::TestCase
     
     def setup 
         @address_book = Address_Book.new()
+        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+
     end 
 
     def test_address_book_class 
@@ -23,6 +26,9 @@ class TestAddressBook < Test::Unit::TestCase
         assert_equal(true, @address_book.respond_to?(:main_menu))
     end 
 
+    def test_session_can_save_update 
+        assert_equal(false, @address_book.session.respond_to?(:save_update))
+    end 
     
 
     
