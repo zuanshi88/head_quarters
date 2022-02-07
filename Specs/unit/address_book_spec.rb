@@ -31,7 +31,7 @@ class TestAddressBook < Test::Unit::TestCase
     end 
 
     def test_address_book_has_database 
-        assert_equal("",@address_book.session.database.database_file)
+        assert_equal("a_marshaled_database_file",@address_book.session.database.database_file)
     end 
     
     # def test_session_can_save_update 
