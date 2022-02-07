@@ -76,15 +76,15 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     #     @address_book.session.save_update(@entry, delete: true)
     #     assert_equal(size, @address_book.session.database.accounts.size)
 
-    end 
+    #end 
 
     # def test_display_method 
     #     assert_equal(Array, @address_book.display([1,2,3]).class)
     # end 
 
-    def test_display_touch_points_menu
+    # def test_display_touch_points_menu
 
-    end 
+    # end 
 
     #not finding the name searched for...
 
