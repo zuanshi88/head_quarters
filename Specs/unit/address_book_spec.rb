@@ -33,6 +33,10 @@ class TestAddressBook < Test::Unit::TestCase
     def test_address_book_has_database 
         assert_equal("../Specs/a_marshaled_database.txt",@address_book.session.database.database_file)
     end 
+
+    def test_address_book_has_directory 
+        assert_equal(Directory, @address_book.session.database)
+    end 
     
     # def test_session_can_save_update 
     #     asset_equal(false, @address_book.session.save_update(@entry))
