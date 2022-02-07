@@ -11,11 +11,11 @@ class TestSession < Test::Unit::TestCase
 
     end 
 
-    def session_has_class 
+    def test_session_has_class 
         assert_equal(Session, @session.class)
     end 
 
-    def session_has_database_with_directory_class
+    def test_session_has_database_with_directory_class
         assert_equal(Directory, @session.database.class)
     end 
 
