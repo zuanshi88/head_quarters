@@ -75,6 +75,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
      def test_address_can_delete_and_save_update 
         size = @address_book.session.database.accounts.size
         assert_equal(98, @address_book.session.database.accounts.size)
+         assert_equal(false, @address_book.session.respond_to?(:save_update))
         # @address_book.session.save_update(@entry, delete: false)
         # assert_equal(size, @address_book.session.database.accounts.size)
         # @address_book.session.save_update(@entry, delete: true)
