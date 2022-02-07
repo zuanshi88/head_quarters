@@ -12,11 +12,11 @@ echo "hello world"
 #could fork it and do a lot of things -- maybe have a flag for whether
 #or not to run all of the tests or only certain ones. 
 
-ruby ./unit/entry_spec.rb 
-# ruby ./unit/directory_spec.rb 
-# ruby ./unit/touch_point_spec.rb
-# ruby ./unit/project_spec.rb 
-# ruby ./unit/head_quarters_spec.rb
+ruby unit/entry_spec.rb 
+ruby unit/directory_spec.rb 
+ruby unit/touch_point_spec.rb
+ruby unit/project_spec.rb 
+# ruby unit/head_quarters_spec.rb
 
 
 
