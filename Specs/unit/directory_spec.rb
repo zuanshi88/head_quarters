@@ -13,6 +13,7 @@ class TestDirectory < Test::Unit::TestCase
     # we can see how coupled the directory already is to all of these other models
     # entry_class, touch_point_class
 
+
     def setup 
         #we are loading our data from the @read_file
         @read_file = 'a_read_test_database.txt'
