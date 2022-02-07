@@ -28,6 +28,7 @@ class TestSession < Test::Unit::TestCase
             @session.save_update(@entry)
         assert_equal(size, @session.database.accounts.size)
     end 
+end 
 
     
 
