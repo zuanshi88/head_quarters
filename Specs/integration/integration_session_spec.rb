@@ -7,7 +7,7 @@ class TestSession < Test::Unit::TestCase
 
     def setup 
         @session = Session.new(true)
-        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        @entry = Entry.new({"first name" => "Zevron", "last name" => "Catmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
 
     end 
 
@@ -23,9 +23,10 @@ class TestSession < Test::Unit::TestCase
         assert_equal(Array, @session.database.touch_points.class)
     end 
 
-    
-
- 
+    def test_can_delete_an_entry 
+        size = @session.database.accounts.size
+            @session.save_update(@entry)
+        assert_equal(size, @session.database.accounts.size)
     end 
 
     
