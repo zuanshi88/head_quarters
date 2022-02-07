@@ -27,7 +27,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         #head_quarters is basically session now.
 
     def test_address_has_head_quarters 
-        assert_equal(Head_Quarters, @address_book.session.class)
+        assert_equal(Session, @address_book.session.class)
     end 
 
     def test_address_has_main_menu
