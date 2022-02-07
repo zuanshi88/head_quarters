@@ -16,10 +16,10 @@ class TestDirectory < Test::Unit::TestCase
 
     def setup 
         #we are loading our data from the @read_file
-        @read_file = 'a_read_test_database.txt'
+    
         #we are saving the results of our test runs to the @write file
-        @write_file = 'write_test_database.txt'
-        @directory = Directory.new(@read_file)
+    
+        @directory = Directory.new(true)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
         @database_file = @directory.database_file
