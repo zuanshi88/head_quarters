@@ -1,4 +1,4 @@
-require_relative "Classes/head_quarters"
+require_relative "Classes/session"
 require_relative "Modules/menu_module"
 require_relative "Modules/formatting_module"
 
