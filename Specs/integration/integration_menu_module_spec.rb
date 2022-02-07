@@ -64,6 +64,10 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
     # why isn't this working???? It seems to work in the Directory spec?
 
+    def test_database_has_class 
+        assert_equal(Directory, @address_book.session.database.class)
+    end 
+
     def test_database_can_respond_to_dave_update 
         assert_equal(true, @address_book.session.database.respond_to?(:save_update))
     end 
