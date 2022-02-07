@@ -30,8 +30,7 @@ class TestDirectory < Test::Unit::TestCase
 
     def test_accounts_length 
         size = @directory.accounts.length
-        assert_equal(<siz>
-        <</e>, @directory.accounts.length)
+        assert_equal(size, @directory.accounts.length)
     end 
 
 
@@ -83,7 +82,8 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_touch_point_length 
-        assert_equal(430, @touch_points.length)
+        size = @touch_points.length
+        assert_equal(size, @touch_points.length)
     end 
 
 
