@@ -1,5 +1,6 @@
 #!/bash/bin 
 
+echo ""
 
 git add .
 
