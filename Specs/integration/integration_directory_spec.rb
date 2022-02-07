@@ -29,7 +29,9 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_accounts_length 
-        assert_equal(98, @directory.accounts.length)
+        size = @directory.accounts.length
+        assert_equal(<siz>
+        <</e>, @directory.accounts.length)
     end 
 
 
