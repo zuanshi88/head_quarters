@@ -27,8 +27,8 @@ class TestSession < Test::Unit::TestCase
         size = @session.database.accounts.size
         entry = @session.database.accounts[10]
         assert_equal(Entry, entry.class)
-        assert_equal("Spring Anderson", entry.name)
-        @session.save_update(entry: @entry, delete: true)
+          assert_equal("Spring Anderson", entry.name)
+        @session.save_update(@entry, delete: true)
         assert_equal(size - 1, @session.database.accounts.size)
         entry = @session.database.accounts[10]
         assert_equal("Spring Anderson", @session.database.accounts[10].name)
