@@ -15,7 +15,7 @@ class Address_Book
     attr_reader :session
 
     def initialize
-        @session = Head_Quarters.new(FILE) 
+        @session = Session.new(FILE) 
         main_menu
     end 
 

@@ -6,7 +6,7 @@ require_relative 'touch_point_class'
 
 
 
-class Head_Quarters
+class Session
   
     # include Menu 
     # include Formatting 
