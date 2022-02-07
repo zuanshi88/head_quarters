@@ -35,7 +35,7 @@ class TestAddressBook < Test::Unit::TestCase
     end 
 
     def test_address_book_has_directory 
-        assert_equal(Directory, @address_book.session.database)
+        assert_equal(Directory, @address_book.session.database.class)
     end 
     
     # def test_session_can_save_update 
