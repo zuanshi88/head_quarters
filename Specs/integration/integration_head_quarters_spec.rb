@@ -15,6 +15,8 @@ class Test_Head_Quarters < Test::Unit::TestCase
 
     def setup 
         @head_quarters = Head_Quarters.new(TEST_DATABASE)
+        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+
     end 
 
     def test_head_quarters_has_class 
@@ -33,6 +35,10 @@ class Test_Head_Quarters < Test::Unit::TestCase
         assert_equal(Hash, @head_quarters.accounts_index.class)
     end 
 
+    def test_create_touch_point_call 
+        size = 
+
+    end 
 
     
 
