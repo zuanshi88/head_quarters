@@ -27,7 +27,7 @@ class TestAddressBook < Test::Unit::TestCase
     end 
 
     def test_session_can_save_update 
-        assert_equal(false, @address_book.session.respond_to?(:save_update))
+        assert_equal(true, @address_book.session.respond_to?(:save_update))
     end 
     
 
