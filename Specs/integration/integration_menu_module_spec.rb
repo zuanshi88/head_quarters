@@ -88,6 +88,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @address_book.session.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
             assert_equal(size + 1, @entry.touch_points.size)
         end 
+
+        
         
 
 
