@@ -25,6 +25,9 @@ class TestDirectory < Test::Unit::TestCase
         @database_file = @directory.database_file
     end 
 
+    def test_directory_has_database_file 
+        assert_equal(Array, @database_file.class)
+    end 
 
     def test_directory_has_database_file 
         assert_equal(true, @directory.status)
