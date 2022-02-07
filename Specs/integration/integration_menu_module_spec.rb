@@ -11,10 +11,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     
     def setup
           #we are loading our data from the @read_file
-        @read_file = 'c_read_test_database.txt'
         #we are saving the results of our test runs to the @write file
-        @write_file = 'write_test_database.txt'
-        @address_book = Address_Book.new(true)
+        @address_book = Address_Book.new(status = true)
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @entry_hash = {"first name" => "Zaron", "last name" => "Zitmer", "email" => "zwhitmer@gmail.com", "phone number" =>"(333) 333-3833"}
     end
