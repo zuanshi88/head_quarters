@@ -31,7 +31,7 @@ class TestAddressBook < Test::Unit::TestCase
     end 
     
     def test_session_can_save_update 
-        asset_equal(false @address_book.session.save_update(@entry))
+        asset_equal(false, @address_book.session.save_update(@entry))
     end 
 
     
