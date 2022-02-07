@@ -7,9 +7,9 @@ class TestAddressBook < Test::Unit::TestCase
 
     
     def setup 
+        @file = 'c_test_database.txt'
         @address_book = Address_Book.new()
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
-
     end 
 
     def test_address_book_class 
