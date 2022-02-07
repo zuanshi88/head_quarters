@@ -44,7 +44,8 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_directory_index_size 
-         assert_equal(275, @directory.accounts_index.size)
+        size = @directory.accounts_index.size
+         assert_equal(size, @directory.accounts_index.size)
     end 
 
     def test_directory_accounts_index_retrieves_array_of_multiple_matches
@@ -81,7 +82,8 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_directory_touch_points_size 
-        assert_equal(430, @directory.touch_points.size)
+        size = @directory.touch_points.size
+        assert_equal(size, @directory.touch_points.size)
     end 
 
 
