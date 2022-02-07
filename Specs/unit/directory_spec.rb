@@ -19,7 +19,7 @@ class TestDirectory < Test::Unit::TestCase
     
         #we are saving the results of our test runs to the @write file
     
-        @directory = Directory.new(false)
+        @directory = Directory.new(true)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
         @database_file = @directory.database_file
