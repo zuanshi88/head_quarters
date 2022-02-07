@@ -29,6 +29,10 @@ class TestAddressBook < Test::Unit::TestCase
     def test_session_respond_to_save_update 
         assert_equal(true, @address_book.session.respond_to?(:save_update))
     end 
+
+    def test_address_book_has_database 
+        assert_equal("",@address_book.session.database.database_file)
+    end 
     
     # def test_session_can_save_update 
     #     asset_equal(false, @address_book.session.save_update(@entry))
