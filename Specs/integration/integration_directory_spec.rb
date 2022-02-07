@@ -29,7 +29,7 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_accounts_length 
-        assert_equal(98, @directory.accounts.length)
+        assert_equal(146, @directory.accounts.length)
     end 
 
 
@@ -41,7 +41,7 @@ class TestDirectory < Test::Unit::TestCase
 
     def test_can_add_account 
         @directory.add_account(@entry)
-        assert_equal(99, @directory.accounts.length)
+        assert_equal(147, @directory.accounts.length)
     end 
 
     # #delete_account 
@@ -49,7 +49,7 @@ class TestDirectory < Test::Unit::TestCase
     def test_can_delete_account
         @directory.add_account(@entry)
         @directory.delete_account(@entry) 
-        assert_equal(97, @directory.accounts.length)
+        assert_equal(145, @directory.accounts.length)
     end 
 
     def test_save_update_delete 
