@@ -22,6 +22,12 @@ class TestDirectory < Test::Unit::TestCase
         @directory = Directory.new(@read_file)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
+        @database_file = @directory.database_file
+    end 
+
+
+    def test_directory_has_database_file 
+        assert_equal(@read_file, @database_file)
     end 
 
 
