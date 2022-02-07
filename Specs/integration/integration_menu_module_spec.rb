@@ -59,7 +59,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     def test_address_can_add_and_save_update 
         size = @address_book.session.database.accounts.size
         # @address_book.session.save_update(Entry.new(@entry_hash))
-        assert_equal(98, @address_book.session.database.accounts.size)
+        assert_equal(143, @address_book.session.database.accounts.size)
     end 
 
     # why isn't this working???? It seems to work in the Directory spec?
