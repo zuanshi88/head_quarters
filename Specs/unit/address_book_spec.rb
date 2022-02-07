@@ -7,7 +7,7 @@ class TestAddressBook < Test::Unit::TestCase
 
     
     def setup 
-        @address_book = Address_Book.new()
+        @address_book = Address_Book.new(true)
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
     end 
 
