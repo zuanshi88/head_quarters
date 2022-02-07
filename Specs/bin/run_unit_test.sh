@@ -16,7 +16,7 @@ ruby unit/entry_spec.rb
 ruby unit/directory_spec.rb 
 ruby unit/touch_point_spec.rb
 ruby unit/project_spec.rb 
-# ruby unit/head_quarters_spec.rb
+ruby unit/address_book_spec.rb
 
 
 
