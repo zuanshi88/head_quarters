@@ -10,6 +10,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     
     
     def setup
+        FILE = 
         @address_book = Address_Book.new()
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @entry_hash = {"first name" => "Zaron", "last name" => "Zitmer", "email" => "zwhitmer@gmail.com", "phone number" =>"(333) 333-3833"}
