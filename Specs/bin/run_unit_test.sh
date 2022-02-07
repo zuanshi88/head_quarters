@@ -1,6 +1,6 @@
 #!/bash/bin
 
-echo "hello world"
+echo "hello world from unit test suite"
 
 
 #modules-- what do I test with those
@@ -20,4 +20,4 @@ ruby unit/project_spec.rb
 
 
 
-echo "Goodbye world"
+echo "Goodbye world from unit test suite"
