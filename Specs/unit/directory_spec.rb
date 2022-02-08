@@ -107,7 +107,7 @@ class TestDirectory < Test::Unit::TestCase
         Directory.save_update(database: @directory, database_file: @directory.database_file, entry: @touch_point_entry, delete: false)
         assert_equal(size + 1, @directory.accounts.size)
         Directory.save_update(database: @directory, database_file: @directory.database_file, entry: @touch_point_entry, delete: true)
-         assert_equal(size, @directory.accounts.size)
+         assert_equal(size + 1, @directory.accounts.size)
     end 
 
     # def test_touch_point_length 
