@@ -100,7 +100,9 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_class_method_save_update 
-
+     @touch_point_entry =  Entry.new({"first name" => "Stan", "last name" => "Razny", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+     Directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
+     Directory.save_update
 
     end 
 
