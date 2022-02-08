@@ -94,6 +94,8 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal("Stan", @touch_point_entry.first_name)
         assert_equal("Razny", @touch_point_entry.last_name)
         assert_equal([], @touch_point_entry.touch_points)
+        Directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
+        assert_equal(1, @touch_point_entry.touch_points.size)
     end 
 
     def test_class_method_save_update 
