@@ -1,6 +1,6 @@
 require '../Classes/directory_class'
-require '../Classes/entry_class'
-require '../Classes/touch_point_class.rb'
+# require '../Classes/entry_class'
+# require '../Classes/touch_point_class.rb'
 require 'test/unit'
 
 
@@ -17,9 +17,9 @@ class TestDirectory < Test::Unit::TestCase
     def setup 
         #we are loading our data from the @read_file
     
-        #we are saving the results of our test runs to the @write file
+      #passing false puts the directory creation in test mode
     
-        @directory = Directory.new(true)
+        @directory = Directory.new(false)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
         @database_file = @directory.database_file
@@ -30,7 +30,7 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_directory_has_database_file 
-        assert_equal(true, @directory.status)
+        assert_equal(false, @directory.status)
     end 
 
 
