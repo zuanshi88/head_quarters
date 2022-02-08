@@ -24,7 +24,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     end 
 
     def test_address_book_has_database 
-        assert_equal("../Specs/a_read_test_database.txt", @address_book.session.database.database_file)
+        assert_equal("../Database/a_read_test_database.txt", @address_book.session.database.database_file)
     end
 
         #head_quarters is basically session now.

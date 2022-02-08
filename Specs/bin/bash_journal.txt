@@ -1,17 +1,8 @@
-2022-02-05 19:05:02 Now this should save as we wanted it to.
-2022-02-05 19:04:48 Fresh start
-
-
-
-
-
-
-
-
-
-
-
-
+2022-02-07 17:26:01 I need to refactor with the session as self... the address book really just starts the app I suppose.
+2022-02-07 17:25:30 Definitely seeing why a willy nilly approach is not the best one for implementation... changes cascade through, mess up tests..
+2022-02-07 10:44:01 Another test to just see how this is coming out
+2022-02-07 10:43:29 Is this recording?
+2022-02-07 10:42:47 still have the marshaling issues that I suppose I created with all the reactoring.
 
 
 
