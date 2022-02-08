@@ -81,7 +81,7 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_accounts_length 
-        assert_equal(96, @directory.accounts.length)
+        assert_equal(90, @directory.accounts.length)
     end 
 
     def test_can_instantiate_an_entry 

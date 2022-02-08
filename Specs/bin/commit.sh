@@ -11,4 +11,4 @@ read RESPONSE
 git commit -m "$RESPONSE"
 
 bash ./bin/run_unit_test.sh
-bash ./bin/run_integration_test.sh
+# bash ./bin/run_integration_test.sh
