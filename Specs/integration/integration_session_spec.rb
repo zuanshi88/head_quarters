@@ -15,6 +15,19 @@ class TestSession < Test::Unit::TestCase
         assert_equal(Session, @session.class)
     end 
 
+      def test_session_respond_to_save_update 
+        assert_equal(true, @address_book.session.respond_to?(:save_update))
+    end 
+
+    
+    def test_session_has_database 
+        assert_equal("../Database/a_read_test_database.txt", @address_book.session.database.database_file)
+    end 
+
+    def test_address_book_has_directory 
+        assert_equal(Directory, @address_book.session.database.class)
+    end 
+
     def test_session_has_database_with_directory_class
         assert_equal(Directory, @session.database.class)
     end 
