@@ -96,7 +96,7 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal([], @touch_point_entry.touch_points)
         Directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
         assert_equal(1, @touch_point_entry.touch_points.size)
-        assert_equal("some real good deals", @touch_point_entry[0].activity)
+        assert_equal("some real good deals", @touch_point_entry.touch_points[0].activity)
     end 
 
     def test_class_method_save_update 
