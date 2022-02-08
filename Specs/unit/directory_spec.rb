@@ -1,13 +1,11 @@
 require '../Classes/directory_class'
-# require '../Classes/entry_class'
-# require '../Classes/touch_point_class.rb'
+
 require 'test/unit'
 
 
 
 class TestDirectory < Test::Unit::TestCase 
 
-    #set up to read from one file and write to a new file so the tests don't break each time.
 
     # bring in save_update method here so it is easir to test and because that makes sense
     # we can see how coupled the directory already is to all of these other models
@@ -15,27 +13,23 @@ class TestDirectory < Test::Unit::TestCase
 
 
     def setup 
-        #we are loading our data from the @read_file
-    
-      #passing false puts the directory creation in test mode
-    
+    # the false parameter creates a testing version of the database
         @directory = Directory.new(false)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
         @database_file = @directory.database_file
     end 
 
-    def test_directory_has_database_file_with_correct_class 
-        assert_equal("../Database/a_read_test_database.txt", @database_file)
+    def test_directory_has_class 
+        assert_equal(Directory, @directory.class)
     end 
 
-    def test_directory_has_database_file 
+     def test_directory_has_database_file 
         assert_equal(false, @directory.status)
     end 
 
-
-    def test_directory_has_class 
-        assert_equal(Directory, @directory.class)
+    def test_directory_has_database_file 
+        assert_equal("../Database/a_read_test_database.txt", @database_file)
     end 
 
 
@@ -65,10 +59,6 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
 
-    def test_directory_accounts_index_retrieves_value
-        assert_equal(Entry, @directory.accounts_index["latham"][0].class)
-    end 
-
     def test_directory_index_can_search_cities 
         assert_equal(4, @directory.accounts_index["portland"].size)
     end 
@@ -86,25 +76,23 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(size, @directory.touch_points.size)
     end 
 
+    def test_accounts_has_class 
+        assert_equal(Array, @directory.accounts.class)
+    end 
 
-    
+    def test_accounts_length 
+        assert_equal(96, @directory.accounts.length)
+    end 
+
+    def test_can_instantiate_an_entry 
+        @new_entry =  Entry.new({"first name" => "Damn", "last name" => "Yankee", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        assert_equal("Damn", @new_entry.first_name)
+    end 
 
 
-    # def test_accounts_has_class 
-    #     assert_equal(Array, @directory.accounts.class)
-    # end 
+    def test_class_method_save_update 
 
-    # def test_accounts_length 
-    #     assert_equal(96, @directory.accounts.length)
-    # end 
-
-    # def test_entry_class
-    #     assert_equal(Entry, @entry.class)
-    # end 
-
-    # def test_create_tps 
-    #      assert_equal(Array, @touch_points.class)
-    # end 
+    end 
 
     # def test_touch_point_length 
     #     assert_equal(430, @touch_points.length)
