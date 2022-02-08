@@ -91,7 +91,7 @@ class TestDirectory < Test::Unit::TestCase
 
     def test_directory_can_create_touch_point 
         @touch_point_entry =  Entry.new({"first name" => "Stan", "last name" => "Razny", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
-        assert_equal("Dan", @touch_point_entry.first_name)
+        assert_equal("Stan", @touch_point_entry.first_name)
 
 
         Directory
