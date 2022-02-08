@@ -5,7 +5,7 @@ require 'test/unit'
 
 
 
-class TestDirectory < Test::Unit::TestCase 
+class TestDirectoryIntegration < Test::Unit::TestCase 
 
     #set up to read from one file and write to a new file so the tests don't break each time.
 
@@ -14,10 +14,7 @@ class TestDirectory < Test::Unit::TestCase
     # entry_class, touch_point_class
 
     def setup 
-        #we are loading our data from the @read_file
         @read_file = '../Database/an_integration_read_database.txt'
-        #we are saving the results of our test runs to the @write file
-        @write_file = '../Database/write_test_database.txt'
         @directory = Directory.new(@read_file)
         @entry = @directory.accounts[-1]
         @touch_points = @directory.create_tps
