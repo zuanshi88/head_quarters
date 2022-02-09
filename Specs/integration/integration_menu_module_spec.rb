@@ -48,14 +48,14 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
     def test_create_selection_hash_action
        #this turns array into a Hash
-         selection = @address_book.session.database.accounts_index["latham"]
+         selection = @session.database.accounts_index["latham"]
         assert_equal(Hash, @session.create_selection_hash_action(selection).class)
     end 
 
     #next here would be to test display_contact and open_contact ...
 
     def test_address_can_add_and_save_update 
-        size = @address_book.session.database.accounts.size
+        size = @session.database.accounts.size
         # @address_book.session.save_update(Entry.new(@entry_hash))
         assert_equal(size, @session.database.accounts.size)
     end 
@@ -71,7 +71,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     end 
 
      def test_address_can_delete_and_save_update 
-        size = @address_book.session.database.accounts.size
+        size = @session.database.accounts.size
         assert_equal(size, @session.database.accounts.size)
         @session.database.save_update(@entry)
         assert_equal(size + 1, @session.database.accounts.size)
@@ -102,7 +102,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
 
     # def test_display_method 
-    #     assert_equal(Array, @address_book.display([1,2,3]).class)
+    #     assert_equal(Array, @session.display([1,2,3]).class)
     # end 
 
     # def test_display_touch_points_menu
@@ -112,7 +112,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     #not finding the name searched for...
 
     # # def test_display_account 
-    #     assert_equal(Entry, @address_book.display_account(["latham"]).class)
+    #     assert_equal(Entry, @session.display_account(["latham"]).class)
     # # end 
 
     # case action
