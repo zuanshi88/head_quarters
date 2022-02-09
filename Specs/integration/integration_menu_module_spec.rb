@@ -106,11 +106,11 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             assert_equal(total_size, @session.database.touch_points)
         end 
 
-        def test_refresh_database_instance_call 
-            old_id = @session.database.object_id
-            @session.refresh_database_instance
-            assert_not_equal(old_id, @session.database.object_id)
-        end 
+        # def test_refresh_database_instance_call 
+        #     old_id = @session.database.object_id
+        #     @session.refresh_database_instance
+        #     assert_not_equal(old_id, @session.database.object_id)
+        # end 
         
 
 
