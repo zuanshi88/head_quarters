@@ -95,14 +95,14 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal("Stan", @touch_point_entry.first_name)
         assert_equal("Razny", @touch_point_entry.last_name)
         assert_equal([], @touch_point_entry.touch_points)
-        Directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
+        @directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
         assert_equal(1, @touch_point_entry.touch_points.size)
         assert_equal("Did some real good deals.", @touch_point_entry.touch_points[0].activity)
     end 
 
     def test_class_method_save_update 
         @touch_point_entry =  Entry.new({"first name" => "Stan", "last name" => "Razny", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
-        Directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
+        @directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
         size = @directory.accounts.size 
         @directory.save_update(@touch_point_entry, false)
         assert_equal(size + 1, @directory.accounts.size)

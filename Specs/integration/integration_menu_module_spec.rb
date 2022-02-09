@@ -97,7 +97,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
         def test_create_touch_point_call 
             size = @entry.touch_points.size 
-            @address_book.session.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
+            @address_book.session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
             assert_equal(size + 1, @entry.touch_points.size)
         end 
 
