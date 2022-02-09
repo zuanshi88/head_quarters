@@ -49,24 +49,5 @@ class TestSession < Test::Unit::TestCase
 
 end 
 
-    
-
-    #  attr_reader :database, :touch_points, :accounts_index
-
-# def refresh_database
-#       @database = Directory.new(@database_file)
-#       @touch_points = @database.create_tps
-#       @accounts_index = WordIndex.new(@database.accounts).index
-#     end 
-
-#     def save_update(entry)
-#       Directory.save_update(database: @database, database_file: @database_file, entry: entry)
-#     end 
-
-#     def create_touch_point(entry)
-#       create_date = touch_point_create_date_action
-#       activity = touch_point_create_activity_action
-#       entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
-#     end 
 
 

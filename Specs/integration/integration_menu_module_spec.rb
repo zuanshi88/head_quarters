@@ -123,7 +123,6 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     # case action
     #             when 3
     #               save_update(entry: Entry.new(add_entry_action))
-    #               refresh_database
     #             when 4
     #                 clear_drop_center
     #                 # display_last_ten_entry_touch_points_title
