@@ -132,7 +132,10 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
             #could we pull the @entry out of the new database 
 
+            @session.accounts.delete_if{|i| i.name == @entry.name}
+
             updated_entry = @session.database.accounts.select{|i| i.name == @entry.name }
+            
 
             assert_equal('Aaron Whitmer', updated_entry.size)
             assert_equal(updated_entry.touch_points.size, @entry.touch_points.size)
