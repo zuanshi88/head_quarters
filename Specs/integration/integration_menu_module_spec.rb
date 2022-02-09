@@ -109,7 +109,9 @@ class TestAddressBookIntegration < Test::Unit::TestCase
           def test_session_can_delete_touch_point_at_both_entry_and_database_levels
             size = @entry.touch_points.size 
             total_size = @session.database.touch_points.size
-    
+            @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
+            assert_equal(size - 1, @entry.touch_points.size)
+            assert_equal(total_size - 1, @session.database.touch_points.size)
             @entry.touch_points.delete_at(1)
             @session.refresh_database_instance
             assert_equal(size - 1, @entry.touch_points.size)
