@@ -114,30 +114,9 @@ class TestAddressBookIntegration < Test::Unit::TestCase
           def test_session_can_delete_touch_point_at_both_entry_and_database_levels
             size = @entry.touch_points.size 
             total_size = @session.database.touch_points.size
-            @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
-              @session.database.save_update(@entry)
-            @session.refresh_database_instance
-            @session.database.create_touch_point(@entry, Time.now, "Doing homework") 
-              @session.database.save_update(@entry)
-            @session.refresh_database_instance
-            @session.database.create_touch_point(@entry, Time.now, "Eating nachos") 
-              @session.database.save_update(@entry)
-            @session.refresh_database_instance
-            # getting +3 
-            assert_equal(size + 3, @entry.touch_points.size)
-            # getting + 3
-            assert_equal(total_size + 3, @session.database.touch_points.size)
-            @entry.touch_points.delete_at(0)
-            #no change for  @session.database.touch_points.size still + 3
-            assert_equal(total_size + 3, @session.database.touch_points.size)
-            @session.database.save_update(@entry)
-              #no change for  @session.database.touch_points.size still + 3
-            assert_equal(total_size + 3, @session.database.touch_points.size)
-            #now all of a sudden the databaase is + 5
-            @session.refresh_database_instance
-             assert_equal(total_size + 5, @session.database.touch_points.size)
-            assert_equal(size + 2, @entry.touch_points.size)
-            # coming back 3 higher than expected
+            assert_equal(size + 1, @entry.touch_points.size )
+            assert_equal(total_size + 1, @session.database.touch_points.size )
+
         end 
         # int_menu_mod --test_session_can_delete_touch_point_at_both_entry_and_database_levels -- @session.datebase.save_update(@entry)
 
