@@ -134,7 +134,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
             updated_entry = @session.database.accounts.select{|i| i.name == @entry.name }[0]
 
-            assert_equal('', updated_entry.name)
+            assert_equal('Aaron Whitmer', updated_entry.name)
+            assert_equal(updated_entry.touch_points.size, @entry.touch_points.size)
 
 
 
