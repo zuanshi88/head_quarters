@@ -115,7 +115,11 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             size = @entry.touch_points.size 
             total_size = @session.database.touch_points.size
             @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
+              @session.database.save_update(@entry)
+            @session.refresh_database_instance
             @session.database.create_touch_point(@entry, Time.now, "Doing homework") 
+              @session.database.save_update(@entry)
+            @session.refresh_database_instance
             @session.database.create_touch_point(@entry, Time.now, "Eating nachos") 
               @session.database.save_update(@entry)
             @session.refresh_database_instance
