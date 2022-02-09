@@ -59,11 +59,7 @@ class Directory
     end 
  
 
-       # here we are connecting directory to head_quarters using the 
-       # head_quarters @database instance variable which connects
-       #this instance of directory with this instance of headquarters. 
-       #here we are using a global method to encapsulate calls to 
-       #instance methods
+
     def save_update(entry, delete = false)
           self.delete_account(entry) 
             if delete == false 
