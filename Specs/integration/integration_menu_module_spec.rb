@@ -1,4 +1,3 @@
-require '../address_book.rb'
         '../Classes/session.rb'
 require '../Classes/entry_class.rb'
 require 'test/unit'
