@@ -17,7 +17,6 @@ class TestDirectoryIntegration < Test::Unit::TestCase
         @read_file = './Database/an_integration_read_database.txt'
         @directory = Directory.new(@read_file)
         @entry = @directory.accounts[-1]
-        @touch_points = @directory.create_tps
     end 
 
 
