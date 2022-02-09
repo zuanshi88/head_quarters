@@ -147,13 +147,13 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     
-    # def test_save_update_add 
-    #     entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
-    #     initial_size = @directory.accounts.size
-    #     Directory.save_update(database: @directory, database_file: @write_file, entry: entry, delete: false)
-    #     resulting_size = @directory.accounts.size 
-    #     assert_equal(initial_size + 1, resulting_size)
-    # end 
+    def test_save_update_add 
+        entry = Entry.new({"first name" => "Tesla", "last name" => "Hendersack", "email" => "ts@gmail.com", "phone number" =>"(773) 673-0803"})
+        initial_size = @directory.accounts.size
+        @directory.save_update(entry, false)
+        resulting_size = @directory.accounts.size 
+        assert_equal(initial_size + 1, resulting_size)
+    end 
 
     # def test_marshal_save 
 
