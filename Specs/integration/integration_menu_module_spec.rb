@@ -34,7 +34,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     end 
 
     def test_address_has_main_menu
-        assert_equal(true, @address_book.respond_to?(:main_menu))
+        assert_equal(true, @address_book.session.respond_to?(:main_menu))
     end 
 
     def test_has_database 
@@ -51,11 +51,11 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         assert_equal(Array, @address_book.session.database.accounts_index["latham"].class)
     end 
 
-    def test_create_selection_hash_action
-       #this turns array into a Hash
-         selection = @address_book.session.database.accounts_index["latham"]
-        assert_equal(Hash, @address_book.create_selection_hash_action(selection).class)
-    end 
+    # def test_create_selection_hash_action
+    #    #this turns array into a Hash
+    #      selection = @address_book.session.database.accounts_index["latham"]
+    #     assert_equal(Hash, @address_book.create_selection_hash_action(selection).class)
+    # end 
 
     #next here would be to test display_contact and open_contact ...
 
