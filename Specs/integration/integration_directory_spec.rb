@@ -74,7 +74,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
 
     def test_touch_point_length 
-        size = @database.accounts.length
+        size = @directory.accounts.length
         assert_equal(size, @database.accounts.length)
     end 
 
