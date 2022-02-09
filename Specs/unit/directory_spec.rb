@@ -107,9 +107,12 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal("Jam", @touch_point_entry.first_name)
         assert_equal("Razny", @touch_point_entry.last_name)
         assert_equal([], @touch_point_entry.touch_points)
-        @directory.create_touch_point(@touch_point_entry, Time.now, "Fuck some real good deals.")
+        @directory.create_touch_point(@touch_point_entry, Time.now, "Got some real good deals.")
         assert_equal(1, @touch_point_entry.touch_points.size)
-        assert_equal("Did some real good deals.", @touch_point_entry.touch_points[0].activity)
+        assert_equal("Got some real good deals.", @touch_point_entry.touch_points[0].activity)
+
+        #now use the delete method.
+
     end 
 
 
