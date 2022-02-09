@@ -123,11 +123,11 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.database.delete_touch_point(@entry, @entry.touch_points[-1])
             # before saving these are different
             assert_equal(size, @entry.touch_points.size )
-            assert_equal(total_size, @session.database.touch_points.size )
+            assert_equal(total_size + 1, @session.database.touch_points.size )
             @session.database.save_update(@entry)
             @session.refresh_database_instance
             #after saving they should be the same
-             assert_equal(size, @entry.touch_points.size )
+            assert_equal(size, @entry.touch_points.size )
             assert_equal(total_size, @session.database.touch_points.size )
 
 
