@@ -16,21 +16,19 @@ class TestSession < Test::Unit::TestCase
     end 
 
       def test_session_respond_to_save_update 
-        assert_equal(true, @address_book.session.respond_to?(:save_update))
+        assert_equal(true, @session.database.respond_to?(:save_update))
     end 
 
     
     def test_session_has_database 
-        assert_equal("../Database/a_read_test_database.txt", @address_book.session.database.database_file)
+        assert_equal("../Database/a_read_test_database.txt", @session.database.database_file)
     end 
 
     def test_address_book_has_directory 
-        assert_equal(Directory, @address_book.session.database.class)
-    end 
-
-    def test_session_has_database_with_directory_class
         assert_equal(Directory, @session.database.class)
     end 
+
+
 
     def test_session_has_array_of_touch_points 
         assert_equal(Array, @session.database.touch_points.class)
@@ -41,7 +39,7 @@ class TestSession < Test::Unit::TestCase
         entry = @session.database.accounts[10]
         assert_equal(Entry, entry.class)
           assert_equal("Spring Anderson", entry.name)
-        @session.database.save_update(@entry, delete: true)
+        @session.database.save_update(@entry, true)
         assert_equal(size - 1, @session.database.accounts.size)
         entry = @session.database.accounts[10]
         assert_equal("Spring Anderson", @session.database.accounts[10].name)
