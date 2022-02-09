@@ -130,17 +130,13 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.refresh_database_instance
             #after saving they should be the same
             assert_equal(size, entry.touch_points.size )
-            # assert_equal(total_size, @session.database.touch_points.size )
+            assert_equal(total_size, @session.database.touch_points.size )
 
             #could we pull the @entry out of the new database 
 
             # @session.database.accounts.delete_if{|i| i.name == @entry.name}
             #   @session.database.marshal_save
-            updated_entry = @session.database.accounts.select{|i| i.name == @entry.name }
-            
-
-            assert_equal('Aaron Whitmer', updated_entry.size)
-            assert_equal(updated_entry.touch_points.size, @entry.touch_points.size)
+           
 
 
 
