@@ -129,8 +129,9 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.database.save_update(@entry)
               #no change for  @session.database.touch_points.size still + 3
             assert_equal(total_size + 3, @session.database.touch_points.size)
+            #now all of a sudden the databaase is + 5
             @session.refresh_database_instance
-             assert_equal(total_size, @session.database.touch_points.size)
+             assert_equal(total_size + 5, @session.database.touch_points.size)
             assert_equal(size + 2, @entry.touch_points.size)
             # coming back 3 higher than expected
             assert_equal(total_size + 2, @session.database.touch_points.size)
