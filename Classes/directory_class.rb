@@ -54,7 +54,7 @@ class Directory
       return tps
     end
 
-    def self.create_touch_point(entry, create_date, activity)
+    def create_touch_point(entry, create_date, activity)
       entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
     end 
  

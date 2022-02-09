@@ -27,18 +27,13 @@ module Menu
             drop_n_lines
             center_text(message, 50)
 
-           # main_menu_options
-           # -- head_quarters (save_update)
-           # -- where should "last_ten_combined" go?
-           # -- formatting 
-           # -- menu display module
 
                 action = gets.to_i
 
                 case action
                 when 3
                   @database.save_update(Entry.new(add_entry_action))
-                  # refresh_database
+                  refresh_database_instance
                 when 4
                     clear_drop_center
                     # display_last_ten_entry_touch_points_title
@@ -173,7 +168,6 @@ module Menu
               when 3
                 edit(entry)   
                 @database.save_update(entry)
-                # refresh_database 
                 entry_menu(entry)  
               when 4
                 
@@ -186,9 +180,8 @@ module Menu
               when 8
                 create_date = touch_point_create_date_action
                 activity = touch_point_create_activity_action
-                self.create_touch_point(entry, create_date, activity)
+                @database.create_touch_point(entry, create_date, activity)
                 @database.save_update(entry)
-                # refresh_database 
                 system('cls')
                 display_contact(entry)
                 entry_menu(entry)
@@ -261,13 +254,12 @@ module Menu
                   puts "Delete \# ?"
                   delete_tp = gets.to_i
                   # an unnecessary delete. the tp_hass is all going away
-                  tp_hash.delete(delete_tp)
                   entry.touch_points.delete_at(delete_tp)
+                  @database.save_update(entry)
             when 9
               puts "Are you sure?"
               response = gets.chomp
               response.downcase.include?("y") ? @database.save_update(entry) : entry_menu(entry)
-              # refresh_database  
               main_menu
             else
               puts "Where is this?"

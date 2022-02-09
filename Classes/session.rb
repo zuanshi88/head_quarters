@@ -11,41 +11,21 @@ class Session
     include Menu 
     include Formatting 
 
-    attr_reader :touch_points
     attr_accessor :database 
 
-    # decouple @touch_points from headquarters-- just make it travel wtih directory
-    # headquarters doesn't care how database keeps track of the touch_points or even 
-    # what they are. they just want to know that the touch_points are going to be ready
-    # to serve up when needed. 
-
-    #also, extract the WordIndex and just create it when it is called 
-    # so that it is using the most upto date information
 
 
-
-    def initialize(status)
+    def initialize(status = false)
       @status = status
       @database = Directory.new(status)
-      @touch_points = @database.create_tps
+         if @status 
+            @session.main_menu
+        end 
     end
 
-    # since this is basically just like the initialize method
-    #decided to bring it back here. 
-    # it has all the same coupling as the initialize method, but
-    #at least they are cordoned off together in the main file.
-    def refresh_database
+    #here we could pass a boolean value for main_menu
+    def refresh_database_instance 
       @database = Directory.new(@status)
-      @touch_points = @database.create_tps
-    end 
-
-    def save_update(entry, delete)
-      @database = save_update(entry, delete)
-      @database = Directory.new(@status)
-    end 
-
-    def create_touch_point(entry, create_date, activity)
-      Directory.create_touch_point(entry, create_date, activity)
     end 
     
   end 
