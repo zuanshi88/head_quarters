@@ -6,7 +6,7 @@ require 'test/unit'
 class TestSession < Test::Unit::TestCase
 
     def setup 
-        @session = Session.new(false)
+        @session = Session.new
         @entry = Entry.new({"first name" => "Zevron", "last name" => "Catmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
 
     end 

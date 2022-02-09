@@ -12,7 +12,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     def setup
           #we are loading our data from the @read_file
         #we are saving the results of our test runs to the @write file
-        @session = Session.new(false)
+        @session = Session.new
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @entry_hash = {"first name" => "Zaron", "last name" => "Zitmer", "email" => "zwhitmer@gmail.com", "phone number" =>"(333) 333-3833"}
     end
@@ -102,8 +102,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
             @session.database.save_update(@entry)
             assert_equal(size + 1, @entry.touch_points.size)
-            # @session.refresh_database_instance
-            # assert_equal(total_size, @session.database.touch_points)
+            @session.refresh_database_instance
+            assert_equal(total_size, @session.database.touch_points)
         end 
 
         def test_refresh_database_instance_call 
