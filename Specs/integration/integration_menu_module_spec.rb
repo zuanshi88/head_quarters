@@ -124,7 +124,9 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             # getting + 3
             assert_equal(total_size + 3, @session.database.touch_points.size)
             @entry.touch_points.delete_at(0)
+            assert_equal(total_size, @session.database.touch_points.size)
             @session.database.save_update(@entry)
+            assert_equal(total_size, @session.database.touch_points.size)
             @session.refresh_database_instance
              assert_equal(total_size, @session.database.touch_points.size)
             assert_equal(size + 2, @entry.touch_points.size)
