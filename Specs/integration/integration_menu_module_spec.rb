@@ -132,8 +132,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
             #could we pull the @entry out of the new database 
 
-            @session.database.accounts.delete_if{|i| i.name == @entry.name}
-              @session.database.marshal_save
+            # @session.database.accounts.delete_if{|i| i.name == @entry.name}
+            #   @session.database.marshal_save
             updated_entry = @session.database.accounts.select{|i| i.name == @entry.name }
             
 
