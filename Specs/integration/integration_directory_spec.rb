@@ -54,7 +54,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
     def test_save_update_delete 
         initial_size = @directory.accounts.size
-        Directory.save_update(database: @directory, database_file: @write_file, entry: @entry, delete: true)
+        @directory.save_update(@entry, true)
         resulting_size = @directory.accounts.size 
         assert_equal(initial_size - 1, resulting_size)
     end 
@@ -63,7 +63,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
     def test_save_update_add 
         entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         initial_size = @directory.accounts.size
-        Directory.save_update(database: @directory, database_file: @write_file, entry: entry, delete: false)
+        @direcotry.save_update(entry, false)
         resulting_size = @directory.accounts.size 
         assert_equal(initial_size + 1, resulting_size)
     end 
