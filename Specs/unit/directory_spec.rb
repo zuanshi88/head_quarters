@@ -100,6 +100,18 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal("Did some real good deals.", @touch_point_entry.touch_points[0].activity)
     end 
 
+    def test_directory_can_delete_touch_point 
+        @touch_point_entry =  Entry.new({"first name" => "Jam", "last name" => "Razny", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        assert_equal("Stan", @touch_point_entry.first_name)
+        assert_equal("Razny", @touch_point_entry.last_name)
+        assert_equal([], @touch_point_entry.touch_points)
+        @directory.create_touch_point(@touch_point_entry, Time.now, "Fuck" some real good deals.")
+        assert_equal(1, @touch_point_entry.touch_points.size)
+        assert_equal("Did some real good deals.", @touch_point_entry.touch_points[0].activity)
+    end 
+
+
+
     def test_class_method_save_update 
         @touch_point_entry =  Entry.new({"first name" => "Stan", "last name" => "Razny", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
@@ -128,7 +140,7 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(size - 2, @directory.accounts.length)
     end 
 
-    def test_directotry_accounts_same_object_id_before_and_after_add_and_delete_account 
+    def test_directory_accounts_same_object_id_before_and_after_add_and_delete_account 
         id = @directory.accounts.object_id
         size = @directory.accounts.size
         @directory.add_account(@entry)
