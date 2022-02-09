@@ -132,7 +132,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
 
             #could we pull the @entry out of the new database 
 
-            updated_entry = @session.database.accounts.select{|i| i == @entry}
+            updated_entry = @session.database.accounts.select{|i| i == @entry}[0]
 
             assert_equal('', updated_entry.name)
 
