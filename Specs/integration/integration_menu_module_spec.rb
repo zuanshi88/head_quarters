@@ -102,7 +102,6 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             size = @entry.touch_points.size 
             total_size = @session.database.touch_points.size
             @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
-            @session.database.save_update(@entry)
             assert_equal(size + 1, @entry.touch_points.size)
             @session.refresh_database_instance
             assert_equal(total_size + 1, @session.database.touch_points.size)
@@ -116,15 +115,13 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             size = @entry.touch_points.size 
             @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
             total_size = @session.database.touch_points.size
-            @session.database.save_update(@entry)
             @session.refresh_database_instance
             assert_equal(size + 1, @entry.touch_points.size )
             assert_equal(total_size + 1, @session.database.touch_points.size )
-            @session.database.delete_touch_point(@entry, @entry.touch_points[-1])
+            @session.database.delete_touch_point(@entry, @entry.touch_points[0])
             # before saving these are different
             assert_equal(size, @entry.touch_points.size )
             assert_equal(total_size + 1, @session.database.touch_points.size )
-            @session.database.save_update(@entry)
             @session.refresh_database_instance
             #after saving they should be the same
             assert_equal(size, @entry.touch_points.size )
