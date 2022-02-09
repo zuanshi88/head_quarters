@@ -2,7 +2,9 @@
 
 echo ""
 
-git add .
+stage=$(git add . )
+
+stage 
 
 echo 'What would you like to record? -- make it good.'
 
