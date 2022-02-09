@@ -71,14 +71,11 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
 
     end 
-    
-    def test_create_tps 
-         assert_equal(Array, @touch_points.class)
-    end 
+
 
     def test_touch_point_length 
-        size = @touch_points.length
-        assert_equal(size, @touch_points.length)
+        size = @database.accounts.length
+        assert_equal(size, @database.accounts.length)
     end 
 
 
