@@ -139,12 +139,12 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(id, @directory.accounts.object_id)
     end 
 
-    # def test_save_update_delete 
-    #     initial_size = @directory.accounts.size
-    #     Directory.save_update(database: @directory, database_file: @write_file, entry: @entry, delete: true)
-    #     resulting_size = @directory.accounts.size 
-    #     assert_equal(initial_size - 1, resulting_size)
-    # end 
+    def test_save_update_delete 
+        initial_size = @directory.accounts.size
+        @directory.save_update( @entry, true)
+        resulting_size = @directory.accounts.size 
+        assert_equal(initial_size - 1, resulting_size)
+    end 
 
     
     # def test_save_update_add 
