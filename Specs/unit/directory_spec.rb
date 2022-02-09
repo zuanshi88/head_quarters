@@ -155,10 +155,14 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(initial_size + 1, resulting_size)
     end 
 
-    # def test_marshal_save 
-
-
-    # end 
+    def test_marshal_save 
+        entry = Entry.new({"first name" => "Tender", "last name" => "Hendersack", "email" => "ts@gmail.com", "phone number" =>"(773) 673-0803"})
+        directory_before_save = Directory.new(false)
+        accounts_before = directory_before_save.accounts
+        @directory.save_update(entry, false)
+        @directory.marshal_save
+        assert_equal()
+    end 
 
 
 
