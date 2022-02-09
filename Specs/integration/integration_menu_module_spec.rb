@@ -119,10 +119,10 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.database.create_touch_point(@entry, Time.now, "Eating nachos") 
               @session.database.save_update(@entry)
             @session.refresh_database_instance
-            # getting 1 
+            # getting +3 
             assert_equal(size + 3, @entry.touch_points.size)
-            # getting + 1 465
-            assert_equal(total_size, @session.database.touch_points.size)
+            # getting + 3
+            assert_equal(total_size + 3, @session.database.touch_points.size)
             @entry.touch_points.delete_at(0)
             @session.database.save_update(@entry)
             @session.refresh_database_instance
