@@ -71,8 +71,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         assert_equal(Directory, @address_book.session.database.class)
     end 
 
-    def test_database_can_respond_to_dave_update 
-        assert_equal(true, @address_book.session.respond_to?(:save_update))
+    def test_database_can_respond_to_save_update 
+        assert_equal(true, @address_book.session.database.respond_to?(:save_update))
     end 
 
      def test_address_can_delete_and_save_update 
