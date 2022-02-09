@@ -115,8 +115,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
             @session.database.save_update(@entry)
             @session.refresh_database_instance
-            # + 1
-            assert_equal(size, @entry.touch_points.size)
+            # getting 1 
+            assert_equal(size + 1, @entry.touch_points.size)
             # + 1
             assert_equal(total_size, @session.database.touch_points.size)
             @entry.touch_points.delete_at(0)
