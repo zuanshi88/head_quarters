@@ -161,7 +161,7 @@ class TestDirectory < Test::Unit::TestCase
         accounts_before = directory_before_save.accounts.size
         @directory.save_update(entry, false)
         @directory.marshal_save
-        assert_equal(accounts_before + 1, @directory.accounts.size)
+        assert_equal(accounts_before, @directory.accounts.size)
     end 
 
 
