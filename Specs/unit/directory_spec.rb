@@ -130,7 +130,9 @@ class TestDirectory < Test::Unit::TestCase
 
     def test_directotry_accounts_same_object_id_before_and_after_add_and_delete_account 
         id = @directory.accounts.object_id
+        size = @directory.accounts.size
         @directory.add_account(@entry)
+        assert_equal(size + 1, @directory.accounts.length)
         assert_equal(id, @directory.accounts.object_id)
     end 
 
