@@ -110,16 +110,13 @@ class TestDirectory < Test::Unit::TestCase
          assert_equal(size, @directory.accounts.size)
     end 
 
-    # def test_touch_point_length 
-    #     assert_equal(430, @touch_points.length)
-    # end 
-
+  #Directory can add account 
     # # #add_account 
 
-    # def test_can_add_account 
-    #     @directory.add_account(@entry)
-    #     assert_equal(97, @directory.accounts.length)
-    # end 
+    def test_can_add_account 
+        @directory.add_account(@entry)
+        assert_equal(97, @directory.accounts.length)
+    end 
 
     # # #delete_account 
 
