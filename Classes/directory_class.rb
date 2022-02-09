@@ -1,12 +1,19 @@
+require_relative 'entry_class.rb'
+require_relative 'touch_point_class.rb'
+
 
 class Directory
 
-  attr_reader :accounts, :accounts_index, :touch_points
+  attr_reader :accounts, :accounts_index, :touch_points, :database_file, :status
 
-  def initialize(file)
-    @accounts = File.open(file, "rb"){|from_file| Marshal.load(from_file)}
+  def initialize(status)
+    @status = status
+
+    # for some reason this is only working with 2 dots befpre Specs for deploy,ent and one for testing.
+    @database_file = status ? '../Database/a_marshaled_database.txt' : '../Database/a_read_test_database.txt'
+    @accounts = File.open(@database_file, "rb"){|from_file| Marshal.load(from_file)}
     @accounts_index = self.index
-    @touch_points = create_tps
+    @touch_points = create_tps  
   end
 
   #instance variable called by all instances of directories to provide
@@ -47,23 +54,29 @@ class Directory
       return tps
     end
 
+    def self.create_touch_point(entry, create_date, activity)
+      entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
+    end 
+ 
+
        # here we are connecting directory to head_quarters using the 
        # head_quarters @database instance variable which connects
        #this instance of directory with this instance of headquarters. 
        #here we are using a global method to encapsulate calls to 
        #instance methods
-    def self.save_update(database:, database_file:, entry:, delete: false)
-          database.delete_account(entry) 
+    def save_update(entry, delete = false)
+          self.delete_account(entry) 
             if delete == false 
-               database.add_account(entry)
+               self.add_account(entry)
             end 
-          marshal_save(database.accounts, database_file)
+            self.marshal_save  
+          end 
+
+    def marshal_save
+        File.open(@database_file, "wb"){|f| f.write(Marshal.dump(@accounts))}
     end
 
-    def self.marshal_save(obj_array, file)
-        File.open(file, "wb"){|f| f.write(Marshal.dump(obj_array))}
-    end
-
+    # @database.accounts vs. self.accounts
 
     def add_account(entry)
       self.accounts.push(entry)
