@@ -96,7 +96,8 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             assert_equal(size + 1, @entry.touch_points.size)
         end 
 
-        def test_tests_are connected 
+        def test_tests_are_connected 
+
             assert_equal(5, 2 + 2)
         end 
 
