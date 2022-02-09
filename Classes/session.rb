@@ -1,17 +1,18 @@
 require_relative 'directory_class'
 require_relative 'entry_class'
 require_relative 'touch_point_class'
-# require '../Modules/menu_module'
-# require '../Modules/formatting_module'
+require '../Modules/menu_module'
+require '../Modules/formatting_module'
 
 
 
-class Session
+class Session 
   
-    # include Menu 
-    # include Formatting 
+    include Menu 
+    include Formatting 
 
-    attr_reader :database, :touch_points
+    attr_reader :touch_points
+    attr_accessor :database 
 
     # decouple @touch_points from headquarters-- just make it travel wtih directory
     # headquarters doesn't care how database keeps track of the touch_points or even 
@@ -23,10 +24,9 @@ class Session
 
 
 
-    def initialize(file)
-      @database_file = file
-      @database = Directory.new(file)
-      #change this to a Directory call...
+    def initialize(status)
+      @status = status
+      @database = Directory.new(status)
       @touch_points = @database.create_tps
     end
 
@@ -35,20 +35,18 @@ class Session
     # it has all the same coupling as the initialize method, but
     #at least they are cordoned off together in the main file.
     def refresh_database
-      @database = Directory.new(@database_file)
+      @database = Directory.new(@status)
       @touch_points = @database.create_tps
     end 
 
-    def save_update(entry, delete = false)
-      Directory.save_update(database: @database, database_file: @database_file, entry: entry, delete: delete)
+    def save_update(entry, delete)
+      @database = save_update(entry, delete)
+      @database = Directory.new(@status)
     end 
 
-    def create_touch_point(entry)
-      create_date = touch_point_create_date_action
-      activity = touch_point_create_activity_action
-      entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
+    def create_touch_point(entry, create_date, activity)
+      Directory.create_touch_point(entry, create_date, activity)
     end 
- 
     
   end 
 

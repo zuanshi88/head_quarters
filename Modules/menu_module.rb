@@ -37,8 +37,8 @@ module Menu
 
                 case action
                 when 3
-                  save_update(entry: Entry.new(add_entry_action))
-                  refresh_database
+                  @database.save_update(Entry.new(add_entry_action))
+                  # refresh_database
                 when 4
                     clear_drop_center
                     # display_last_ten_entry_touch_points_title
@@ -58,7 +58,7 @@ module Menu
                   # array of account objs 
                   # then display_account either displays account
                   # or a lists of matching accounts
-                  selection = @database.accounts_index[select_account_action]
+                  selection = self.database.accounts_index[select_account_action]
                   account_hash = create_selection_hash_action(selection) 
                   display_account(selection, account_hash)
                 else 
@@ -172,8 +172,8 @@ module Menu
 
               when 3
                 edit(entry)   
-                save_update(entry)
-                refresh_database 
+                @database.save_update(entry)
+                # refresh_database 
                 entry_menu(entry)  
               when 4
                 
@@ -184,9 +184,11 @@ module Menu
                 drop_n_lines(1)
                 entry_menu(entry, full = false)
               when 8
-                create_touch_point(entry)
-                save_update(entry)
-                refresh_database 
+                create_date = touch_point_create_date_action
+                activity = touch_point_create_activity_action
+                self.create_touch_point(entry, create_date, activity)
+                @database.save_update(entry)
+                # refresh_database 
                 system('cls')
                 display_contact(entry)
                 entry_menu(entry)
@@ -264,8 +266,8 @@ module Menu
             when 9
               puts "Are you sure?"
               response = gets.chomp
-              response.downcase.include?("y") ? save_update(entry) : entry_menu(entry)
-              refresh_database  
+              response.downcase.include?("y") ? @database.save_update(entry) : entry_menu(entry)
+              # refresh_database  
               main_menu
             else
               puts "Where is this?"
