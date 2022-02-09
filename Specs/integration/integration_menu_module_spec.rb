@@ -96,10 +96,12 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             assert_equal(size + 1, @entry.touch_points.size)
         end 
 
-        def test_tests_are_connected 
-
-            assert_equal(5, 2 + 2)
+        def test_session_can_delete_touch_point 
+            size = @entry.touch_points.size 
+            @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
+            assert_equal(size + 1, @entry.touch_points.size)
         end 
+
 
 
         
