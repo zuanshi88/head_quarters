@@ -111,23 +111,25 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         end 
 
           def test_session_can_delete_touch_point_at_both_entry_and_database_levels
-
-            size = @entry.touch_points.size 
+            entry = Entry.new({"first name" => "Karen", "last name" => "Shitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+            save_update(entry)
+            refresh_database_instance
+            size = entry.touch_points.size 
             total_size = @session.database.touch_points.size
 
-            @session.database.create_touch_point(@entry, Time.now, "Playing SUPER FUN games") 
+            @session.database.create_touch_point(entry, Time.now, "Playing SUPER FUN games") 
             @session.refresh_database_instance
            
          
-            assert_equal(size + 1, @entry.touch_points.size )
+            assert_equal(size + 1, entry.touch_points.size )
             assert_equal(total_size + 1, @session.database.touch_points.size )
-            @session.database.delete_touch_point(@entry, @entry.touch_points[0])
+            @session.database.delete_touch_point(entry, entry.touch_points[0])
             # before saving these are different
-            assert_equal(size, @entry.touch_points.size )
+            assert_equal(size, entry.touch_points.size )
             assert_equal(total_size + 1, @session.database.touch_points.size )
             @session.refresh_database_instance
             #after saving they should be the same
-            assert_equal(size, @entry.touch_points.size )
+            assert_equal(size, entry.touch_points.size )
             # assert_equal(total_size, @session.database.touch_points.size )
 
             #could we pull the @entry out of the new database 
