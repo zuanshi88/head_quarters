@@ -15,7 +15,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
     def setup 
         @read_file = './Database/an_integration_read_database.txt'
-        @directory = Directory.new(@read_file)
+        @directory = Directory.new(false)
         @entry = @directory.accounts[-1]
     end 
 
