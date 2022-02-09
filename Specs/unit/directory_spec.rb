@@ -121,7 +121,6 @@ class TestDirectory < Test::Unit::TestCase
         @touch_point_entry =  Entry.new({"first name" => "Stan", "last name" => "Razny", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @directory.create_touch_point(@touch_point_entry, Time.now, "Did some real good deals.")
         size = @directory.accounts.size 
-        @directory.save_update(@touch_point_entry, false)
         assert_equal(size + 1, @directory.accounts.size)
         @directory.save_update(@touch_point_entry, true)
          assert_equal(size, @directory.accounts.size)
