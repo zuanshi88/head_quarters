@@ -49,6 +49,7 @@ class TestSession < Test::Unit::TestCase
         #delete entry
 
         size = @session.database.touch_points.size
+        num_of_accounts = @session.database.accounts.size 
         assert_equal(size, @session.database.touch_points.size)
         @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
@@ -56,6 +57,7 @@ class TestSession < Test::Unit::TestCase
         @session.refresh_database_instance
         @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
+        assert_equal(num_of_accounts, @session.database.touch_points.size)
         assert_equal(size + 1, @session.database.touch_points.size)
 
         entry_size = @entry.touch_points.size
