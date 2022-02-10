@@ -62,7 +62,8 @@ class TestSession < Test::Unit::TestCase
         @session.refresh_database_instance
         @session.database.create_touch_point(entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
-        assert_equal(num_of_accounts, @session.database.accounts.size)
+        # now is registering that one and only one new account has been created!
+        assert_equal(num_of_accounts + 1, @session.database.accounts.size)
         assert_equal(size, @session.database.touch_points.size)
 
         entry_size = @entry.touch_points.size
