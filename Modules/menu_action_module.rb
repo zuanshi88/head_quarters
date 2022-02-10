@@ -5,11 +5,11 @@ module Menu_Action
     def add_entry_action
         #this method collects all info via menu prompts
         #then passes info on to save entry
-        center_text("first name:", 15)
+        puts "name:"
         first_name = gets.chomp
         puts "last name:"
         last_name = gets.chomp
-        "street address:"
+        puts "street address:"
         street_address = gets.chomp
         puts "city:"
         city = gets.chomp
@@ -38,27 +38,22 @@ module Menu_Action
     end
 
         # only knows it is getting an array 
-    def create_selection_hash_action(selection)
-        begin
-        if selection.nil?
-            nil 
-        else
-            account_hash = {}
-            selection.each_with_index{|acc, index| account_hash[index] = acc}
-            return account_hash
-        end
-        rescue => error  
-            puts "You wrote a bad, bad song!"
-            puts error.message
-            exit
-        end
-    end 
+        def create_selection_hash_action(selection)
+            begin
+                account_hash = {}
+                selection.each_with_index{|acc, index| account_hash[index] = acc}
+                 account_hash
+            rescue => error  
+                puts "You wrote a bad, bad song!"
+                puts error.message
+            end
+        end 
 
     
         def select_account_action 
             puts "Enter name:"
             target = gets.chomp
-            target.downcase
+            return target.downcase
         end 
 
     def touch_point_create_date_action
@@ -71,12 +66,12 @@ module Menu_Action
                         #02/02/2022--this is a big problem here-- how do we sanitize a date
                         # from user input
 
-                    info= response.split(',').map{|item|item.to_i} 
-                    if info[0].size == 4
+                    info= response.split(/[,\/-]/).map{|item|item.to_i} 
+                    if info[0].size == 4 && info[1].size >= 1 && info[2].size >= 1
                         create_date = Time.mktime(info[0], info[1],info[2])
                         return create_date
                     else  
-                         puts "Did you lead with a 4 digit year"
+                         puts "Did you lead with a 4 digit year-- also you can divide with , / or -"
                         add_touch_point 
                     end 
                 end

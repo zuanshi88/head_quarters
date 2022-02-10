@@ -25,6 +25,7 @@ module Menu
             display_main_menu
               
             drop_n_lines
+
             center_text(message, 50)
 
 
@@ -45,16 +46,11 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  # select_account_action, 
-                  # @database.accounts_index
-                  # display account
-
-                  # @database.accounts index takes a name and reurns
-                  # array of account objs 
-                  # then display_account either displays account
-                  # or a lists of matching accounts
-                  selection = self.database.accounts_index[select_account_action]
+                  selection = @database.accounts_index[select_account_action]
                   account_hash = create_selection_hash_action(selection) 
+                  if selection == nil || account_hash.empty?
+                    main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
+                  end 
                   display_account(selection, account_hash)
                 else 
                   exit
@@ -66,10 +62,10 @@ module Menu
 
   def display_account(selection, account_hash) 
     # head_quarters
-          if account_hash.nil? 
-            main_menu(true, "      <<<<<<   try another selection #{selection} could not be fuckin located   >>>>>>")
+          if selection == nil || account_hash == nil 
+            main_menu(true, "      <<<<<<   try another selection   >>>>>>")
           elsif  account_hash.length == 1
-            (account_hash[0])
+            open_contact(account_hash[0])
           else 
             account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name} -- #{account_hash[key].object_id}", 38); puts ""}
             selection = gets.chomp
@@ -168,6 +164,7 @@ module Menu
               when 3
                 edit(entry)   
                 @database.save_update(entry)
+                refresh_database_instance
                 entry_menu(entry)  
               when 4
                 
@@ -179,9 +176,13 @@ module Menu
                 entry_menu(entry, full = false)
               when 8
                 create_date = touch_point_create_date_action
+                if create_date < Time.new(1692,1,1) || create_date == nil
+                  center_text("That date doesn't seem right, try again", 5)
+                  create_date = touch_point_create_date_action
+                end 
                 activity = touch_point_create_activity_action
                 @database.create_touch_point(entry, create_date, activity)
-                @database.save_update(entry)
+                refresh_database_instance
                 system('cls')
                 display_contact(entry)
                 entry_menu(entry)
@@ -254,19 +255,21 @@ module Menu
                   puts "Delete \# ?"
                   delete_tp = gets.to_i
                   # an unnecessary delete. the tp_hass is all going away
-                  entry.touch_points.delete_at(delete_tp)
+                  @database.delete_touch_point(entry, entry.touch_points[delete_tp])
                   @database.save_update(entry)
+                  refresh_database_instance
             when 9
               puts "Are you sure?"
               response = gets.chomp
-              response.downcase.include?("y") ? @database.save_update(entry) : entry_menu(entry)
-              main_menu
-            else
-              puts "Where is this?"
-              entry_menu(entry)
-          end
-    end
-
+              if response.downcase.include?("y")
+                  @database.save_update(entry, true) 
+                  refresh_database_instance
+                  main_menu
+              else
+                 entry_menu(entry)
+            end
+        end
+      end 
           def touch_points_menu(status = true)
 
               if status 
@@ -293,7 +296,12 @@ module Menu
                 drop_n_lines
                 display(last_n_descending(10))
             when 9 
-              display_account(select_account_action)
+              selection = @database.accounts_index[select_account_action]
+              if selection == nil 
+                    main_menu(true, "Try another search-- nothing doing!!")
+                  end 
+                  account_hash = create_selection_hash_action(selection) 
+                  display_account(selection, account_hash)
             else
               main_menu
             end

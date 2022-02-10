@@ -23,9 +23,5 @@ module Menu_Methods
             tps.sort_by{|tp| tp.date_obj }.reverse
         end 
 
-        def entry_last_n_descending(n, entry)
-            entry.touch_points.last(n)
-        end 
             
-
 end 

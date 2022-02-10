@@ -84,7 +84,7 @@ module Menu_Display
 
                 def display(tps)
                     tps.each do |tp|
-                        title = tp.account_name.split(/ /)[1]
+                        title = tp.account_name.split(/ /)[-1 ]
                         center_text("#{tp.date}  #{title}:", 48, new_line = false)
                         center_text("--   #{tp.activity[0..75]} #{tp.activity.size > 75 ? "..." : ""}", 10 - title.size)
                     end 

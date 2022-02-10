@@ -4,13 +4,14 @@ require_relative 'touch_point_class.rb'
 
 class Directory
 
-  attr_reader :accounts, :accounts_index, :touch_points, :database_file, :status
+  attr_reader :accounts_index, :touch_points, :database_file, :status
+  attr_accessor :accounts
 
   def initialize(status)
     @status = status
-
+# './Database/a_marshaled_database.txt'
     # for some reason this is only working with 2 dots befpre Specs for deploy,ent and one for testing.
-    @database_file = status ? '../Database/a_marshaled_database.txt' : '../Database/a_read_test_database.txt'
+    @database_file = status ? './Database/c_read_test_database.txt' : './Database/a_read_test_database.txt'
     @accounts = File.open(@database_file, "rb"){|from_file| Marshal.load(from_file)}
     @accounts_index = self.index
     @touch_points = create_tps  
@@ -23,9 +24,9 @@ class Directory
   # of its data. Directory can ask for the touch points from touch_points. 
   
    def index
-            information = ["name", "last_name", "first_name"]
+            # information = ["name", "last_name", "first_name"]
             index_hash = {}
-            self.accounts.cycle(1) do |obj|
+            @accounts.cycle(1) do |obj|
             index_hash[obj.name.downcase] = [] if index_hash[obj.name.downcase].nil?
             index_hash[obj.name.downcase].push(obj)
             index_hash[obj.last_name.downcase] = [] if index_hash[obj.last_name.downcase].nil?
@@ -56,17 +57,23 @@ class Directory
 
     def create_touch_point(entry, create_date, activity)
       entry.touch_points << Touch_Point.new(entry.object_id, entry.name, create_date, activity)
+      save_update(entry)
     end 
  
+    def delete_touch_point(entry, tp)
+      entry.touch_points.delete(tp)
+      self.touch_points.delete(tp)
+      save_update(entry)
+    end 
 
 
     def save_update(entry, delete = false)
-          self.delete_account(entry) 
+           delete_account(entry)
             if delete == false 
                self.add_account(entry)
             end 
-            self.marshal_save  
-          end 
+            marshal_save  
+    end 
 
     def marshal_save
         File.open(@database_file, "wb"){|f| f.write(Marshal.dump(@accounts))}
@@ -75,12 +82,11 @@ class Directory
     # @database.accounts vs. self.accounts
 
     def add_account(entry)
-      self.accounts.push(entry)
+      @accounts.push(entry)
     end 
 
     def delete_account(entry)
-      self.accounts.delete(entry)
-      self.accounts
+      @accounts.filter!{|acc| acc.name != entry.name}
     end
 
 

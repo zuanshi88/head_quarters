@@ -1,8 +1,16 @@
 require_relative 'directory_class'
 require_relative 'entry_class'
 require_relative 'touch_point_class'
-require '../Modules/menu_module'
-require '../Modules/formatting_module'
+require './Modules/menu_module'
+require './Modules/formatting_module'
+
+
+# to production = >
+# single dot for Modules 
+
+#brought back status to session and main menu conditional 
+# directory_class 
+#changed false to @status for Directory.new calls
 
 
 
@@ -11,15 +19,15 @@ class Session
     include Menu 
     include Formatting 
 
-    attr_accessor :database 
+    attr_accessor :database, :status
 
 
 
-    def initialize(status = false)
+    def initialize(status)
       @status = status
-      @database = Directory.new(status)
+      @database = Directory.new(@status)
          if @status 
-            @session.main_menu
+            self.main_menu
         end 
     end
 
