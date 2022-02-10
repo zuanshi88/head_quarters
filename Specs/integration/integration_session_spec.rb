@@ -39,7 +39,7 @@ class TestSession < Test::Unit::TestCase
         entry = Entry.new({"first name" => "Kevron", "last name" => "Catmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @session.database.save_update(entry, false)
         # @session.refresh_database_instance
-        assert_equal(size, @session.database.accounts.size)
+        assert_equal(size + 1, @session.database.accounts.size)
         size = @session.database.accounts.size
         @session.database.save_update(entry, true)
         # @session.refresh_database_instance
