@@ -67,8 +67,6 @@ class TestSession < Test::Unit::TestCase
         # also now registering that 3 tps are being created.
         assert_equal(size + 3, @session.database.touch_points.size)
 
-        entry_size = @entry.touch_points.size
-        assert_equal(1, entry_size )
         num_of_accounts = @session.database.accounts.size 
         num_of_tps = @session.database.touch_points.size
         # @session.database.delete_touch_point(@entry, @entry.touch_points[0])
