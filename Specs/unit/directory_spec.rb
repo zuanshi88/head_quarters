@@ -23,9 +23,9 @@ class TestDirectory < Test::Unit::TestCase
 
     def test_directory_has_class 
         assert_equal(Directory, @directory.class)
-    end 
-
-     def test_directory_has_false_status
+        
+        def test_directory_has_false_status
+        end     
         assert_equal(false, @directory.status)
     end 
 
