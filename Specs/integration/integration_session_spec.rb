@@ -40,7 +40,7 @@ class TestSession < Test::Unit::TestCase
         @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
         entry = @session.database.accounts.select{|acc| acc.name == @entry.name}
-        assert_equal("", entry.first.name)
+        assert_equal(entry_size, entry.touch_points.size)
         assert_equal(entry_size, 111)
         assert_equal(size + 1, @session.database.touch_points.size )
     end     
