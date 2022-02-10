@@ -37,7 +37,7 @@ class TestSession < Test::Unit::TestCase
     def test_create_touch_point 
         size = @session.database.touch_points.size
         @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
-        asset_equal(size + 1, @session.database.touch_points.size )
+        assert_equal(size + 1, @session.database.touch_points.size )
     end     
 
     def test_delete_touch_point 
