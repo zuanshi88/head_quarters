@@ -140,7 +140,7 @@ class TestDirectory < Test::Unit::TestCase
         size = @directory.accounts.length
         @directory.add_account(@entry) #90
         assert_equal(size + 1, @directory.accounts.length)
-        new size = @directory.accounts.length
+        new_size = @directory.accounts.length
         @directory.delete_account(@entry) 
         assert_equal(new_size - 1, @directory.accounts.length)
     end 
