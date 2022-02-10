@@ -138,6 +138,7 @@ class TestDirectory < Test::Unit::TestCase
 
     def test_can_delete_account
         size = @directory.accounts.length
+        assert_equal(size + 1, @directory.accounts.length)
         @directory.add_account(@entry) #90
         assert_equal(size + 1, @directory.accounts.length)
         new_size = @directory.accounts.length
