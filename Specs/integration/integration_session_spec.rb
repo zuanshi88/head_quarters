@@ -41,7 +41,6 @@ class TestSession < Test::Unit::TestCase
         @session.refresh_database_instance
         entry = @session.database.accounts.select{|acc| acc.name == @entry.name}
         assert_equal(entry_size + 1, entry.first.touch_points.size)
-        assert_equal(entry_size, 111)
         assert_equal(size + 1, @session.database.touch_points.size )
     end     
 
