@@ -16,4 +16,7 @@ bash ./bin/run_unit_test.sh
 echo "UNIT TESTS COMPLETE"
 echo "INTEGRATION TESTS COMMENCING"
 bash ./bin/run_integration_test.sh
-echo "INTEGRATION TESTS COMPETE"
+echo "INTEGRATION TESTS COMPETE for: "
+echo "------------------------------------"
+echo $RESPONSE
+echo "------------------------------------"
