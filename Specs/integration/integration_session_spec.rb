@@ -44,7 +44,8 @@ class TestSession < Test::Unit::TestCase
         @session.database.save_update(entry, true)
         # @session.refresh_database_instance
         assert_equal(new_size - 1, @session.database.accounts.size)
-        assert_equal(new_size, size)
+        assert_equal(new_size, size + 1)
+        assert_equal(size, @session.database.accounts.size)
     end
 
      def test_can_add_an_entry_with_save_update 
