@@ -35,7 +35,7 @@ class TestSession < Test::Unit::TestCase
     end 
 
     def test_can_delete_an_entry_with_save_update
-        size =  @session.database.size
+        size =  @session.database.counts.size
         entry = Entry.new({"first name" => "Kevron", "last name" => "Catmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @session.database.save_update(entry, false)
         # @session.refresh_database_instance
