@@ -147,7 +147,6 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(size + 1, @directory.accounts.length)
         new_size = @directory.accounts.length
         @directory.delete_account(entry) 
-         @directory.save_update(entry)
         assert_equal(size, @directory.accounts.length)
     end 
 
@@ -158,7 +157,7 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(size + 1, @directory.accounts.length)
         selection = @directory.accounts[20]
          @directory.delete_account(selection)
-          @directory.save_update(entry)
+          @directory.save_update(@entry)
         assert_equal(size, @directory.accounts.length)
         assert_equal(id, @directory.accounts.object_id)
     end 
