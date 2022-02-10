@@ -64,7 +64,8 @@ class TestSession < Test::Unit::TestCase
         @session.refresh_database_instance
         # now is registering that one and only one new account has been created!
         assert_equal(num_of_accounts + 1, @session.database.accounts.size)
-        assert_equal(size, @session.database.touch_points.size)
+        # also now registering that 3 tps are being created.
+        assert_equal(size + 3, @session.database.touch_points.size)
 
         entry_size = @entry.touch_points.size
         assert_equal(1, entry_size )
