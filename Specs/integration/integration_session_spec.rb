@@ -42,7 +42,10 @@ class TestSession < Test::Unit::TestCase
     end     
 
     def test_delete_touch_point 
-
+        size = @session.database.touch_points.size
+        @session.database.delete_touch_point(@entry, @entry.touch_points[0])
+        @session.refresh_database_instance
+        assert_equal(size -1, @session.database.touch_points.size )
     end 
 
 
