@@ -58,7 +58,7 @@ class TestSession < Test::Unit::TestCase
         assert_equal(1, entry_size )
         @session.database.delete_touch_point(@entry, @entry.touch_points[0])
         num_of_accounts = @session.database.accounts.size 
-        num_of_tps - @session.database.touch_points.size
+        num_of_tps = @session.database.touch_points.size
         assert_equal(entry_size - 1, @entry.touch_points.size )
         @session.refresh_database_instance
         assert_equal(num_of_tps, @session.database.touch_points.size )
