@@ -35,12 +35,13 @@ class TestSession < Test::Unit::TestCase
     end 
 
     def test_create_touch_point 
-        entry_size = @entry.touch_points.size 
+        entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        entry_size = entry.touch_points.size 
         size = @session.database.touch_points.size
-        @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
+        @session.database.create_touch_point(entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
-        entry = @session.database.accounts.select{|acc| acc.name == @entry.name}
-        assert_equal(entry_size + 1, entry.first.touch_points.size)
+        updated_entry = @session.database.accounts.select{|acc| acc.name == @entry.name}
+        assert_equal(entry_size + 1, updated_entry.first.touch_points.size)
         assert_equal(size + 1, @session.database.touch_points.size )
     end     
 
