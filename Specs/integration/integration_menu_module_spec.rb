@@ -72,13 +72,6 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         assert_equal(true, @session.database.respond_to?(:save_update))
     end 
 
-     def test_address_can_delete_and_save_update 
-        size = @session.database.accounts.size
-        assert_equal(size, @session.database.accounts.size)
-        @session.database.save_update(@entry)
-        assert_equal(size + 1, @session.database.accounts.size)
-     end 
-
 
      def test_database_has_save_obj_id_before_and_after_save_update 
         id = @session.database.object_id
@@ -90,6 +83,7 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         size = @session.database.accounts.size
         @session.database.save_update(entry)
+        @session.refresh_database_instance
         assert_equal(size + 1, @session.database.accounts.size)
      end 
 
