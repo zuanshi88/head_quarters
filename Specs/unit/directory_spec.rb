@@ -8,9 +8,6 @@ require 'test/unit'
 class TestDirectory < Test::Unit::TestCase 
 
 
-    # bring in save_update method here so it is easir to test and because that makes sense
-    # we can see how coupled the directory already is to all of these other models
-    # entry_class, touch_point_class
 
 
     def setup 
