@@ -1,4 +1,5 @@
 require '../Classes/directory_class'
+require '../Classes/entry_class'
 
 require 'test/unit'
 
@@ -137,13 +138,14 @@ class TestDirectory < Test::Unit::TestCase
     # # #delete_account 
 
     def test_can_delete_account
+        entry = Entry.new({"first name" => "Chappy name" => "Stillwell", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+
         size = @directory.accounts.length
-        616
         assert_equal(size, @directory.accounts.length)
-        @directory.add_account(@entry) #90
+        @directory.add_account(entry) #90
         assert_equal(size + 1, @directory.accounts.length)
         new_size = @directory.accounts.length
-        @directory.delete_account(@entry) 
+        @directory.delete_account(entry) 
         assert_equal(size, @directory.accounts.length)
     end 
 
