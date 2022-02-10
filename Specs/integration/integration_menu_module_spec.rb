@@ -86,9 +86,10 @@ class TestAddressBookIntegration < Test::Unit::TestCase
          assert_not_equal(id, @session.object_id)
      end 
 
-     def test_address_can_delete_and_update 
+     def test_address_can_delete_and_update
+        entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         size = @session.database.accounts.size
-        @session.database.save_update(@entry)
+        @session.database.save_update(entry)
         assert_equal(size + 1, @session.database.accounts.size)
      end 
 
