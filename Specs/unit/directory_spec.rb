@@ -138,7 +138,7 @@ class TestDirectory < Test::Unit::TestCase
     # # #delete_account 
 
     def test_can_delete_account
-        entry = Entry.new({"first name" => "Chappy name" => "Stillwell", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        entry = Entry.new({"first name" => "Chappy", "last name" => "Stillwell", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
 
         size = @directory.accounts.length
         assert_equal(size, @directory.accounts.length)
