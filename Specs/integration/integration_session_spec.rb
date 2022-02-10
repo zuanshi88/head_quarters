@@ -36,7 +36,6 @@ class TestSession < Test::Unit::TestCase
 
     def test_create_touch_point 
         entry_size = @entry.touch_points.size 
-        assert_equal(entry_size, 111)
         size = @session.database.touch_points.size
         @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
