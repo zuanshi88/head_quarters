@@ -60,7 +60,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
     
     def test_save_update_add 
-        entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        entry = Entry.new({"first name" => "#{rand(100)}", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         initial_size = @directory.accounts.size
         @directory.save_update(entry, false)
         resulting_size = @directory.accounts.size 
