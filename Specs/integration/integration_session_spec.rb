@@ -48,14 +48,19 @@ class TestSession < Test::Unit::TestCase
         #delete_tp 
         #delete entry
 
+        entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        
+        
+        @session.refresh_database_instance
+
         size = @session.database.touch_points.size
         num_of_accounts = @session.database.accounts.size 
         assert_equal(size, @session.database.touch_points.size)
-        @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
+        @session.database.create_touch_point(entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
-        @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
+        @session.database.create_touch_point(entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
-        @session.database.create_touch_point(@entry, Time.now, "Computing is the shit")
+        @session.database.create_touch_point(entry, Time.now, "Computing is the shit")
         @session.refresh_database_instance
         assert_equal(num_of_accounts, @session.database.accounts.size)
         assert_equal(size, @session.database.touch_points.size)
