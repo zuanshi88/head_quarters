@@ -34,9 +34,9 @@ class TestSession < Test::Unit::TestCase
         assert_equal(Array, @session.database.touch_points.class)
     end 
 
-    def test_create_touch_point 
-        @session.database.add_touch_point
-    end     
+    # def test_create_touch_point 
+    #     @session.database.create_touch_point
+    # end     
 
     def test_delete_touch_point 
 
