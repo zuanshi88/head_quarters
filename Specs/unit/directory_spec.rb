@@ -151,7 +151,7 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_directory_accounts_same_object_id_before_and_after_add_and_delete_account 
-        entry = Entry.new({"first name" => "Tappy", "last name" => "Hillswell", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         id = @directory.accounts.object_id
         size = @directory.accounts.size
         @directory.add_account(entry)
@@ -171,7 +171,7 @@ class TestDirectory < Test::Unit::TestCase
 
     
     def test_save_update_add 
-        entry = Entry.new({"first name" => "Tesla", "last name" => "Hendersack", "email" => "ts@gmail.com", "phone number" =>"(773) 673-0803"})
+        entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         initial_size = @directory.accounts.size
         @directory.save_update(entry, false)
         resulting_size = @directory.accounts.size 
@@ -179,7 +179,7 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_marshal_save 
-        entry = Entry.new({"first name" => "Tender", "last name" => "Hendersack", "email" => "ts@gmail.com", "phone number" =>"(773) 673-0803"})
+        entry = Entry.new({"first name" => "#{rand(1000)}", "last name" => "#{rand(1000)}", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         directory_before_save = Directory.new(false)
         accounts_before = directory_before_save.accounts.size
         @directory.save_update(entry, false)
