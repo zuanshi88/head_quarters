@@ -34,6 +34,17 @@ class TestSession < Test::Unit::TestCase
         assert_equal(Array, @session.database.touch_points.class)
     end 
 
+    def test_create_touch_point 
+        @session.database.add_touch_point
+    end     
+
+    def test_delete_touch_point 
+
+    end 
+
+
+
+
     def test_can_delete_an_entry_with_save_update
         size =  @session.database.accounts.size
         entry = Entry.new({"first name" => "Kevron", "last name" => "Catmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
