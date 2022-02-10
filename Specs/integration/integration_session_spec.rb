@@ -36,8 +36,10 @@ class TestSession < Test::Unit::TestCase
 
     def test_can_delete_an_entry_with_save_update
         @session.database.save_update(@entry, false)
+        @session.refresh_database_instance
         size = @session.database.accounts.size
         @session.database.save_update(@entry, true)
+        @session.refresh_database_instance
         assert_equal(size - 1, @session.database.accounts.size)
     end
 
