@@ -151,13 +151,13 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
     def test_directory_accounts_same_object_id_before_and_after_add_and_delete_account 
+        entry = Entry.new({"first name" => "Tappy", "last name" => "Hillswell", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         id = @directory.accounts.object_id
         size = @directory.accounts.size
-        @directory.add_account(@entry)
+        @directory.add_account(entry)
         assert_equal(size + 1, @directory.accounts.length)
         selection = @directory.accounts[20]
          @directory.delete_account(selection)
-          @directory.save_update(@entry)
         assert_equal(size, @directory.accounts.length)
         assert_equal(id, @directory.accounts.object_id)
     end 
