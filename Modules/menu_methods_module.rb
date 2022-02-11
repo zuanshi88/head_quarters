@@ -4,7 +4,8 @@ module Menu_Methods
     
 
         def from_today 
-            @database.touch_points.filter{ |tp| tp.date_obj <= Time.now}
+            current = @database.touch_points.filter{ |tp| tp.date_obj <= Time.now}
+            all_ascending(current)
         end 
 
         def the_future
@@ -17,6 +18,10 @@ module Menu_Methods
             else  
                 entry.touch_points.last(n)
             end 
+        end 
+        
+        def all_ascending(tps = @database.touch_points)
+            tps.sort_by{|tp| tp.date_obj }.reverse
         end 
 
         def all_descending(tps = @database.touch_points)
