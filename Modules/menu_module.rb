@@ -287,14 +287,19 @@ module Menu
               full_display(all_descending)
             when 5
               full_display(from_today)
-            when 7 
+            when 6 
               clear_drop_center
               full_display(the_future)
-            when 8
+            when 7
                 clear_drop_center
                 display_last_ten_entry_touch_points_title
                 drop_n_lines
                 display(last_n_descending(10))
+            when 8
+                clear_drop_center
+                display_last_ten_entry_touch_points_title
+                drop_n_lines
+                display(last_n_descending(20))
             when 9 
               selection = @database.accounts_index[select_account_action]
               if selection == nil 
