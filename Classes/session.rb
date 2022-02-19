@@ -1,8 +1,8 @@
 require_relative 'directory_class'
 require_relative 'entry_class'
 require_relative 'touch_point_class'
-require '../Modules/menu_module'
-require '../Modules/formatting_module'
+require './Modules/menu_module'
+require './Modules/formatting_module'
 
 
 # to production = >

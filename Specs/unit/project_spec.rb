@@ -43,8 +43,12 @@ class TestProject < Test::Unit::TestCase
          assert_equal("Computers", @project.tag)
     end 
 
-    def touch_points_empty
+    def test_touch_points_empty
         assert_empty(@project.touch_points)
+    end 
+
+    def test_can_create_touch_point
+
     end 
 
 end 
