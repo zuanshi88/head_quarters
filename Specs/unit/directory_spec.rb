@@ -184,6 +184,21 @@ class TestDirectory < Test::Unit::TestCase
         assert_equal(accounts_before + 1, @directory.accounts.size)
     end 
 
+    def test_touch_point_index_has_a_hash 
+        assert_equal(Hash,@directory.touch_points_index.class)
+    end 
+
+    def test_touch_point_index_size_greater_than_1 
+        assert_equal(true,@directory.touch_points_index.size > 0)
+    end 
+
+    # def test_touch_point_index_size_equals_37 
+    #     assert_equal(37,@directory.touch_points_index.size)
+    # end 
+
+      def test_touch_point_index_returns_activities 
+        assert_equal([],@directory.touch_points_index['ruby'])
+    end 
 
 
 
