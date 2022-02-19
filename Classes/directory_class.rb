@@ -13,8 +13,9 @@ class Directory
     # for some reason this is only working with 2 dots befpre Specs for deploy,ent and one for testing.
     @database_file = status ? './Database/c_read_test_database.txt' : '../Database/a_read_test_database.txt'
     @accounts = File.open(@database_file, "rb"){|from_file| Marshal.load(from_file)}
-    @accounts_index = self.index
+    @accounts_index = self.index_acccounts 
     @touch_points = create_tps  
+    @touch_points_index = self.index_touch_points
   end
 
   #instance variable called by all instances of directories to provide
@@ -23,7 +24,7 @@ class Directory
   #pull instance variable out and pass it to Touchpoints to produce all
   # of its data. Directory can ask for the touch points from touch_points. 
   
-   def index
+   def index_accounts
             # information = ["name", "last_name", "first_name"]
             index_hash = {}
             @accounts.cycle(1) do |obj|
@@ -40,6 +41,20 @@ class Directory
             end
             index_hash
     end
+
+    def index_touch_points
+            # information = ["name", "last_name", "first_name"]
+            touch_point_hash = {}
+            @touch_points.cycle(1) do |tp|
+              tp.activity.split(" ").each do |word|
+            touch_point_hash[word] = [] if index_hash[].nil?
+            touch_point_hash[word].push(tp)
+            end
+            touch_point_hash
+    end
+
+
+
   
   # make a call over to touch_points perhaps?  
   
