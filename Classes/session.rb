@@ -1,8 +1,8 @@
 require_relative 'directory_class'
 require_relative 'entry_class'
 require_relative 'touch_point_class'
-require './Modules/menu_module'
-require './Modules/formatting_module'
+require '../Modules/menu_module'
+require '../Modules/formatting_module'
 
 
 # to production = >
@@ -11,6 +11,7 @@ require './Modules/formatting_module'
 #brought back status to session and main menu conditional 
 # directory_class 
 #changed false to @status for Directory.new calls
+#single dot for production database file, double dot for the test_file
 
 
 

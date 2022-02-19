@@ -11,6 +11,10 @@ class TestProject < Test::Unit::TestCase
     #   - open like account 
     #   - touch_points-- mix account/people touch_point with project touch_points 
     # how will this be saved? 
+
+    #NEXT UP -- clean up this spec and then create saom sort of integration test to model
+    # creating projects and adding touch points to them, and then set up the interface.
+    # then we will have a really clean bulleted time line of people and projects.
     
     def setup
         @entry = Entry.new("first name" => "Aaron", "last name" => "Whitmer")
