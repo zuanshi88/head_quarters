@@ -4,7 +4,13 @@ require '../Classes/entry_class'
 require 'test/unit'
 
 
-class TestProject < Test::Unit::TestCase    
+class TestProject < Test::Unit::TestCase  
+    
+    # interface
+    #   - mirror new accout 
+    #   - open like account 
+    #   - touch_points-- mix account/people touch_point with project touch_points 
+    # how will this be saved? 
     
     def setup
         @entry = Entry.new("first name" => "Aaron", "last name" => "Whitmer")
