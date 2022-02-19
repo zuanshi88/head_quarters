@@ -5,6 +5,13 @@ module Menu_Action
     def add_entry_action
         #this method collects all info via menu prompts
         #then passes info on to save entry
+
+        puts "project?"
+        response = gets.chomp.downcase 
+
+        if response.include?("y")
+            return add_project_action 
+        else 
         puts "name:"
         first_name = gets.chomp
         puts "last name:"
@@ -33,9 +40,44 @@ module Menu_Action
 
         touch_points = []
 
-        {"first name" => first_name, "last name" => last_name, "address" => address, "phone number" => phone_number, "email" => email, "name" => name, "touch_points" => touch_points}
+        return {"first name" => first_name, "last name" => last_name, "address" => address, "phone number" => phone_number, "email" => email, "name" => name, "touch_points" => touch_points}
 
     end
+end 
+
+    def add_project_action 
+        puts "project type:"
+        project_type = gets.chomp
+        puts "project title:"
+        project_title = gets.chomp
+        puts "project focus"
+        project_focus = gets.chomp
+        puts "tools and materials"
+        tools_and_materials = gets.chomp
+        # puts "state:"
+        # state = gets.chomp
+        # puts "zipcode"
+        # zipcode = gets.chomp
+        address = {}
+        # {"street_address" => project_focus,
+        #                 "city" => tools_and_materials,
+                        # "state" => state,
+                        # "zipcode" => zipcode
+                    #   }
+        # name = "#{first_name} #{last_name}"
+
+        # puts "phone:"
+
+        # phone_number = gets.chomp.to_s
+
+        # puts "email:"
+        # email = gets.chomp.to_s
+
+        touch_points = []
+
+        {"first name" => project_type, "last name" => project_title, "address" => address, "phone number" => project_focus, "email" => tools_and_materials, "name" => '', "touch_points" => touch_points}
+
+    end 
 
         # only knows it is getting an array 
         def create_selection_hash_action(selection)

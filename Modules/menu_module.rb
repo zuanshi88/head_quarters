@@ -236,11 +236,11 @@ module Menu
               entry.state = results[2]
               entry.zipcode = results[3]
             when 3
-              puts "NEW phone number"
+              puts "NEW phone number / FOCUS"
               phone_number = gets.chomp
               entry.phone_number = phone_number
             when 4
-              puts "NEW email"
+              puts "NEW email / TOOLS & MATERIALS"
               email = gets.chomp
               entry.email = email
             when 8

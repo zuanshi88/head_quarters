@@ -7,16 +7,16 @@ class Entry
 
 
   def initialize(hash)
-    @first_name = hash["first name"] || "filler"
-    @last_name = hash["last name"] || "filler"
-    @name = "#{@first_name} #{@last_name}" || "filler"
-    @address = hash["address"] || "filler"
-    @street_address = @address["street_address"] || "filler"
-    @city = @address["city"] || "filler"
-    @state = @address["state"] || "filler"
-    @zipcode = @address["zipcode"] || "filler"
-    @phone_number = hash["phone number"] || "filler"
-    @email = hash["email"] || "filler"
+    @first_name = hash["first name"] || ""
+    @last_name = hash["last name"] || ""
+    @name = "#{@first_name} #{@last_name}" || ""
+    @address = hash["address"] || ""
+    @street_address = @address["street_address"] || ""
+    @city = @address["city"] || ""
+    @state = @address["state"] || ""
+    @zipcode = @address["zipcode"] || ""
+    @phone_number = hash["phone number"] || ""
+    @email = hash["email"] || ""
     @touch_points = []
   end
 

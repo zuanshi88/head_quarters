@@ -41,7 +41,7 @@ module Menu_Display
 
                     ["   == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = ==   = = ==== = ===",
                     "  === == = == =  == =  === = = = = === = = =  ===  === =  == = =  === = = === = = ===== == = ===",
-                    "   name (1) | address (2) | phone (3) | email (4) | touch points (8) | delete (9) | entry menu (*)",
+                    "   name (1) | address (2) | phone / FOCUS (3) | email / TOOLS & MATERIALS (4) | touch points (8) | delete (9) | entry menu (*)",
                     "== = = = =  == = = == = = = = ==  === = = = = = = = = = == = = = = = =  = = = == == = =",
                     "  = = == = ==  = = = == =  == =  === = = = = === = = =  ===  === =  == = =  === = =  = = "].each do |line| 
 
