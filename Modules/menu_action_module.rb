@@ -99,16 +99,28 @@ end
         end 
 
     def touch_point_create_date_action
-            puts "Date? \#,\#,\# (year, month, day)"
+            puts "Date? \#,\#,\# (year, month, day) || (f)uture & (p)ast"
             response = gets.chomp
             begin   
-                if response.include?("n")
+                if response.downcase.include?("n")
                    return create_date = Time.now
-                elsif
-                        #02/02/2022--this is a big problem here-- how do we sanitize a date
-                        # from user input
+                elsif response.downcase.include?("f")
+                    puts "how many days?"
 
-                    info= response.split(/[,\/-]/).map{|item|item.to_i} 
+                    response = gets.chomp 
+                
+                    return create_date = Time.now + (86400 * response.to_i)
+                
+                elsif response.downcase.include?("p")
+                    puts "how many days?"
+
+                    response = gets.chomp 
+                
+                    return create_date = Time.now - (86400 * response.to_i)
+                      
+                
+                    else 
+                    info = response.split(/[,\/-]/).map{|item|item.to_i} 
                     if info[0].size == 4 && info[1].size >= 1 && info[2].size >= 1
                         create_date = Time.mktime(info[0], info[1],info[2])
                         return create_date
