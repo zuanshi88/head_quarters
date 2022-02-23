@@ -21,7 +21,7 @@ module Menu_Methods
         end 
         
         def all_ascending(tps = @database.touch_points)
-            tps.sort_by{|tp| tp.date_obj }.reverse
+            tps.sort_by{|tp| tp.date_obj }
         end 
 
         def all_descending(tps = @database.touch_points)

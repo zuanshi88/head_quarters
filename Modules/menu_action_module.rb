@@ -93,7 +93,7 @@ end
 
     
         def select_account_action 
-            puts "Enter name:"
+            puts "Enter keyword:"
             target = gets.chomp
             return target.downcase
         end 

@@ -42,6 +42,14 @@ module Menu
                   display(last_n_descending(10))
                     drop_n_lines
                   touch_points_menu(false)
+                when 5 
+                  selection = @database.touch_points_index[select_account_action]
+                  touch_points_hash = create_selection_hash_action(selection)
+                    if selection == nil || touch_points_hash.empty?
+                    main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
+                  else 
+                    display_account(selection, account_hash)
+                  end 
                 when 8
                   display_all_accounts(@database.accounts)
                   main_menu(false)
@@ -50,10 +58,11 @@ module Menu
                   account_hash = create_selection_hash_action(selection) 
                   if selection == nil || account_hash.empty?
                     main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
+                  else 
+                    display_account(selection, account_hash)
                   end 
-                  display_account(selection, account_hash)
-                else 
-                  exit
+                else  
+                  exit 
                 end
           end
 
@@ -71,7 +80,14 @@ module Menu
             selection = gets.chomp
             open_contact(account_hash[selection.to_i])
           end 
+  end 
 
+  def display_touch_point_index_results(selection, touch_points_index_hash)
+        if selection == nil || touch_points_index_hash == nil 
+            main_menu(true, "      <<<<<<   try another selection   >>>>>>")
+        else 
+            touch_points_index_hash.each_key{|key| center_text("#{touch_points_index_hash[key].date}: #{touch_points_index_hash[key].account_name} : #{touch_points_index_hash[key].activity}", 38); puts ""}
+        end 
   end 
 
       
@@ -282,7 +298,14 @@ module Menu
             selection = gets.chomp
             
             case selection.to_i
-
+            when 2 
+              selection = @database.touch_points_index[select_account_action]
+              if selection == nil 
+                    main_menu(true, "Try another search-- nothing doing!!")
+              end 
+                  touch_point_hash = create_selection_hash_action(selection)
+                  clear_drop_center 
+                  display_touch_point_index_results(selection, touch_point_hash)
             when 3
               full_display(all_descending)
             when 5
@@ -292,12 +315,10 @@ module Menu
               full_display(the_future)
             when 7
                 clear_drop_center
-                display_last_ten_entry_touch_points_title
                 drop_n_lines
                 display(last_n_descending(10))
             when 8
                 clear_drop_center
-                display_last_ten_entry_touch_points_title
                 drop_n_lines
                 display(last_n_descending(20))
             when 9 

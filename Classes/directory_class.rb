@@ -4,7 +4,7 @@ require_relative 'touch_point_class.rb'
 
 class Directory
 
-  attr_reader :accounts_index, :touch_points, :database_file, :status
+  attr_reader :status, :database_file, :accounts_index, :touch_points, :touch_points_index
   attr_accessor :accounts
 
   def initialize(status)
@@ -13,7 +13,7 @@ class Directory
     # for some reason this is only working with 2 dots befpre Specs for deploy,ent and one for testing.
     @database_file = status ? './Database/c_read_test_database.txt' : '../Database/a_read_test_database.txt'
     @accounts = File.open(@database_file, "rb"){|from_file| Marshal.load(from_file)}
-    @accounts_index = self.index_acccounts 
+    @accounts_index = self.index_accounts 
     @touch_points = create_tps  
     @touch_points_index = self.index_touch_points
   end
@@ -45,11 +45,16 @@ class Directory
     def index_touch_points
             # information = ["name", "last_name", "first_name"]
             touch_point_hash = {}
-            @touch_points.cycle(1) do |tp|
-              tp.activity.split(" ").each do |word|
-            touch_point_hash[word] = [] if index_hash[].nil?
-            touch_point_hash[word].push(tp)
-            end
+            @touch_points.each_with_index do |tp, index|
+              unless tp.activity.empty?
+                tp.activity.split(" ").each do |word|
+                  unless word == nil 
+                    touch_point_hash[word.downcase] = [] if touch_point_hash[word.downcase].nil? 
+                    touch_point_hash[word.downcase].push(tp)
+                  end 
+                end 
+              end 
+          end 
             touch_point_hash
     end
 
