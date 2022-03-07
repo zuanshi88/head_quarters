@@ -1,5 +1,7 @@
 require_relative 'entry_class.rb'
 require_relative 'touch_point_class.rb'
+require 'did_you_mean'
+
 
 
 class Directory
@@ -109,5 +111,16 @@ class Directory
       @accounts.filter!{|acc| acc.name != entry.name}
     end
 
+    def distance(word1, word2)
+      DidYouMean::Levenshtein.distance(word1, word2)
+    end 
+
+    def lev_acc_search(word)
+      @accounts_index.keys.sort_by{ |key| self.distance(word, key) }.first
+    end 
+
+    def lev_tp_search(word)
+      @touch_points_index.keys.sort_by{ |key| self.distance(word, key) }.first
+    end 
 
   end

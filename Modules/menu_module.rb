@@ -26,12 +26,21 @@ module Menu
               
             drop_n_lines
 
-            center_text(message, 50)
+            center_text(message, 25)
 
 
                 action = gets.to_i
 
                 case action
+                when 2 
+                  search = @database.lev_tp_search(select_keyword_action)
+                  selection = @database.touch_points_index[search]
+                if selection == nil 
+                    main_menu(true, "Try another search-- nothing doing!!")
+                end 
+                  touch_point_hash = create_selection_hash_action(selection)
+                  clear_drop_center 
+                  display_touch_point_index_results(selection, touch_point_hash)
                 when 3
                   @database.save_update(Entry.new(add_entry_action))
                   refresh_database_instance
@@ -42,104 +51,24 @@ module Menu
                   display(last_n_descending(10))
                     drop_n_lines
                   touch_points_menu(false)
-                when 5 
-                  selection = @database.touch_points_index[select_account_action]
-                  touch_points_hash = create_selection_hash_action(selection)
-                    if selection == nil || touch_points_hash.empty?
-                    main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
-                  else 
-                    display_account(selection, account_hash)
-                  end 
                 when 8
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  selection = @database.accounts_index[select_account_action]
-                  account_hash = create_selection_hash_action(selection) 
-                  if selection == nil || account_hash.empty?
+                  search = @database.lev_acc_search(select_keyword_action)
+                  selection = @database.accounts_index[search]
+                  accounts_hash = create_selection_hash_action(selection)
+                    if selection == nil || accounts_hash.empty?
                     main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
                   else 
-                    display_account(selection, account_hash)
+                    display_account(selection, accounts_hash)
                   end 
                 else  
                   exit 
                 end
+                 drop_n_lines(3)
+                 main_menu(false)
           end
-
-
-
-
-  def display_account(selection, account_hash) 
-    # head_quarters
-          if selection == nil || account_hash == nil 
-            main_menu(true, "      <<<<<<   try another selection   >>>>>>")
-          elsif  account_hash.length == 1
-            open_contact(account_hash[0])
-          else 
-            account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name} -- #{account_hash[key].object_id}", 38); puts ""}
-            selection = gets.chomp
-            open_contact(account_hash[selection.to_i])
-          end 
-  end 
-
-  def display_touch_point_index_results(selection, touch_points_index_hash)
-        if selection == nil || touch_points_index_hash == nil 
-            main_menu(true, "      <<<<<<   try another selection   >>>>>>")
-        else 
-            touch_points_index_hash.each_key{|key| center_text("#{touch_points_index_hash[key].date}: #{touch_points_index_hash[key].account_name} : #{touch_points_index_hash[key].activity}", 38); puts ""}
-        end 
-  end 
-
-      
-
-
-  def display_all_accounts(accounts)
-        #this is all pushed way over for easier reading upon display
-        
-            drop_n_lines(2)
-      
-          accounts.sort_by{|obj| obj.last_name.downcase}.each do |entry|
-                drop_n_lines
-              ["- #{entry.last_name}, #{entry.first_name} |  #{entry.street_address} | #{entry.city}, #{entry.state} #{entry.zipcode} - ",
-              "_________________________________________________________________________"].each do |line|
-                center_text(line, 50)
-              end 
-          end
-  end
-
-
- def display_contact(obj)
-        # 1st  used address_hash = JSON.parse(obj["address"])
-        # 2nd did the JSON conversion earlier and then used HASH KEYS to access info_hash
-        # 3rd decided to initiate defined ENTRY obj before displaying or editing.
-      
-        %x(echo clr)
-        drop_n_lines
-          [[obj.name, true], 
-          [obj.street_address, true], 
-          [obj.city, false]].each do |info, status|
-            center_text(info, 50, status)
-          end 
-
-          print " " + obj.state + " " + obj.zipcode 
-          drop_n_lines
-
-          [[obj.phone_number, true], [obj.email, true]].each do |info, status| 
-            center_text(info, 50, status)
-          end 
-            if obj.touch_points.empty?
-              drop_n_lines
-            else
-              drop_n_lines
-              # this is where we can cap the tp display of each entry
-              obj.touch_points.sort_by{|tp| tp.date_obj }.last(15).reverse.each do |tp|
-                center_text("#{tp.date}: #{tp.activity}", 38)
-              end 
-            end
-            
-            drop_n_lines(2)
- end
-
 
         def open_contact(result)
                 if result == nil 
@@ -299,10 +228,11 @@ module Menu
             
             case selection.to_i
             when 2 
-              selection = @database.touch_points_index[select_account_action]
-              if selection == nil 
+                  search = @database.lev_tp_search(select_keyword_action)
+                  selection = @database.touch_points_index[search]
+                if selection == nil 
                     main_menu(true, "Try another search-- nothing doing!!")
-              end 
+                end 
                   touch_point_hash = create_selection_hash_action(selection)
                   clear_drop_center 
                   display_touch_point_index_results(selection, touch_point_hash)
@@ -321,13 +251,15 @@ module Menu
                 clear_drop_center
                 drop_n_lines
                 display(last_n_descending(20))
-            when 9 
-              selection = @database.accounts_index[select_account_action]
-              if selection == nil 
-                    main_menu(true, "Try another search-- nothing doing!!")
+              when 9
+                  search = @database.lev_acc_search(select_keyword_action)
+                  selection = @database.accounts_index[search]
+                  accounts_hash = create_selection_hash_action(selection)
+                    if selection == nil || accounts_hash.empty?
+                    main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
+                  else 
+                    display_account(selection, accounts_hash)
                   end 
-                  account_hash = create_selection_hash_action(selection) 
-                  display_account(selection, account_hash)
             else
               main_menu
             end

@@ -92,7 +92,7 @@ end
         end 
 
     
-        def select_account_action 
+        def select_keyword_action 
             puts "Enter keyword:"
             target = gets.chomp
             return target.downcase
