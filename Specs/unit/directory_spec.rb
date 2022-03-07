@@ -197,7 +197,11 @@ class TestDirectory < Test::Unit::TestCase
     # end 
 
       def test_touch_point_index_returns_activities 
-        assert_equal([],@directory.touch_points_index['ruby'])
+        assert_equal(3,@directory.touch_points_index['ruby'].length)
+    end 
+
+    def test_can_produce_levenshtein_distance 
+        assert_equal(0,@directory.distance("Dave", "Dave"))
     end 
 
 
