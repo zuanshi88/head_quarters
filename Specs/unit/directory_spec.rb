@@ -205,6 +205,17 @@ class TestDirectory < Test::Unit::TestCase
     end 
 
 
+    def test_lev_search_returns_a_string
+        assert_equal(String, @directory.lev_search('Dave').class)
+    end 
+
+   def test_lev_search_returns_a_specific_string
+        assert_equal("alex & deanna", @directory.lev_search('Alex Deana'))
+        assert_equal("aaron", @directory.lev_search('aron'))
+
+    end 
+
+
 
 
 end 
