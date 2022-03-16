@@ -114,7 +114,8 @@ module Menu
                  end 
                   touch_point_hash = create_selection_hash_action(selection)
                   clear_drop_center 
-                  display_touch_point_index_results(selection, touch_point_hash, entry)
+                  display_touch_point_index_results(selection, touch_point_hash)
+                  entry_menu(entry, full = false)
                 when 3
                   clear_drop_center
                   display_last_ten_entry_touch_points_title  
