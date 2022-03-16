@@ -95,7 +95,7 @@ end
         def select_keyword_action 
             puts "Enter keyword:"
             target = gets.chomp
-            return target.downcase
+            target.downcase
         end 
 
     def touch_point_create_date_action

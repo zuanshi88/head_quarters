@@ -105,7 +105,9 @@ module Menu
               selection = gets.to_i
 
               case selection
-              when 2 
+              when 2
+                clear_drop_center
+                display_entry_menu
                 entry_index = @database.index_touch_points(entry.touch_points)
                 search = @database.lev_tp_search(select_keyword_action, entry_index)
                 selection = entry_index[search]

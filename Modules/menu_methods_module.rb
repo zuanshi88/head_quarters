@@ -16,7 +16,7 @@ module Menu_Methods
             if entry == nil 
                 @database.touch_points.select{|tp| tp.date_obj < Time.now}.sort_by{|tp| tp.date_obj}.last(n).reverse
             else  
-                entry.touch_points.last(n)
+                entry.touch_points.sort_by{ |tp| tp.date_obj }.last(n).reverse
             end 
         end 
         
