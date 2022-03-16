@@ -112,7 +112,7 @@ module Menu_Display
                             if selection == nil || touch_points_index_hash == nil 
                                 main_menu(true, "      <<<<<<   try another selection   >>>>>>")
                             else 
-                                touch_points_index_hash.each_key{|key| center_text("#{touch_points_index_hash[key].date}: #{touch_points_index_hash[key].account_name} : #{touch_points_index_hash[key].activity}", 15); puts ""}
+                                touch_points_index_hash.values.sort_by{|values| touch_points_index_hash[key].date}.each_key{|key| center_text("#{touch_points_index_hash[key].date}: #{touch_points_index_hash[key].account_name} : #{touch_points_index_hash[key].activity}", 15); puts ""}
                             end 
                     end 
 
