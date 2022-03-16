@@ -111,23 +111,28 @@ module Menu
                 selection = entry_index[search]
                   if selection == nil 
                     main_menu(true, "Try another search-- nothing doing!!")
-                end 
+                 end 
                   touch_point_hash = create_selection_hash_action(selection)
                   clear_drop_center 
                   display_touch_point_index_results(selection, touch_point_hash)
-              when 3
-                edit(entry)   
-                @database.save_update(entry)
-                refresh_database_instance
-                entry_menu(entry)  
-              when 4
-                
-                clear_drop_center
-                display_last_ten_entry_touch_points_title  
-                drop_n_lines(1)
-                display_entry_tps(last_n_descending(10,entry))
-                drop_n_lines(1)
-                entry_menu(entry, full = false)
+                when 3
+                  clear_drop_center
+                  display_last_ten_entry_touch_points_title  
+                  drop_n_lines(1)
+                  display_entry_tps(last_n_descending(10, entry))
+                  drop_n_lines(1)
+                  entry_menu(entry, full = false)
+                when 5
+                  clear_drop_center
+                  drop_n_lines(1)
+                  display_entry_tps(all_descending(entry.touch_points))
+                  drop_n_lines(1)
+                  entry_menu(entry, full = false)
+              when 7
+                  edit(entry)   
+                  @database.save_update(entry)
+                  refresh_database_instance
+                  entry_menu(entry)  
               when 8
                 create_date = touch_point_create_date_action
                 if create_date < Time.new(1692,1,1) || create_date == nil
