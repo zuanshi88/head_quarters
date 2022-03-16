@@ -17,6 +17,8 @@ class TestDirectoryIntegration < Test::Unit::TestCase
         @read_file = './Database/an_integration_read_database.txt'
         @directory = Directory.new(false)
         @entry = @directory.accounts[-1]
+        @entry_with_most_tps = @directory.accounts.sort_by{|entry| entry.touch_points.size}[-1]
+        @entry_index = @directory.index_touch_points(@entry_with_most_tps.touch_points)
     end 
 
 
@@ -26,7 +28,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
     def test_accounts_length 
         size = @directory.accounts.length
-        assert_equal(size, @directory.accounts.length)
+        assert_equal(283, @directory.accounts.length)
     end 
 
 
@@ -78,8 +80,18 @@ class TestDirectoryIntegration < Test::Unit::TestCase
         assert_equal(size, @directory.accounts.length)
     end 
 
+    def test_directory_can_index_entry_and_return_a_hash 
+        assert_equal(Hash, @entry_index.class)
+    end 
 
-
+    
+    def test_entry_has_touch_points 
+        assert_operator( 40, :<=, @entry_with_most_tps.touch_points.size)
+    end 
+    
+    def test_entry_index_can_return_a_value 
+        assert_operator(300, :<=, @entry_index.size)
+    end 
 
 
 end 

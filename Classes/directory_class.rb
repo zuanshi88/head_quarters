@@ -44,10 +44,10 @@ class Directory
             index_hash
     end
 
-    def index_touch_points
+    def index_touch_points(touch_points = @touch_points)
             # information = ["name", "last_name", "first_name"]
             touch_point_hash = {}
-            @touch_points.each_with_index do |tp, index|
+            touch_points.each_with_index do |tp, index|
               unless tp.activity.empty?
                 tp.activity.split(" ").each do |word|
                   unless word == nil 
@@ -119,8 +119,8 @@ class Directory
       @accounts_index.keys.sort_by{ |key| self.distance(word, key) }.first
     end 
 
-    def lev_tp_search(word)
-      @touch_points_index.keys.sort_by{ |key| self.distance(word, key) }.first
+    def lev_tp_search(word, word_index = @touch_points_index)
+      word_index.keys.sort_by{ |key| self.distance(word, key) }.first
     end 
 
   end

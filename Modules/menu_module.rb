@@ -105,7 +105,16 @@ module Menu
               selection = gets.to_i
 
               case selection
-
+              when 2 
+                entry_index = @database.index_touch_points(entry.touch_points)
+                search = @database.lev_tp_search(select_keyword_action, entry_index)
+                selection = entry_index[search]
+                  if selection == nil 
+                    main_menu(true, "Try another search-- nothing doing!!")
+                end 
+                  touch_point_hash = create_selection_hash_action(selection)
+                  clear_drop_center 
+                  display_touch_point_index_results(selection, touch_point_hash)
               when 3
                 edit(entry)   
                 @database.save_update(entry)
