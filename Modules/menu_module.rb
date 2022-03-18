@@ -131,6 +131,8 @@ module Menu
                   display_entry_tps(all_descending(entry.touch_points))
                   drop_n_lines(1)
                   entry_menu(entry, full = false)
+                when 6 
+                  open_file(entry.name)
               when 7
                   edit(entry)   
                   @database.save_update(entry)

@@ -140,5 +140,12 @@ end
           activity = gets.chomp
     end 
 
+    #might also need an open directory here
+
+    def open_file(file)
+      system("touch #{file}.docx")
+      system ("start #{file}.docx")
+    end 
+
 
 end 
