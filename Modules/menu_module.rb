@@ -64,6 +64,7 @@ module Menu
                     display_account(selection, accounts_hash)
                   end 
                 else  
+                  clear_drop_center
                   exit 
                 end
                  drop_n_lines(3)
@@ -132,7 +133,7 @@ module Menu
                   drop_n_lines(1)
                   entry_menu(entry, full = false)
                 when 6 
-                  open_file(entry.name)
+                  open_file("#{entry.last_name}_#{entry.first_name[0..3]}")
               when 7
                   edit(entry)   
                   @database.save_update(entry)

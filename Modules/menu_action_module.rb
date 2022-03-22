@@ -143,9 +143,11 @@ end
     #might also need an open directory here
 
     def open_file(file)
-      system("touch #{file}.docx")
-      system ("start #{file}.docx")
+      file = file.gsub(/\s+/, "")
+      system("touch ./Entry_Files/#{file}.docx")
+      system ("start ./Entry_Files/#{file}.docx")
     end 
+
 
 
 end 
