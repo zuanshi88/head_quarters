@@ -161,6 +161,7 @@ module Menu
                   entry_menu(entry, full = false)
                 when 6 
                   open_file("#{entry.last_name}_#{entry.first_name[0..3]}")
+                  entry_menu(entry)
               when 7
                   edit(entry)   
                   @database.save_update(entry)
