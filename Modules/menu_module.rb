@@ -35,9 +35,15 @@ module Menu
                 when 2 
                   search = @database.lev_tp_search(select_keyword_action)
                   selection = @database.touch_points_index[search]
-                if selection == nil 
+                  #if the key contains search then add values 
+                  other_hits = @database.touch_points_index.keys.select{ |key| key =~ /search/}
+                  other_hits.each{ |hit| selection << search[hit] }
+                  selection.flatten.compact.uniq!
+                
+                  if selection == nil 
                     main_menu(true, "Try another search-- nothing doing!!")
                 end 
+
                   touch_point_hash = create_selection_hash_action(selection)
                   clear_drop_center 
                   display_touch_point_index_results(selection, touch_point_hash)
