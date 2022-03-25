@@ -102,7 +102,7 @@ module Menu_Display
                             elsif  account_hash.length == 1
                                 open_contact(account_hash[0])   
                             else 
-                                account_hash.each_key{|key| center_text("#{key}: #{account_hash[key].name} -- #{account_hash[key].object_id}", 38); puts ""}
+                                account_hash.keys.each{|key| center_text("#{key}: #{account_hash[key].last_name} -- #{account_hash[key].first_name} ", 38); puts ""}
                                 selection = gets.chomp
                                 open_contact(account_hash[selection.to_i])
                             end 
@@ -112,7 +112,7 @@ module Menu_Display
                             if selection == nil || touch_points_index_hash == nil 
                                 main_menu(true, "      <<<<<<   try another selection   >>>>>>")
                             else 
-                                touch_points_index_hash.values.sort_by{|value| value.date_obj}.reverse.each{|v| center_text("#{v.date}: #{v.account_name} : #{v.activity}", 15); puts ""}
+                                touch_points_index_hash.values.uniq.sort_by{|value| value.date_obj}.reverse.each{|v| center_text("#{v.date}: #{v.account_name} : #{v.activity}", 15); puts ""}
                             end 
                     end 
 

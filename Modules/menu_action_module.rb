@@ -84,7 +84,7 @@ end
             begin
                 account_hash = {}
                 selection.each_with_index{|acc, index| account_hash[index] = acc}
-                 account_hash
+                account_hash
             rescue => error  
                 puts "You wrote a bad, bad song!"
                 puts error.message
@@ -99,27 +99,18 @@ end
         end 
 
     def touch_point_create_date_action
-            puts "Date? \#,\#,\# (year, month, day) || (f)uture & (p)ast"
+            puts "DATE? (#year,#month,#day) | (n)ow | (f)uture | (p)ast"
             response = gets.chomp
             begin   
                 if response.downcase.include?("n")
                    return create_date = Time.now
                 elsif response.downcase.include?("f")
-                    puts "how many days?"
-
-                    response = gets.chomp 
-                
-                    return create_date = Time.now + (86400 * response.to_i)
-                
+                   days_in_future = prompt_for_days
+                   Time.now + (86400 * days_in_future.to_i)
                 elsif response.downcase.include?("p")
-                    puts "how many days?"
-
-                    response = gets.chomp 
-                
-                    return create_date = Time.now - (86400 * response.to_i)
-                      
-                
-                    else 
+                    days_in_past = prompt_for_days
+                    Time.now - (86400 * days_in_past.to_i)
+                else 
                     info = response.split(/[,\/-]/).map{|item|item.to_i} 
                     if info[0].size == 4 && info[1].size >= 1 && info[2].size >= 1
                         create_date = Time.mktime(info[0], info[1],info[2])
@@ -133,7 +124,15 @@ end
                     puts "Did you put the year first?"
                     add_touch_point    
                 end
+
     end
+
+    def prompt_for_days 
+         puts "how many days?"
+         gets.chomp 
+    end 
+
+
 
     def touch_point_create_activity_action
           puts "Activity: "

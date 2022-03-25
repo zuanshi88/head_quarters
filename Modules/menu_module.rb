@@ -33,20 +33,8 @@ module Menu
 
                 case action
                 when 2 
-                  search = @database.lev_tp_search(select_keyword_action)
-                  selection = @database.touch_points_index[search]
-                  #if the key contains search then add values 
-                  other_hits = @database.touch_points_index.keys.select{ |key| key =~ /search/}
-                  other_hits.each{ |hit| selection << search[hit] }
-                  selection.flatten.compact.uniq!
-                
-                  if selection == nil 
-                    main_menu(true, "Try another search-- nothing doing!!")
-                end 
-
-                  touch_point_hash = create_selection_hash_action(selection)
-                  clear_drop_center 
-                  display_touch_point_index_results(selection, touch_point_hash)
+                 clear_drop_center 
+                 initiate_touch_point_search
                 when 3
                   @database.save_update(Entry.new(add_entry_action))
                   refresh_database_instance
@@ -61,14 +49,8 @@ module Menu
                   display_all_accounts(@database.accounts)
                   main_menu(false)
                 when 9
-                  search = @database.lev_acc_search(select_keyword_action)
-                  selection = @database.accounts_index[search]
-                  accounts_hash = create_selection_hash_action(selection)
-                    if selection == nil || accounts_hash.empty?
-                    main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
-                  else 
-                    display_account(selection, accounts_hash)
-                  end 
+                  clear_drop_center
+                  initiate_account_search
                 else  
                   clear_drop_center
                   exit 
@@ -76,6 +58,45 @@ module Menu
                  drop_n_lines(3)
                  main_menu(false)
           end
+
+        def initiate_touch_point_search 
+                  lev_search = @database.lev_tp_search(select_keyword_action)
+                  #selection will be ARRAY of objs
+                  selection = @database.touch_points_index[lev_search]
+                
+                if selection == nil 
+                    main_menu(true, "Try another search-- nothing doing!!")
+                end 
+
+                  display_touch_point_index_results(selection, create_selection_hash_action(selection))
+
+        end 
+
+        def initiate_account_search
+
+                  lev_search = @database.lev_acc_search(select_keyword_action)
+
+                  selection = @database.accounts_index[lev_search]
+
+                  accounts_hash = create_selection_hash_action(selection)
+
+                  if selection == nil || accounts_hash.empty?
+                    main_menu(true, "<<<<<<<<<   Try another search, my friend   >>>>>>>")
+                  else 
+                    display_account(selection, accounts_hash)
+                  end 
+
+       end 
+
+        # def touch_point_search(selection)
+        #           # @database.touch_points_index.keys do |key|
+        #           #   if key.downcase =~ /search/
+        #           #     selection << @database.touch_points_index[key]
+        #           #   end  
+        #           # end
+                  
+                  
+        # end 
 
         def open_contact(result)
                 if result == nil 
