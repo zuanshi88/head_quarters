@@ -41,17 +41,7 @@ class Session
 
 
 
-
-#TO DO list
-# clean up code, get better with comments.
-#prompt for missing info
-#using ^for searching/open
-#search, add, remove (check for duplicates)
-#foreign address handler?
-#code to stop repeats
-#add time stamp and a sort by date function
-#list all enties alphabetically...
-#add touch_points
+#3/25/2022
 
 #12/16/2020: Make a new menu to display different views of directory_hash
 #alphbetic, last contact, etc,

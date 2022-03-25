@@ -20,19 +20,5 @@ class Entry
     @touch_points = []
   end
 
-    def first_name=(first_name)
-      @first_name = first_name
-      @name = "#{@first_name} #{@last_name}"
-    end
-
-    def last_name=(last_name)
-      @last_name = last_name
-      @name = "#{@first_name} #{@last_name}"
-    end
-
-    def touch_points=(reset)
-      @touch_points = reset
-      @entry_info["touch_points"] = reset
-    end
 
 end

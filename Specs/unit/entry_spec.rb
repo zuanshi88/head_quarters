@@ -23,11 +23,11 @@ class TestEntry < Test::Unit::TestCase
     end 
 
     def test_entry_address 
-        assert_equal(" ", @entry.address)
-        assert_equal(" ", @entry.street_address)
-        assert_equal(" ", @entry.city)
-        assert_equal(" ", @entry.state)
-        assert_equal(" ", @entry.zipcode)
+        assert_equal("", @entry.address)
+        assert_equal("", @entry.street_address)
+        assert_equal("", @entry.city)
+        assert_equal("", @entry.state)
+        assert_equal("", @entry.zipcode)
     end 
 
     def test_entry_email 

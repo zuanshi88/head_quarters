@@ -45,7 +45,7 @@ class Directory
     end
 
     def index_touch_points(touch_points = @touch_points)
-            # information = ["name", "last_name", "first_name"]
+          
             touch_point_hash = {}
             touch_points.each_with_index do |tp, index|
               unless tp.activity.empty?
