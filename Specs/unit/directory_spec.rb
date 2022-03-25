@@ -21,10 +21,11 @@ class TestDirectory < Test::Unit::TestCase
     def test_directory_has_class 
         assert_equal(Directory, @directory.class)
         
-        def test_directory_has_false_status
-        end     
-        assert_equal(false, @directory.status)
     end 
+    
+    def test_directory_has_false_status
+        assert_equal(false, @directory.status)
+    end
 
     def test_directory_has_database_file 
         assert_equal("../Database/a_read_test_database.txt", @database_file)
@@ -197,7 +198,7 @@ class TestDirectory < Test::Unit::TestCase
     # end 
 
       def test_touch_point_index_returns_activities 
-        assert_equal(3,@directory.touch_points_index['ruby'].length)
+        assert_equal(6,@directory.touch_points_index['ruby'].length)
     end 
 
     def test_can_produce_levenshtein_distance 
