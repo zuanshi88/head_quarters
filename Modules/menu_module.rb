@@ -110,7 +110,7 @@ module Menu
                 end 
         end
 
-        def entry_menu(entry, full = true)
+        def entry_menu(entry, full = true, message = '')
 
               if full 
                   clear_drop_center
@@ -125,6 +125,7 @@ module Menu
               if full
                 if entry != nil 
                   display_contact(entry)
+                  center_text(message, 25)
                 else  
                   puts "This isn't a valid account, try another selection"
                   main_menu(false)
@@ -135,13 +136,21 @@ module Menu
               selection = gets.to_i
 
               case selection
+              when 4
+                   if entry.files.nil?
+                        entry_menu(entry, false, "Sorry, Charlie, no files yet")
+                    else  
+                        display_files(create_selection_hash_action(entry.files))
+                    end 
+            
               when 1 
                 clear_drop_center 
                   # @database.save_update(Entry.new(add_entry_action))
                   # refresh_database_instance
-                arguments = add_entry_action << entry.object_id
-                Entry_File.new(*arguments)
-                
+                @database.create_entry_file(entry, add_entry_file_action)
+                refresh_database_instance
+                system('cls')
+                entry_menu(entry, false)
                 
               when 2
                 clear_drop_center

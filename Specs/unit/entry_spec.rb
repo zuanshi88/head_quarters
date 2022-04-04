@@ -1,4 +1,4 @@
-require '../Classes/entry_class'
+require './Classes/entry_class'
 require 'test/unit'
 
 
@@ -40,6 +40,10 @@ class TestEntry < Test::Unit::TestCase
 
     def test_entry_array_empty 
         assert_empty(@entry.touch_points)
+    end 
+
+    def test_entry_has_empty_files_array 
+            assert_equal([], @entry.files)
     end 
 
 

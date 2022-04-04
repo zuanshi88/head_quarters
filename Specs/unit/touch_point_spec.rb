@@ -1,5 +1,5 @@
 
-require '../Classes/touch_point_class'
+require './Classes/touch_point_class'
 require 'test/unit'
 
 

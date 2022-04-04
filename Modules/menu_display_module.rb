@@ -165,5 +165,9 @@ module Menu_Display
                             drop_n_lines(2)
                 end
 
+
+                def display_files(file_hash)
+                      file_hash.each{|k,v| center_text("#{k}: #{v.type} : #{v.path.split('/').last}", 15); puts ""}
+                end
             
 end 

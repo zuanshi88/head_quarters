@@ -1,5 +1,5 @@
-require '../Classes/entry_file_class'
-require '../Classes/entry_class'
+require './Classes/entry_file_class'
+require './Classes/entry_class'
 
 require 'test/unit'
 

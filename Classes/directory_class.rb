@@ -1,4 +1,5 @@
 require_relative 'entry_class.rb'
+require_relative 'entry_file_class.rb'
 require_relative 'touch_point_class.rb'
 require 'did_you_mean'
 
@@ -88,6 +89,25 @@ class Directory
       self.touch_points.delete(tp)
       save_update(entry)
     end 
+
+
+    def create_entry_file(entry, attributes)
+      if entry.files.nil? 
+        entry.files = []
+      end 
+      entry.files << Entry_File.new(*attributes, entry.object_id)
+      save_update(entry)
+    end 
+
+    def delete_entry_file(entry, file)
+      entry.files.delete(file)
+      save_update(entry)
+    end 
+
+    def open_entry_file(file)
+        system("#{file.type} #{file.path}")
+    end 
+
 
 
     def save_update(entry, delete = false)

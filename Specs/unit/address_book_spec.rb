@@ -1,4 +1,4 @@
-require '../address_book.rb'
+require './address_book.rb'
 
 require 'test/unit'
 

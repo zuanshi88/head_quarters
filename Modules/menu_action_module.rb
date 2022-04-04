@@ -155,9 +155,6 @@ end
       system ("start ./Entry_Files/#{file}.docx")
     end 
 
-    def open_add_file(file)
-        system("#{file.type} #{file.path}")
-    end 
 
 
 end 

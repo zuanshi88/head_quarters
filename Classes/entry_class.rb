@@ -2,7 +2,7 @@ class Entry
 
   attr_accessor :first_name, :last_name, :name, :address,
               :street_address, :city, :state, :zipcode,
-              :phone_number, :email, :touch_points
+              :phone_number, :email, :touch_points, :files
 
 
 
@@ -18,7 +18,7 @@ class Entry
     @phone_number = hash["phone number"] || ""
     @email = hash["email"] || ""
     @touch_points = []
+    @files = []
   end
-
 
 end
