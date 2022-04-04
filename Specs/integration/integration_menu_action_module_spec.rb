@@ -1,7 +1,7 @@
-require '../Classes/session.rb'
-require '../Classes/entry_class.rb'
-require '../Classes/directory_class.rb'
-require '../Modules/menu_module.rb'
+require './Classes/session.rb'
+require './Classes/entry_class.rb'
+require './Classes/directory_class.rb'
+require './Modules/menu_module.rb'
 require 'test/unit'
 
 

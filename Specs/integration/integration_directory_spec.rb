@@ -1,6 +1,8 @@
-require '../Classes/directory_class'
-require '../Classes/entry_class'
-require '../Classes/touch_point_class.rb'
+require './Classes/directory_class'
+require './Classes/session'
+require './Classes/entry_class'
+require './Classes/touch_point_class.rb'
+require './Classes/entry_file_class.rb'
 require 'test/unit'
 
 
@@ -28,7 +30,7 @@ class TestDirectoryIntegration < Test::Unit::TestCase
 
     def test_accounts_length 
         size = @directory.accounts.length
-        assert_equal(283, @directory.accounts.length)
+        assert_operator(200, :<=, @directory.accounts.size)
     end 
 
 
@@ -90,7 +92,11 @@ class TestDirectoryIntegration < Test::Unit::TestCase
     end 
     
     def test_entry_index_can_return_a_value 
-        assert_operator(300, :<=, @entry_index.size)
+        assert_operator(200, :<=, @entry_index.size)
+    end 
+
+    def test_open_file 
+
     end 
 
 

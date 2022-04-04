@@ -1,5 +1,6 @@
-require '../Classes/session.rb'
-require '../Classes/entry_class.rb'
+require './Classes/session.rb'
+require './Classes/entry_class.rb'
+require './Classes/entry_file_class'
 require 'test/unit'
 
 
@@ -14,14 +15,15 @@ class TestAddressBookIntegration < Test::Unit::TestCase
     def setup
           #we are loading our data from the @read_file
         #we are saving the results of our test runs to the @write file
-        @session = Session.new
+        @session = Session.new(false)
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @entry_hash = {"first name" => "Zaron", "last name" => "Zitmer", "email" => "zwhitmer@gmail.com", "phone number" =>"(333) 333-3833"}
+        @entry_file = Entry_File.new("code", "C:/Coding/Rubywerk/SinatraCRM", @entry.object_id)
     end
     
 
     def test_address_book_has_database 
-        assert_equal("../Database/a_read_test_database.txt", @session.database.database_file)
+        assert_equal("./Database/a_read_test_database.txt", @session.database.database_file)
     end
 
         #head_quarters is basically session now.
@@ -101,6 +103,16 @@ class TestAddressBookIntegration < Test::Unit::TestCase
             @session.refresh_database_instance
             assert_equal(total_size + 1, @session.database.touch_points.size)
         end 
+
+
+        def test_entry_file 
+            assert_equal('', @entry_file.path)
+        end 
+
+        # def test_can_open_add_file 
+        #     @session.open_add_file(@entry_file) 
+        # end 
+
 
         #   def test_session_can_delete_touch_point_at_both_entry_and_database_levels
         #     entry = Entry.new({"first name" => "Karen", "last name" => "Shitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})

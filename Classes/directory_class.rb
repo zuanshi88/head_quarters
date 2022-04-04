@@ -13,7 +13,7 @@ class Directory
     @status = status
 # './Database/a_marshaled_database.txt'
     # for some reason this is only working with 2 dots befpre Specs for deploy,ent and one for testing.
-    @database_file = status ? './Database/head_database.txt' : '../Database/a_read_test_database.txt'
+    @database_file = status ? './Database/head_database.txt' : './Database/a_read_test_database.txt'
     @accounts = File.open(@database_file, "rb"){|from_file| Marshal.load(from_file)}
     @accounts_index = self.index_accounts 
     @touch_points = create_tps  

@@ -45,6 +45,14 @@ module Menu_Action
     end
 end 
 
+    def add_entry_file_action 
+        puts "file type / opening command"
+        type = gets.chomp 
+        puts "path to file"
+        path = gets.chomp 
+        [type, path]
+    end 
+
     def add_project_action 
         puts "project type:"
         project_type = gets.chomp
@@ -147,6 +155,9 @@ end
       system ("start ./Entry_Files/#{file}.docx")
     end 
 
+    def open_add_file(file)
+        system("#{file.type} #{file.path}")
+    end 
 
 
 end 

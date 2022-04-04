@@ -1,6 +1,6 @@
 require 'test/unit'
-require '../Classes/entry_class'
-require '../Classes/touch_point_class'
+require './Classes/entry_class'
+require './Classes/touch_point_class'
 
 
 class TestEntryAndTouchPoint < Test::Unit::TestCase

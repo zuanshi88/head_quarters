@@ -1,4 +1,4 @@
-require '../Classes/session.rb'
+require './Classes/session.rb'
 
 require 'test/unit'
 
@@ -6,7 +6,7 @@ require 'test/unit'
 class TestSession < Test::Unit::TestCase
 
     def setup 
-        @session = Session.new
+        @session = Session.new(false)
         @entry = Entry.new({"first name" => "Zevron", "last name" => "Catmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
 
     end 
@@ -21,7 +21,7 @@ class TestSession < Test::Unit::TestCase
 
     
     def test_session_has_database 
-        assert_equal("../Database/a_read_test_database.txt", @session.database.database_file)
+        assert_equal("./Database/a_read_test_database.txt", @session.database.database_file)
     end 
 
     def test_address_book_has_directory 

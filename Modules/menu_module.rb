@@ -63,6 +63,7 @@ module Menu
                   lev_search = @database.lev_tp_search(select_keyword_action)
                   #selection will be ARRAY of objs
                   selection = @database.touch_points_index[lev_search]
+                  selection = selection.uniq.sort_by{|tp| tp.date_obj}
                 
                 if selection == nil 
                     main_menu(true, "Try another search-- nothing doing!!")
@@ -77,6 +78,7 @@ module Menu
                   lev_search = @database.lev_acc_search(select_keyword_action)
 
                   selection = @database.accounts_index[lev_search]
+                  selection = selection.uniq.sort_by{|acc| acc.last_name}
 
                   accounts_hash = create_selection_hash_action(selection)
 
@@ -129,10 +131,18 @@ module Menu
                 end 
               end 
 
-            
+          
               selection = gets.to_i
 
               case selection
+              when 1 
+                clear_drop_center 
+                  # @database.save_update(Entry.new(add_entry_action))
+                  # refresh_database_instance
+                arguments = add_entry_action << entry.object_id
+                Entry_File.new(*arguments)
+                
+                
               when 2
                 clear_drop_center
                 display_entry_menu
