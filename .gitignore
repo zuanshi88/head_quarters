@@ -1,5 +1,5 @@
 
 *.txt
 *.docx
-Entry_Files/
+Entry_Files/*.docx
 Specs/bin
