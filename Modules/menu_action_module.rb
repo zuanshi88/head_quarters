@@ -155,6 +155,9 @@ end
       system ("start ./Entry_Files/#{file}.docx")
     end 
 
+    def open_entry_file(file)
+        system(" cd / && #{file.type} #{file.path}")
+    end 
 
 
 end 

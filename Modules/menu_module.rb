@@ -136,23 +136,7 @@ module Menu
               selection = gets.to_i
 
               case selection
-              when 4
-                   if entry.files.nil?
-                        entry_menu(entry, false, "Sorry, Charlie, no files yet")
-                    else  
-                        display_files(create_selection_hash_action(entry.files))
-                    end 
-            
-              when 1 
-                clear_drop_center 
-                  # @database.save_update(Entry.new(add_entry_action))
-                  # refresh_database_instance
-                @database.create_entry_file(entry, add_entry_file_action)
-                refresh_database_instance
-                system('cls')
-                entry_menu(entry, false)
-                
-              when 2
+              when 1
                 clear_drop_center
                 display_entry_menu
                 entry_index = @database.index_touch_points(entry.touch_points)
@@ -165,20 +149,67 @@ module Menu
                   clear_drop_center 
                   display_touch_point_index_results(selection, touch_point_hash)
                   entry_menu(entry, full = false)
-                when 3
+              when 2
+                     if entry.files.nil? || entry.files.empty?
+                        entry_menu(entry, true, "Sorry, Charlie, no files yet")
+                    else  
+                      selection_hash = create_selection_hash_action(entry.files)  
+                      center_text("Enter # -- include 'd' after # to delete selection", 15)
+                      drop_n_lines(2)
+                      display_files(selection_hash)
+                      selection = gets.chomp
+                    end 
+
+                      if selection.length > 1 && selection.include?("d")
+                        int_selection = selection_hash[selection[0].to_i]
+                          if !selection_hash.keys.include?(selection[0].to_i)
+                            entry_menu(entry, true, "No such file, try again")
+                          end 
+                          @database.delete_entry_file(entry, int_selection)
+                          refresh_database_instance  
+                          entry_menu(entry, true, "File Deleted")
+                      end 
+                        
+                      if !selection_hash.keys.include?(selection.to_i)
+                          entry_menu(entry, true, "No such file, try again")
+                      end 
+
+
+                        # def check_selection(entry, selection, hash)
+                        #     if !selection_hash.keys.include?(selection.to_i)
+                        #       entry_menu(entry, true, "No such file, try again")
+                        #       # display_files(selection_hash)
+                        #       # selection = gets.chomp
+                        #     end 
+                        # end 
+                        open_entry_file(selection_hash[selection.to_i])
+  
+                
+              when 3
+                clear_drop_center 
+                  # @database.save_update(Entry.new(add_entry_action))
+                  # refresh_database_instance
+                @database.create_entry_file(entry, add_entry_file_action)
+                refresh_database_instance
+                system('cls')
+                entry_menu(entry, true, "new file successfully added")
+              
+              when 4
                   clear_drop_center
                   display_last_ten_entry_touch_points_title  
                   drop_n_lines(1)
                   display_entry_tps(last_n_descending(10, entry))
                   drop_n_lines(1)
                   entry_menu(entry, full = false)
-                when 5
+              when 5
                   clear_drop_center
                   drop_n_lines(1)
                   display_entry_tps(all_descending(entry.touch_points))
                   drop_n_lines(1)
                   entry_menu(entry, full = false)
-                when 6 
+              when 6 
+
+                # if this ch
                   open_file("#{entry.last_name}_#{entry.first_name[0..3]}")
                   entry_menu(entry)
               when 7
@@ -207,6 +238,7 @@ module Menu
 
         end
 
+       
         # should move these to menu_methods_module
 
         def entry_last_ten_descending(entry)
@@ -244,9 +276,11 @@ module Menu
               city_state_zip = gets.chomp
               search_form = /(\w+),?\s+(\w+)\s+(\d+)/
               results = search_form.match(city_state_zip)
-              entry.city = results[1]
-              entry.state = results[2]
-              entry.zipcode = results[3]
+              unless results.nil?
+                entry.city = results[1] || ""
+                entry.state = results[2] || ""
+                entry.zipcode = results[3] || ""
+              end 
             when 3
               puts "NEW phone number / FOCUS"
               phone_number = gets.chomp

@@ -104,9 +104,9 @@ class Directory
       save_update(entry)
     end 
 
-    def open_entry_file(file)
-        system("#{file.type} #{file.path}")
-    end 
+    # def open_entry_file(file)
+    #     system("#{file.type} #{file.path}")
+    # end 
 
 
 
