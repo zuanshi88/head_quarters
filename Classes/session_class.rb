@@ -5,14 +5,6 @@ require './Modules/menu_module'
 require './Modules/formatting_module'
 
 
-# to production = >
-# single dot for Modules 
-
-#brought back status to session and main menu conditional 
-# directory_class 
-#changed false to @status for Directory.new calls
-#single dot for production database file, double dot for the test_file
-
 
 
 class Session 

@@ -12,8 +12,6 @@ class Directory
 
   def initialize(status)
     @status = status
-# './Database/a_marshaled_database.txt'
-    # for some reason this is only working with 2 dots befpre Specs for deploy,ent and one for testing.
     @database_file = status ? './Database/head_database.txt' : './Database/a_read_test_database.txt'
     @accounts = File.open(@database_file, "rb"){|from_file| Marshal.load(from_file)}
     @accounts_index = self.index_accounts 
@@ -62,10 +60,7 @@ class Directory
             touch_point_hash
     end
 
-
-
   
-  # make a call over to touch_points perhaps?  
   
   def create_tps
     tps = []
@@ -104,11 +99,6 @@ class Directory
       save_update(entry)
     end 
 
-    # def open_entry_file(file)
-    #     system("#{file.type} #{file.path}")
-    # end 
-
-
 
     def save_update(entry, delete = false)
            delete_account(entry)
@@ -121,8 +111,6 @@ class Directory
     def marshal_save
         File.open(@database_file, "wb"){|f| f.write(Marshal.dump(@accounts))}
     end
-
-    # @database.accounts vs. self.accounts
 
     def add_account(entry)
       @accounts.push(entry)
