@@ -18,6 +18,7 @@ class Session
 
     def initialize(status)
       @status = status
+      @time_clock = nil
       @database = Directory.new(@status)
          if @status 
             self.main_menu

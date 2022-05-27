@@ -1,6 +1,7 @@
 require_relative 'menu_methods_module'
 require_relative 'menu_display_module'
 require_relative 'menu_action_module'
+require_relative '../Classes/time_clock'
 
 module Menu 
 
@@ -45,6 +46,12 @@ module Menu
                   display(last_n_descending(10))
                     drop_n_lines
                   touch_points_menu(false)
+                when 6 
+                  clear_drop_center 
+                  display_time_clock
+                  @time_clock = Time_Clock.new
+                  center_text(@time_clock.message, 70)
+                  time_clock_options
                 when 8
                   display_all_accounts(@database.accounts)
                   main_menu(false)
@@ -72,6 +79,30 @@ module Menu
                   display_touch_point_index_results(selection, create_selection_hash_action(selection))
 
         end 
+
+          
+        def time_clock_options 
+          action = gets.to_i
+
+            case action
+            when 3
+              @time_clock.clock_in
+              clear_drop_center 
+              display_time_clock
+              center_text(@time_clock.message, 70)
+              time_clock_options
+            when 4
+              @time_clock.clock_out
+              clear_drop_center 
+              display_time_clock
+              center_text(@time_clock.message, 70)
+              time_clock_options
+            else
+              main_menu
+            end
+
+          end
+
 
         def initiate_account_search
 
