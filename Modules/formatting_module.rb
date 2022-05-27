@@ -14,7 +14,7 @@ module Formatting
           drop_center
       end 
 
-      def center_text(text, n = 25, new_line = true)
+      def center_text(text, n = 60, new_line = true)
             n.times{ print " "}
           if new_line 
             puts text 
