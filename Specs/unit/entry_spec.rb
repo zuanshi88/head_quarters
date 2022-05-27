@@ -13,7 +13,7 @@ require 'test/unit'
 class TestEntry < Test::Unit::TestCase 
 
     def setup 
-        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
+        @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "hitman@gmail.com", "phone number" =>"(888) 888-8888"})
     end 
 
     def test_entry_name 
@@ -31,11 +31,11 @@ class TestEntry < Test::Unit::TestCase
     end 
 
     def test_entry_email 
-         assert_equal("adwhitmer@gmail.com", @entry.email)
+         assert_equal("hitman@gmail.com", @entry.email)
     end 
 
     def test_entry_phone_number 
-        assert_equal("(773) 673-0803", @entry.phone_number)
+        assert_equal("(888) 888-8888", @entry.phone_number)
     end 
 
     def test_entry_array_empty 
@@ -48,28 +48,3 @@ class TestEntry < Test::Unit::TestCase
 
 
 end 
-
-
-
-# class TesterTest < Test::Unit::TestCase 
-
-#     def new_entry_has_attributes
-#         assert_equal("Ruby", Tester.new("Ruby").name)
-#     end 
-    
-    
-# end 
-
-
-# puts entry.class
-# puts entry.first_name
-# puts entry.last_name 
-# puts entry.address
-
-#     begin
-#         puts entry.first_name
-#     rescue => e 
-#         puts e.message
-#     end
-
-    # puts "We are finally programming... for real."
