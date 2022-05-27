@@ -1,9 +1,9 @@
+require 'test/unit'
 require './Classes/directory_class'
-require './Classes/session'
+require './Classes/session_class'
 require './Classes/entry_class'
 require './Classes/touch_point_class.rb'
 require './Classes/entry_file_class.rb'
-require 'test/unit'
 
 
 

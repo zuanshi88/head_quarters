@@ -1,8 +1,8 @@
-require './Classes/session.rb'
+require 'test/unit'
+require './Classes/session_class.rb'
 require './Classes/entry_class.rb'
 require './Classes/directory_class.rb'
 require './Modules/menu_module.rb'
-require 'test/unit'
 
 
 class MenuActionModuleIntegration < Test::Unit::TestCase 

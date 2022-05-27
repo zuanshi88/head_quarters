@@ -1,7 +1,7 @@
-require './Classes/session.rb'
+require 'test/unit'
+require './Classes/session_class.rb'
 require './Classes/entry_class.rb'
 require './Classes/entry_file_class'
-require 'test/unit'
 
 
 class TestAddressBookIntegration < Test::Unit::TestCase 
@@ -18,7 +18,6 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         @session = Session.new(false)
         @entry = Entry.new({"first name" => "Aaron", "last name" => "Whitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
         @entry_hash = {"first name" => "Zaron", "last name" => "Zitmer", "email" => "zwhitmer@gmail.com", "phone number" =>"(333) 333-3833"}
-        @entry_file = Entry_File.new("code", "C:/Coding/Rubywerk/SinatraCRM", @entry.object_id)
     end
     
 
@@ -105,97 +104,11 @@ class TestAddressBookIntegration < Test::Unit::TestCase
         end 
 
 
-        def test_entry_file 
-            assert_equal('', @entry_file.path)
-        end 
-
-        # def test_can_open_add_file 
-        #     @session.open_add_file(@entry_file) 
-        # end 
-
-
-        #   def test_session_can_delete_touch_point_at_both_entry_and_database_levels
-        #     entry = Entry.new({"first name" => "Karen", "last name" => "Shitmer", "email" => "adwhitmer@gmail.com", "phone number" =>"(773) 673-0803"})
-        #      @session.database.save_update(entry)
-        #     @session.refresh_database_instance
-        #     size = entry.touch_points.size 
-        #     total_size = @session.database.touch_points.size
-
-        #     @session.database.create_touch_point(entry, Time.now, "Playing SUPER FUN games") 
-        #     @session.refresh_database_instance
-           
-         
-        #     assert_equal(size + 1, entry.touch_points.size )
-        #     assert_equal(total_size + 1, @session.database.touch_points.size )
-        #     @session.database.delete_touch_point(entry, entry.touch_points[0])
-        #     # before saving these are different
-        #     assert_equal(size, entry.touch_points.size )
-        #     assert_equal(total_size + 1, @session.database.touch_points.size )
-        #     @session.refresh_database_instance
-        #     #after saving they should be the same
-        #     assert_equal(size, entry.touch_points.size )
-        #     assert_equal(total_size, @session.database.touch_points.size )
-
-        #     #could we pull the @entry out of the new database 
-
-        #     # @session.database.accounts.delete_if{|i| i.name == @entry.name}
-        #     #   @session.database.marshal_save
-           
-
-
-
-
-
-        # end 
-        # int_menu_mod --test_session_can_delete_touch_point_at_both_entry_and_database_levels -- @session.datebase.save_update(@entry)
-
-
         def test_refresh_database_instance_call 
             old_id = @session.database.object_id
             @session.refresh_database_instance
             assert_not_equal(old_id, @session.database.object_id)
         end 
         
-
-
-
-        
-
-
-
-    # def test_display_method 
-    #     assert_equal(Array, @session.display([1,2,3]).class)
-    # end 
-
-    # def test_display_touch_points_menu
-
-    # end 
-
-    #not finding the name searched for...
-
-    # # def test_display_account 
-    #     assert_equal(Entry, @session.display_account(["latham"]).class)
-    # # end 
-
-    # case action
-    #             when 3
-    #               save_update(entry: Entry.new(add_entry_action))
-    #               refresh_database
-    #             when 4
-    #                 clear_drop_center
-    #                 # display_last_ten_entry_touch_points_title
-    #                 drop_n_lines
-    #               display(last_n_descending(10))
-    #                 drop_n_lines
-    #               touch_points_menu(false)
-    #             when 8
-    #               display_all_accounts(@database.accounts)
-    #               main_menu(false)
-    #             when 9
-    #               display_account(@database.accounts_index[select_account_action])
-    #             else 
-    #               exit
-    #             end
-
 
 end 

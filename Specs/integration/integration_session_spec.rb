@@ -1,6 +1,6 @@
-require './Classes/session.rb'
-
 require 'test/unit'
+require './Classes/session_class'
+
 
 
 class TestSession < Test::Unit::TestCase

@@ -3,3 +3,4 @@
 *.docx
 Entry_Files/
 Specs/bin
+Specs/unit/entry_file_spec.rb
