@@ -130,7 +130,7 @@ end
                 end
                 rescue
                     puts "Did you put the year first?"
-                    add_touch_point    
+                    touch_point_create_date_action    
                 end
 
     end
