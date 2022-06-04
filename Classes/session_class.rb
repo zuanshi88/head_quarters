@@ -15,7 +15,7 @@ class Session
     attr_accessor :database, :status
 
 
-
+#changed at status tp see if this would allow load.
     def initialize(status)
       @status = status
       @time_clock = nil

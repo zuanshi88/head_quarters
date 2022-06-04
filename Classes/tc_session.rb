@@ -13,7 +13,7 @@ attr_accessor :end, :total_time, :status
 
 
     def session_total_time 
-        @total_time = ((@end - @start)/3600).round(2) 
+        @total_time = ((@end - @start)/360).round(2) 
     end 
 
     def end_session 
