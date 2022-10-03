@@ -3,4 +3,4 @@ Essentially a combination address book, project tracker, and writing management 
 
 ### run from command line:
 
-### ruby app.rb
+### ruby head_quarters.rb
