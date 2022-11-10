@@ -1,5 +1,5 @@
 # head_quarters
-Essentially a combination address book, project tracker, and writing management system written all in Ruby
+A combination address book, project tracker, and writing management system written all in Ruby
 and run from the command line
 
 ```command 
